@@ -31,11 +31,13 @@
           "example": "https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json"
         },
         "name": {
-          "description": "A simple name or human-readable identifier (lowercase alphnumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name)."
+          "description": "A simple name or human-readable identifier (lowercase alphnumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
+          "example": "mangrove-kingfisher-in-kenya"
         },
         "id": {
           "description": "A globally unique identifier for the package, such as a UUID or DOI. See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172",
+          "example": ""
         },
         "licenses": {
           "description": "The license(s) under which the data is provided. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses).",
@@ -106,17 +108,44 @@
           }
         },
         "spatial": {
-          "description": "Spatial coverage of the package, expressed as GeoJSON. In the core module, this will be the bbox",
+          "description": "Spatial coverage of the package as a bounding box defined as an array with four elements representing the minimum and maximum latitude and longitude.. In the core module, this will be the bbox. See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage)",
           "skos:exactMatch": "https://purl.org/dc/terms/spatial",
           "skos:relatedMatch": [
             "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222",
             "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
           ],
-          "type": "object",
-          "$ref": "https://json.schemastore.org/geojson.json"
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": [
+            {
+              "description": "Minimum longitude (west).",
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            },
+            {
+              "description": "Minimum latitude (south).",
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            },
+            {
+              "description": "Maximum longitude (east).",
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            },
+            {
+              "description": "Maximum latitude (north).",
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            }
+          ]
         },
         "temporal": {
-          "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/core/observations#datetime)",
+          "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/core/observations#datetime). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage)",
           "skos:exactMatch": "https://purl.org/dc/terms/temporal",
           "type": "object",
           "required": ["start", "end"],
@@ -134,7 +163,7 @@
           }
         },
         "taxonomic": {
-          "description": "Taxonomic coverage of the package. List of all scientific name of all tags. Computed based on the unique `tag.scientificName`.",
+          "description": "Taxonomic coverage of the package. List of all scientific name of all tags. Computed based on the unique [`tag.scientific_name`](/core/tags/scientific_name). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage)",
           "type": "array",
           "items": {
             "type": "string",
@@ -157,26 +186,26 @@
           }
         },
         "resources": {
-          "description": "See [Data Package specification](https://datapackage.org/standard/data-resource/). GeoLocator DP further requires each object to be a [Tabular Data Resource](https://datapackage.org/standard/data-resource/#tabular) with a specific `name` and `schema`.",
+          "description": "See [Data Package specification](https://datapackage.org/standard/data-resource/). GeoLocator DP further requires each object to be a [Tabular Data Resource](https://datapackage.org/standard/data-resource/#tabular) with a specific `name` and `$schema`.",
           "minItems": 3,
           "items": {
             "oneOf": [
               {
-                "required": ["name", "path", "profile", "schema"],
+                "required": ["name", "path", "$schema"],
                 "properties": {
                   "name": {
-                    "description": "Identifier of the resource.",
-                    "enum": ["deployments", "media", "observations"]
+                    "description": "Identifier of the resource. See [Data Package specification](https://datapackage.org/standard/data-resource/#name).",
+                    "enum": ["tags", "observations", "measurements"]
+                  },
+                  "type": {
+                    "description": "Type of the resource. Only `table` are allowed. See [Data Package specification](https://datapackage.org/standard/data-resource/#type).",
+                    "enum": ["table"]
                   },
                   "path": {
-                    "description": "Path or URL to the data file."
+                    "description": "Path or URL to the data file. See [Data Package specification](https://datapackage.org/standard/data-resource/#path)."
                   },
-                  "profile": {
-                    "description": "[Profile](https://specs.frictionlessdata.io/profiles/) of the resource.",
-                    "enum": ["tabular-data-resource"]
-                  },
-                  "schema": {
-                    "description": "URL of the used Camtrap DP Table Schema version (e.g. `https://raw.githubusercontent.com/tdwg/camtrap-dp/1.0/deployments-table-schema.json`).",
+                  "$schema": {
+                    "description": "URL of the used GeoLocator DP Table Schema version. See [Data Package specification](https://datapackage.org/standard/data-resource/#dollar-schema).",
                     "allOf": [
                       {
                         "$ref": "#$defs/version"
@@ -186,16 +215,6 @@
                         "format": "uri"
                       }
                     ]
-                  }
-                }
-              },
-              {
-                "required": ["name"],
-                "properties": {
-                  "name": {
-                    "not": {
-                      "enum": ["deployments", "media", "observations"]
-                    }
                   }
                 }
               }

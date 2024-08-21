@@ -34,19 +34,13 @@ assign p1_id = p1_name %}
 </p>
 {% endif %} {% if p1.example and p1.example != "" %}
 <p><strong>Example</strong>:</p>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"{{p1_name}}"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ p1.example }}"</span><span class="p">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-{% endif %} {% if p1.properties %} {% assign properties2 = p1.properties %} {% assign required2 =
-p1.required %} {% elsif p1.items.properties %} {% assign properties2 = p1.items.properties %} {%
-assign required2 = p1.items.required %} {% elsif p1.items.oneOf[0].properties %} {% assign
-properties2 = p1.items.oneOf[0].properties %} {% assign required2 = p1.items.oneOf[0].required %} {%
-else %} {% assign properties2 = false %} {% endif %} {% if properties2 %}
+{% capture json_string %} { "{{ p1_name }}": {{ p1.example | jsonify }} } {% endcapture %} {%
+highlight json %} {{ json_string | strip }} {% endhighlight %} {% endif %} {% if p1.properties %} {%
+assign properties2 = p1.properties %} {% assign required2 = p1.required %} {% elsif
+p1.items.properties %} {% assign properties2 = p1.items.properties %} {% assign required2 =
+p1.items.required %} {% elsif p1.items.oneOf[0].properties %} {% assign properties2 =
+p1.items.oneOf[0].properties %} {% assign required2 = p1.items.oneOf[0].required %} {% else %} {%
+assign properties2 = false %} {% endif %} {% if properties2 %}
 <table>
   <colgroup>
     <col width="25%" />

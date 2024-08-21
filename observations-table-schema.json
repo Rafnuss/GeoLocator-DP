@@ -67,19 +67,23 @@
     },
     {
       "name": "observation_type",
-      "description": "Type of observation. \n - `equipment`: Attachement of the tag on the species,\n - `retrieval`: Removal of the tag from the species,\n `control`: ",
+      "description": "Type of observation. \n - `equipment`: Attachement of the tag on the species\n - `retrieval`: Recapture and removal of the tag from the species,\n - `recapture`: Recapture of the spieces AFTER an equipment observation. Use this if bird recapture without device and provide this information in `device_status` \n - `sighting`:  \n -`other`: Other type of observations. Use `observation_comments` to provide mode details.",
       "type": "string",
       "constraints": {
         "required": true,
-        "enum": ["equipment", "retrival", "control", "control_ringing", "control_visual", "other"]
+        "enum": ["equipment", "retrival", "recapture", "sighting", "other"]
       },
       "example": "equipment"
     },
     {
-      "name": "capture_method",
-      "description": "Method of capture. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "name": "device_status",
+      "description": "Status of the device/tag.",
       "type": "string",
-      "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000397",
+      "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
+      "constraints": {
+        "required": false,
+        "enum": ["present", "missing", "broken_damage", "other"]
+      },
       "example": "mistnet"
     },
     {
@@ -90,6 +94,13 @@
         "required": false
       },
       "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000372/"
+    },
+    {
+      "name": "capture_method",
+      "description": "Method of capture. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "type": "string",
+      "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000397",
+      "example": "mistnet"
     },
     {
       "name": "age",
