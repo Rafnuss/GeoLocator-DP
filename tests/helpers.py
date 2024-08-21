@@ -13,9 +13,9 @@ RELAXED_PROFILE_PATH = (
     REPOSITORY_ROOT_PATH / "geolocator-dp-profile-relaxed.json"
 )  # File created in later step
 TABLE_SCHEMA_PATHS = [
-    REPOSITORY_ROOT_PATH / "sensors-table-schema.json",
+    REPOSITORY_ROOT_PATH / "observations-table-schema.json",
     REPOSITORY_ROOT_PATH / "tags-table-schema.json",
-    REPOSITORY_ROOT_PATH / "events-table-schema.json",
+    REPOSITORY_ROOT_PATH / "measurements-table-schema.json",
 ]
 
 
