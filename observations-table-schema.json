@@ -67,7 +67,7 @@
     },
     {
       "name": "observation_type",
-      "description": "Type of observation. \n - `equipment`: Attachement of the tag on the species\n - `retrieval`: Recapture and removal of the tag from the species,\n - `recapture`: Recapture of the spieces AFTER an equipment observation. Use this if bird recapture without device and provide this information in `device_status` \n - `sighting`:  \n -`other`: Other type of observations. Use `observation_comments` to provide mode details.",
+      "description": "Type of observation. \n - `equipment`: Attachement of the tag on the species\n - `retrieval`: Recapture and removal of the tag from the species\n - `recapture`: Recapture of the species AFTER an equipment observation but without removing the tag. This option also covers the case of recapturing a bird without device (choose `missing`in `device_status`) or the case of a recapture happening after a ` retrieval`.\n - `sighting`: An form of knowledge of existance of the bird on a date and location beside ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observations. Avoid using this, and always provide an `observation_comments` in such cases.",
       "type": "string",
       "constraints": {
         "required": true,
@@ -77,14 +77,14 @@
     },
     {
       "name": "device_status",
-      "description": "Status of the device/tag.",
+      "description": "Status of the device/tag. Assumed to be `present` if not provided. Always provide an `observation_comments` if using `other`.",
       "type": "string",
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
       "constraints": {
         "required": false,
         "enum": ["present", "missing", "broken_damage", "other"]
       },
-      "example": "mistnet"
+      "example": "broken_damage"
     },
     {
       "name": "observer",
@@ -93,7 +93,11 @@
       "constraints": {
         "required": false
       },
-      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000372/"
+      "skos:exactMatch": [
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000372/",
+        "http://rs.tdwg.org/dwc/terms/recordedBy"
+      ],
+      "example": "Yann Rime"
     },
     {
       "name": "capture_method",
@@ -103,9 +107,8 @@
       "example": "mistnet"
     },
     {
-      "name": "age",
+      "name": "life_stage",
       "description": "Age class or life stage which can be entered as . See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
-      "skos:broadMatch": "https://rs.tdwg.org/dwc/terms/lifeStage",
       "type": "string",
       "constraints": {
         "required": false,
@@ -133,13 +136,19 @@
           ">4y"
         ]
       },
-      "skos:closeMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000018",
-      "example": "adult"
+      "skos:closeMatch": [
+        "https://rs.tdwg.org/dwc/terms/lifeStage",
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000018"
+      ],
+      "example": ">1y"
     },
     {
       "name": "sex",
       "description": "Sex of the tagged species which can be enetered according to different standard (full string, single letter or number). See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
-      "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000023",
+      "skos:closeMatch": [
+        "http://rs.tdwg.org/dwc/terms/sex",
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000023"
+      ],
       "type": "string",
       "constraints": {
         "required": false,
@@ -155,7 +164,8 @@
         "required": false,
         "enum": ["alive", "unhealthy", "dead", "unknown"]
       },
-      "example": "alive"
+      "example": "alive",
+      "skos:closeMatch": "http://rs.tdwg.org/dwc/terms/vitality"
     },
     {
       "name": "mass",
@@ -168,6 +178,20 @@
       "unit": "grams",
       "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000019",
       "example": 23.3
+    },
+    {
+      "name": "additional_metric",
+      "description": "A list of additional measurements, facts, characteristics, or assertions about the record. Recommended best practice is to use a key:value encoding schema for a data interchange format such as JSON.",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "skos:exactMatch": ["http://rs.tdwg.org/dwc/terms/dynamicProperties"],
+      "skos:narrowMatch": [
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000356",
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000354"
+      ],
+      "example": "{'targusLengthInMeters':0.014, 'weightInGrams':120}"
     },
     {
       "name": "observation_comments",

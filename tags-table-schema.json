@@ -83,10 +83,12 @@
       "constraints": {
         "required": true
       },
-      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
+      "skos:exactMatch": [
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
+        "http://rs.tdwg.org/dwc/terms/scientificName"
+      ],
       "example": "Tachymarptis melba"
     },
-
     {
       "name": "ring_number",
       "description": "Ring number associated with the tagged species.",
