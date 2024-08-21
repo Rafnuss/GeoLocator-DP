@@ -37,34 +37,48 @@
         "id": {
           "description": "A globally unique identifier for the package, such as a UUID or DOI. See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172",
-          "example": ""
+          "example": "10.5281/zenodo.11207081"
         },
         "licenses": {
           "description": "The license(s) under which the data is provided. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses).",
-          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257"
+          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257",
+          "example": [
+            {
+              "name": "CC-BY-4.0",
+              "title": "Creative Commons Attribution 4.0",
+              "path": "https://creativecommons.org/licenses/by/4.0/"
+            }
+          ]
         },
         "title": {
           "description": "A string providing a title or one sentence description for this package. It should be plain text (no markup), capitalised like a title, NOT end in a period and less than 65 characters. See [Data Package specification](https://datapackage.org/standard/data-package/#title).",
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172",
+          "example": "Woodland Kingfisher Geolocator data"
         },
         "description": {
           "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph.See [Data Package specification](https://datapackage.org/standard/data-package/#description).",
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176"
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176",
+          "example": "This datapackage contains the geolocator data collected on 8 Woodland Kingfisher equiped in South Africa."
         },
         "homepage": {
-          "description": "A URL for the home on the web related to this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#homepage)."
+          "description": "A URL for the home on the web related to this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#homepage).",
+          "example": "https://github.com/Rafnuss/WoodlandKingfisher"
         },
         "image": {
-          "description": "An image to use for this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#image)."
+          "description": "An image to use for this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#image).",
+          "example": "https://raw.githubusercontent.com/Rafnuss/WoodlandKingfisher/main/output/NDVI_animation/077531d34e04506aeb5e3d3066a8e06e-19ff78ccc543bbb66a89d90b1ae3fd17_getPixels.gif"
         },
         "version": {
-          "description": "A version string identifying the version of the package, following Semantic Versioning. See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/)."
+          "description": "A version string identifying the version of the package, following Semantic Versioning. See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/).",
+          "example": "v1.2.0"
         },
         "created": {
-          "description": "The datetime on which this was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created)."
+          "description": "The datetime on which this was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
+          "example": "2024-05-17"
         },
         "keywords": {
-          "description": "A list of keywords to assist users in searching for the package. See [Data Package specification](https://datapackage.org/standard/data-package/#keywords)."
+          "description": "A list of keywords to assist users in searching for the package. See [Data Package specification](https://datapackage.org/standard/data-package/#keywords).",
+          "example": ["intra-african", "NDVI", "geopressure"]
         },
         "contributors": {
           "description": "A list of contributors, where each contributor is a list with properties including at least `title` but also optionally `givenName`, `familyName`, `path`, `email`, `roles`, and `organization`. See [Data Package specification](https://datapackage.org/standard/data-package/#contributors). ",
@@ -92,12 +106,25 @@
           "skos:relatedMatch": [
             "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072",
             "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164"
+          ],
+          "example": [
+            {
+              "title": "Yann Rime",
+              "email": "yann.rime@vogelwarte.ch",
+              "roles": ["aut", "contributor"]
+            },
+            {
+              "title": "Raphaël Nussbaumer",
+              "email": "raphael.nussbaumer@vogelwarte.ch",
+              "roles": ["contact", "creator"]
+            }
           ]
         },
         "citation": {
           "description": "Bibliographic/recommended citation for the package.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068",
-          "type": "string"
+          "type": "string",
+          "example": "Nussbaumer, R., & Rime, Y. (2024). WoodlandKingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141"
         },
         "grants": {
           "description": "A list of grants and other funding sources of the project.",
@@ -105,7 +132,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "example": "Hilfsfonds für die Schweizerische Vogelwarte Sempach"
         },
         "spatial": {
           "description": "Spatial coverage of the package as a bounding box defined as an array with four elements representing the minimum and maximum latitude and longitude.. In the core module, this will be the bbox. See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage)",
@@ -142,7 +170,8 @@
               "minimum": -90,
               "maximum": 90
             }
-          ]
+          ],
+          "example": [15, 38, -25, 13]
         },
         "temporal": {
           "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/core/observations#datetime). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage)",
@@ -160,6 +189,10 @@
               "type": "string",
               "format": "date"
             }
+          },
+          "example": {
+            "start": "2017-01-10",
+            "end": "2019-09-29"
           }
         },
         "taxonomic": {
@@ -169,7 +202,8 @@
             "type": "string",
             "description": "Scientific name",
             "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024"
-          }
+          },
+          "example": ["Halcyon senegaloides"]
         },
         "relatedIdentifiers": {
           "description": "Identifiers of resources related to the package (e.g. papers, project pages, derived datasets, APIs, etc.). See [Camtrap DP specification](https://camtrap-dp.tdwg.org/metadata/#relatedIdentifiers)",
