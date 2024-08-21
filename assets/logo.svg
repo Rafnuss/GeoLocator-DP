@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 75 75">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #231f20;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2, .cls-6 {
+        stroke-width: .25px;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke-width: 2px;
+      }
+
+      .cls-4 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-5 {
+        fill: #808285;
+      }
+
+      .cls-6 {
+        fill: #f1f2f2;
+      }
+
+      .cls-7 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-8 {
+        fill: #58595b;
+      }
+
+      .cls-9 {
+        fill: #414042;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="36.61" y1="556.99" x2="50.83" y2="556.99" gradientTransform="translate(-354.82 -342.94) rotate(-41.7)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#58595b"/>
+      <stop offset="1" stop-color="#d1d3d4"/>
+    </linearGradient>
+    <radialGradient id="radial-gradient" cx="44.27" cy="566.38" fx="44.27" fy="566.38" r="7.65" gradientTransform="translate(-354.82 -342.94) rotate(-41.7)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f1f2f2"/>
+      <stop offset="1" stop-color="#a7a9ac"/>
+    </radialGradient>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
+  <g>
+    <g id="Layer_1">
+      <g id="Layer_1-2" data-name="Layer_1">
+        <g id="Layer_1-2">
+          <g>
+            <g>
+              <polygon class="cls-9" points="45.96 59.08 51.97 57.46 49.32 55.55 46.67 54.62 45.96 59.08"/>
+              <path class="cls-8" d="M19.66,25.07l-.49,4.39c-.19,1.67.27,3.21,1.27,4.34,0,0,26.18,29.38,25.5,25.28l.7-4.47-27.01-29.54"/>
+              <path class="cls-3" d="M65.94,32.09c-9.26,6.89-19.91,6.33-24.34.87-6.07-7.45-.2-23.62,8.42-28.56,1.15-.66,6.18-3.55,11.49-1.53,2.2.84,3.63,2.19,4.7,3.26,1.56,1.52,6.26,6.12,6.2,13.22-.08,7.8-5.85,12.28-6.47,12.74"/>
+              <path class="cls-3" d="M38.29,50.47c.52,3.17-7.58,16.07-12.56,19.98-8.33,6.53-17.82-3.02-18.81-4.63-1.15-1.88-5.43-10.53-2.51-16.75,3.37-7.21,20.48-12.92,21.11-13.41"/>
+              <path class="cls-5" d="M56.94,49.31l-6.25,5.57c-1.8,1.6-4.57,1.45-6.18-.36l-23.82-26.73c-1.6-1.8-1.45-4.57.36-6.18l6.25-5.57c1.8-1.6,4.57-1.45,6.18.36l.24.26c1.61,1.81,1.57,1.76,1.6,1.8.18.13.59.43.53.59h0l21.46,24.08c.19.21,1.2,1.4-.36,6.18h0Z"/>
+              <path class="cls-7" d="M47.74,53.78l-6.74-7.56c-.75-.85-.96-2.04-.52-3.09l.55-1.33c.71-1.76,2.19-3.09,4.02-3.61l2.23-.64,9.91,5.46-4.51,1.63c-1.68.61-2.97,1.99-3.43,3.72l-1.48,5.42h-.03Z"/>
+              <circle class="cls-4" cx="55.04" cy="50.46" r="7.65"/>
+              <circle class="cls-6" cx="26.95" cy="25.68" r="2.47"/>
+              <ellipse class="cls-1" cx="24.85" cy="35.53" rx=".93" ry="3.49" transform="translate(-17.34 25.54) rotate(-41.7)"/>
+              <ellipse class="cls-1" cx="38.29" cy="50.47" rx=".93" ry="3.49" transform="translate(-23.88 38.27) rotate(-41.7)"/>
+            </g>
+            <circle class="cls-2" cx="26.95" cy="25.68" r="1.73"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+# Links listed below will be included in your site's navbar (navigation at the top)
+
+- text: Home
+  href: /
+- text: Datapackage
+  href: /datapackage/
+- text: Core Data
+  menu:
+    - text: Tags
+      href: /core/tags/
+    - text: Observations
+      href: /core/observations/
+    - text: Measurements
+      href: /core/measurements/

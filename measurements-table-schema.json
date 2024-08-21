@@ -1,0 +1,81 @@
+{
+  "name": "measurements",
+  "title": "Measurement",
+  "description": "Table with all tag's sensor's data.",
+  "fields": [
+    {
+      "name": "tag_id",
+      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "type": "string",
+      "constraints": {
+        "required": true
+      },
+      "example": "18LX"
+    },
+    {
+      "name": "sensor",
+      "description": "Sensor type.\n - `light`: Light-level values measured by a solar geolocator. Range and units may vary by provider and tag settings. [exactMatch](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000139/)\n - `pressure`: Atmospheric pressure in hPa [exactMatch](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000055/)\n - `activity`: Activity values provided by the tag. In general, higher values indicate more activity. Range and method of calculation may vary by the tag provider, model, settings and placement on the animal. [exactMatch](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000114) \n- `pitch`: The pitch of the tag, as measured by the gyroscope, accelerometer and/or magnetometer on the tag. Values range from -180 to 180, with positive values indicating backward pitch and negative values indicating forward pitch. [exactMatch](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000263/)\n- `temperature`: \n- `airtemperature`: [The temperature measured by the tag (different from ambient temperature or internal body temperature of the animal).](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000104/)\n- `gX`: \n- `gY`: \n- `gZ`: \n- `mX`: \n- `mY`: \n- `mZ`: ",
+      "type": "string",
+      "constraints": {
+        "required": true,
+        "enum": [
+          "light",
+          "pressure",
+          "activity",
+          "pitch",
+          "temperature",
+          "airtemperature",
+          "gX",
+          "gY",
+          "gZ",
+          "mX",
+          "mY",
+          "mZ"
+        ]
+      },
+      "skos:relatedMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000170/",
+      "example": "pressure"
+    },
+    {
+      "name": "datetime",
+      "description": "Date and time of the measurement. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
+      "type": "datetime",
+      "format": "%Y-%m-%dT%H:%M:%S%z",
+      "constraints": {
+        "required": true
+      },
+      "example": "2020-04-01T22:00:00Z",
+      "skos:closeMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000200"
+    },
+    {
+      "name": "value",
+      "description": "Value of the measurement taken by the sensor",
+      "type": "number",
+      "constraints": {
+        "required": true
+      },
+      "example": 12.3
+    },
+    {
+      "name": "valid",
+      "description": "Optional column to manually mark specific measurement as invalid for various reasons (sensor malfunctioned,... )",
+      "type": "boolean",
+      "constraints": { "required": false },
+      "example": true,
+      "skos:relatedMatch": [
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000156",
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000157"
+      ]
+    }
+  ],
+  "missingValues": [""],
+  "foreignKeys": [
+    {
+      "fields": "tag_id",
+      "reference": {
+        "resource": "tags",
+        "fields": "tag_id"
+      }
+    }
+  ]
+}

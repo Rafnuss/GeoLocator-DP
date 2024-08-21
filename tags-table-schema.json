@@ -1,0 +1,117 @@
+{
+  "name": "tags",
+  "title": "Tags",
+  "description": "Table with tags.",
+  "fields": [
+    {
+      "name": "tag_id",
+      "description": "Unique identifier of the tag.",
+      "type": "string",
+      "constraints": {
+        "required": true,
+        "unique": true
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000181/",
+      "example": "18LX"
+    },
+    {
+      "name": "manufacturer",
+      "description": "The company or person that produced the tag.",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000183",
+      "example": "Swiss Ornithological Institue"
+    },
+    {
+      "name": "model",
+      "description": "Model of the tag",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000185",
+      "example": "GDL2.3"
+    },
+    {
+      "name": "firwmare",
+      "description": "The tag firmware and version used during the deployment.",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000380",
+      "example": "v1.0"
+    },
+    {
+      "name": "weight",
+      "description": "Weight of the device with harness. Expressed in grams.",
+      "type": "number",
+      "constraints": {
+        "required": false,
+        "minimum": 0
+      },
+      "unit": "grams",
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000409/",
+      "example": 1.32
+    },
+    {
+      "name": "harness",
+      "description": "The way a tag is attached to an animal. Use values from [Movebank `attachment type` concept](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000052) values if possible. Assumed to be `harness` if not provided",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "example": "leg-loop-harness",
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000052"
+    },
+    {
+      "name": "readout_method",
+      "type": "string",
+      "description": "The way the data are received from the tag. Use value from [Movebank `tag readout method` concept](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000188/) if possible. Assumed to be `tag-retrieval` if not provided",
+      "constraints": {
+        "required": false
+      },
+      "skos:relatedMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000188",
+      "example": "tag-retrieval"
+    },
+    {
+      "name": "scientific_name",
+      "description": "Scientific name of the tagged species.",
+      "type": "string",
+      "constraints": {
+        "required": true
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
+      "example": "Tachymarptis melba"
+    },
+
+    {
+      "name": "ring_number",
+      "description": "Ring number associated with the tagged species.",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000022",
+      "example": "F58445"
+    },
+    {
+      "name": "tag_comments",
+      "description": "Comments or notes about the tag, deployement or animal.",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "skos:narrowMatch": [
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000179",
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000012",
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000082"
+      ],
+      "example": ""
+    }
+  ],
+  "missingValues": [""],
+  "primaryKey": "tag_id"
+}

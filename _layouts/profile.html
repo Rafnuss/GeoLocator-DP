@@ -1,0 +1,118 @@
+---
+layout: default
+---
+
+{{ content }} {% assign profile_file = "geolocator-dp-profile" %} {% assign properties1 =
+site.data[profile_file].allOf[1].properties %} {% assign required1 =
+site.data[profile_file].allOf[1].required %}
+
+<p class="small">
+  Source:
+  <a href="{{ site.github.repository_url }}/blob/main/{{ profile_file }}.json"
+    ><code>{{ profile_file }}.json</code></a
+  >
+</p>
+
+{% for p1_raw in properties1 %} {% assign p1_name = p1_raw[0] %} {% assign p1 = p1_raw[1] %} {%
+assign p1_id = p1_name %}
+
+<h2 id="{{ p1_id }}">{{ p1_name }} {% if required1 contains p1_name %}*{% endif %}</h2>
+
+{{ p1.description | markdownify }} {% if p1['skos:exactMatch'] %}
+<p class="small text-muted">
+  Same as {% for term in p1['skos:exactMatch'] %}<a href="{{ term }}">{{ term }}</a> {% endfor %}
+</p>
+{% elsif p1['skos:narrowMatch'] %}
+<p class="small text-muted">
+  Broader than {% for term in p1['skos:narrowMatch'] %}<a href="{{ term }}">{{ term }}</a> {% endfor
+  %}
+</p>
+{% elsif p1['skos:broadMatch'] %}
+<p class="small text-muted">
+  Narrower than {% for term in p1['skos:broadMatch'] %}<a href="{{ term }}">{{ term }}</a> {% endfor
+  %}
+</p>
+{% endif %} {% if p1.example and p1.example != "" %}
+<p><strong>Example</strong>:</p>
+<div class="language-json highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"{{p1_name}}"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ p1.example }}"</span><span class="p">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+  </div>
+</div>
+{% endif %} {% if p1.properties %} {% assign properties2 = p1.properties %} {% assign required2 =
+p1.required %} {% elsif p1.items.properties %} {% assign properties2 = p1.items.properties %} {%
+assign required2 = p1.items.required %} {% elsif p1.items.oneOf[0].properties %} {% assign
+properties2 = p1.items.oneOf[0].properties %} {% assign required2 = p1.items.oneOf[0].required %} {%
+else %} {% assign properties2 = false %} {% endif %} {% if properties2 %}
+<table>
+  <colgroup>
+    <col width="25%" />
+    <col width="65%" />
+    <col width="10%" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Definition</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p2_raw in properties2 %} {% assign p2_name = p2_raw[0] %} {% assign p2 = p2_raw[1] %} {%
+    assign p2_id = p2_name %}
+
+    <tr class="text-break">
+      <td id="{{ p1_id }}.{{ p2_id }}">
+        <a href="#{{ p1_id }}.{{ p2_id }}"><code>{{ p2_name }}</code></a>
+        {% if required2 contains p2_name %}*{% endif %}
+      </td>
+      <td>
+        {{ p2.description | markdownify }} {% if p2.const or p2.enum or p2.items.enum %}
+        <strong>Constraints</strong>
+        <ul>
+          {% if p2.const %}
+          <li>const: <code>{{ p2.const }}</code></li>
+          {% endif %} {% if p2.enum %}
+          <li>enum: <code>{{ p2.enum | join: ", " }}</code></li>
+          {% endif %} {% if p2.items.enum %}
+          <li>enum: <code>{{ p2.items.enum | join: ", " }}</code></li>
+          {% endif %}
+        </ul>
+        {% endif %} {% if p2.example and p2.example != "" %}
+        <p><strong>Example</strong>: <code>{{ p2.example }}</code></p>
+        {% endif %} {% if p2['skos:exactMatch'] %}
+        <span class="small text-muted">
+          Same as {% for term in p2['skos:exactMatch'] %}<a href="{{ term }}">{{ term }}</a>{%
+          unless forloop.last %}, {% endunless %}{% endfor %}
+        </span>
+        {% elsif p2['skos:narrowMatch'] %}
+        <span class="small text-muted"
+          >Broader than {% for term in p2['skos:narrowMatch'] %}<a href="{{ term }}">{{ term }}</a
+          >{% unless forloop.last %}, {% endunless %}{% endfor %}
+        </span>
+        {% elsif p2['skos:broadMatch'] %}
+        <span class="small text-muted"
+          >Narrower than {% for term in p2['skos:broadMatch'] %}<a href="{{ term }}">{{ term }}</a
+          >{% unless forloop.last %}, {% endunless %}{% endfor %}
+        </span>
+        {% elsif p2['skos:relatedMatch'] %}
+        <span class="small text-muted"
+          >Related to {% for term in p2['skos:relatedMatch'] %}<a href="{{ term }}">{{ term }}</a>{%
+          unless forloop.last %}, {% endunless %}{% endfor %}
+        </span>
+        {% elsif p2['skos:closeMatch'] %}
+        <span class="small text-muted"
+          >Close to {% for term in p2['skos:closeMatch'] %}<a href="{{ term }}">{{ term }}</a>{%
+          unless forloop.last %}, {% endunless %}{% endfor %}
+        </span>
+        {% endif %}
+      </td>
+      <td><span class="badge bg-secondary">{{ p2.type }}</span></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %} {% endfor %}

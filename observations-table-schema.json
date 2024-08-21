@@ -1,0 +1,187 @@
+{
+  "name": "observations",
+  "title": "observations",
+  "description": "Table of all observations associated with the equipement, retrieval or control of a tag",
+  "fields": [
+    {
+      "name": "tag_id",
+      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "type": "string",
+      "constraints": {
+        "required": true,
+        "unique": true
+      },
+      "example": "18LX"
+    },
+    {
+      "name": "datetime",
+      "description": "Date and time of the observation. Formatted as an ISO 8601 string with timezone designator (`YYYY-MM-DDThh:mm:ssZ` or `YYYY-MM-DDThh:mm:ss±hh:mm`).",
+      "skos:broadMatch": "https://rs.tdwg.org/dwc/terms/observationDate",
+      "type": "datetime",
+      "format": "%Y-%m-%dT%H:%M:%S%z",
+      "constraints": {
+        "required": true
+      },
+      "example": "2020-03-01T22:00:00Z",
+      "skos:closeMatch": " http://vocab.nerc.ac.uk/collection/MVB/current/MVB000352"
+    },
+    {
+      "name": "locationName",
+      "description": "Name given to the deployment location.",
+      "skos:exactMatch": "https://rs.tdwg.org/dwc/terms/locality",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "example": "Białowieża MRI 01"
+    },
+    {
+      "name": "latitude",
+      "description": "Latitude of the observation location in decimal degrees, using the WGS84 datum.",
+      "skos:closeMatch": [
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000074",
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000078"
+      ],
+      "type": "number",
+      "constraints": {
+        "required": false,
+        "minimum": -90,
+        "maximum": 90
+      },
+      "example": 52.70442
+    },
+    {
+      "name": "longitude",
+      "description": "Longitude of the observation location in decimal degrees, using the WGS84 datum.",
+      "skos:closeMatch": [
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000075",
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000079"
+      ],
+      "type": "number",
+      "constraints": {
+        "required": false,
+        "minimum": -180,
+        "maximum": 180
+      },
+      "example": 23.84995
+    },
+    {
+      "name": "observation_type",
+      "description": "Type of observation. \n - `equipment`: Attachement of the tag on the species,\n - `retrieval`: Removal of the tag from the species,\n `control`: ",
+      "type": "string",
+      "constraints": {
+        "required": true,
+        "enum": ["equipment", "retrival", "control", "control_ringing", "control_visual", "other"]
+      },
+      "example": "equipment"
+    },
+    {
+      "name": "capture_method",
+      "description": "Method of capture. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "type": "string",
+      "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000397",
+      "example": "mistnet"
+    },
+    {
+      "name": "observer",
+      "description": "The name of an individual or group that observed the observation.",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000372/"
+    },
+    {
+      "name": "age",
+      "description": "Age class or life stage which can be entered as . See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "skos:broadMatch": "https://rs.tdwg.org/dwc/terms/lifeStage",
+      "type": "string",
+      "constraints": {
+        "required": false,
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "A",
+          "pullus",
+          "unkown",
+          "1y",
+          ">1y",
+          "2y",
+          ">2y",
+          "3y",
+          ">3y",
+          "4y",
+          ">4y"
+        ]
+      },
+      "skos:closeMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000018",
+      "example": "adult"
+    },
+    {
+      "name": "sex",
+      "description": "Sex of the tagged species which can be enetered according to different standard (full string, single letter or number). See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000023",
+      "type": "string",
+      "constraints": {
+        "required": false,
+        "enum": ["female", "male", "unknown", "F", "M", "U", "0", "1", "2"]
+      },
+      "example": "female"
+    },
+    {
+      "name": "condition",
+      "description": "Condition of the tagged species. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf). Assumed to be `alive` if not provided",
+      "type": "string",
+      "constraints": {
+        "required": false,
+        "enum": ["alive", "unhealthy", "dead", "unknown"]
+      },
+      "example": "alive"
+    },
+    {
+      "name": "mass",
+      "description": "Mass of the tagged species. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf). Expressed in grams.",
+      "type": "number",
+      "constraints": {
+        "required": false,
+        "minimum": 0
+      },
+      "unit": "grams",
+      "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000019",
+      "example": 23.3
+    },
+    {
+      "name": "observation_comments",
+      "description": "Comments or notes about the observation.",
+      "skos:broadMatch": [
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000396",
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000077",
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000082",
+        "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000083"
+      ],
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "example": ""
+    }
+  ],
+  "missingValues": [""],
+  "foreignKeys": [
+    {
+      "fields": "tag_id",
+      "reference": {
+        "resource": "tags",
+        "fields": "tag_id"
+      }
+    }
+  ]
+}

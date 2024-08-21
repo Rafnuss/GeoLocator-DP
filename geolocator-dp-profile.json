@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Geolocator Data Package",
+  "description": "Data exchange format for geolocator data.",
+  "type": "object",
+  "$defs": {
+    "version": {
+      "pattern": "1\\.0"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://datapackage.org/profiles/2.0/datapackage.json"
+    },
+    {
+      "required": [
+        "$schema",
+        "title",
+        "created",
+        "contributors",
+        "licenses",
+        "spatial",
+        "temporal",
+        "taxonomic",
+        "resources"
+      ],
+      "properties": {
+        "$schema": {
+          "description": "See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema). GeoLocator DP further requires this to be the URL of the used GeoLocator DP Profile version.",
+          "format": "uri",
+          "example": "https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json"
+        },
+        "name": {
+          "description": "A simple name or human-readable identifier (lowercase alphnumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name)."
+        },
+        "id": {
+          "description": "A globally unique identifier for the package, such as a UUID or DOI. See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
+        },
+        "licenses": {
+          "description": "The license(s) under which the data is provided. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses).",
+          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257"
+        },
+        "title": {
+          "description": "A string providing a title or one sentence description for this package. It should be plain text (no markup), capitalised like a title, NOT end in a period and less than 65 characters. See [Data Package specification](https://datapackage.org/standard/data-package/#title).",
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
+        },
+        "description": {
+          "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph.See [Data Package specification](https://datapackage.org/standard/data-package/#description).",
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176"
+        },
+        "homepage": {
+          "description": "A URL for the home on the web related to this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#homepage)."
+        },
+        "image": {
+          "description": "An image to use for this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#image)."
+        },
+        "version": {
+          "description": "A version string identifying the version of the package, following Semantic Versioning. See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/)."
+        },
+        "created": {
+          "description": "The datetime on which this was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created)."
+        },
+        "keywords": {
+          "description": "A list of keywords to assist users in searching for the package. See [Data Package specification](https://datapackage.org/standard/data-package/#keywords)."
+        },
+        "contributors": {
+          "description": "A list of contributors, where each contributor is a list with properties including at least `title` but also optionally `givenName`, `familyName`, `path`, `email`, `roles`, and `organization`. See [Data Package specification](https://datapackage.org/standard/data-package/#contributors). ",
+          "type": "array",
+          "items": {
+            "required": ["title"],
+            "properties": {
+              "title": {
+                "description": "Name of the contributor."
+              },
+              "role": {
+                "description": "Role of the contributor. We strongly suggests to have at least `principalInvestigator` and `contact` to match movebank requirement. Defaults to `contributor`.",
+                "enum": [
+                  "creator",
+                  "contact",
+                  "principalInvestigator",
+                  "rightsHolder",
+                  "dataCurator",
+                  "publisher",
+                  "contributor"
+                ]
+              }
+            }
+          },
+          "skos:relatedMatch": [
+            "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072",
+            "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164"
+          ]
+        },
+        "citation": {
+          "description": "Bibliographic/recommended citation for the package.",
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068",
+          "type": "string"
+        },
+        "grants": {
+          "description": "A list of grants and other funding sources of the project.",
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000123/",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "spatial": {
+          "description": "Spatial coverage of the package, expressed as GeoJSON. In the core module, this will be the bbox",
+          "skos:exactMatch": "https://purl.org/dc/terms/spatial",
+          "skos:relatedMatch": [
+            "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222",
+            "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
+          ],
+          "type": "object",
+          "$ref": "https://json.schemastore.org/geojson.json"
+        },
+        "temporal": {
+          "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/core/observations#datetime)",
+          "skos:exactMatch": "https://purl.org/dc/terms/temporal",
+          "type": "object",
+          "required": ["start", "end"],
+          "properties": {
+            "start": {
+              "description": "Start date of the first observation. Formatted as an ISO 8601 string (`YYYY-MM-DD`).",
+              "type": "string",
+              "format": "date"
+            },
+            "end": {
+              "description": "End date of the last observation. Formatted as an ISO 8601 string (`YYYY-MM-DD`).",
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "taxonomic": {
+          "description": "Taxonomic coverage of the package. List of all scientific name of all tags. Computed based on the unique `tag.scientificName`.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Scientific name",
+            "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024"
+          }
+        },
+        "relatedIdentifiers": {
+          "description": "Identifiers of resources related to the package (e.g. papers, project pages, derived datasets, APIs, etc.). See [Camtrap DP specification](https://camtrap-dp.tdwg.org/metadata/#relatedIdentifiers)",
+          "type": "array",
+          "items": {
+            "description": "Related identifier."
+          }
+        },
+        "references": {
+          "description": "List of references related to the package, preferably including DOIs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "description": "See [Data Package specification](https://datapackage.org/standard/data-resource/). GeoLocator DP further requires each object to be a [Tabular Data Resource](https://datapackage.org/standard/data-resource/#tabular) with a specific `name` and `schema`.",
+          "minItems": 3,
+          "items": {
+            "oneOf": [
+              {
+                "required": ["name", "path", "profile", "schema"],
+                "properties": {
+                  "name": {
+                    "description": "Identifier of the resource.",
+                    "enum": ["deployments", "media", "observations"]
+                  },
+                  "path": {
+                    "description": "Path or URL to the data file."
+                  },
+                  "profile": {
+                    "description": "[Profile](https://specs.frictionlessdata.io/profiles/) of the resource.",
+                    "enum": ["tabular-data-resource"]
+                  },
+                  "schema": {
+                    "description": "URL of the used Camtrap DP Table Schema version (e.g. `https://raw.githubusercontent.com/tdwg/camtrap-dp/1.0/deployments-table-schema.json`).",
+                    "allOf": [
+                      {
+                        "$ref": "#$defs/version"
+                      },
+                      {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "not": {
+                      "enum": ["deployments", "media", "observations"]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
