@@ -1,7 +1,8 @@
 # SITE SETTINGS
 title: GeoLocator DP
 author: GeoLocator Development Team
-url: "https://raphaelnussbaumer.com/GeoLocator-DP/"
+url: https://raphaelnussbaumer.com
+baseurl: /GeoLocator-DP
 
 # SOCIAL PROFILES
 social:
