@@ -1,7 +1,7 @@
 {
   "name": "observations",
   "title": "observations",
-  "description": "Table of all observations associated with the equipement, retrieval or control of a tag",
+  "description": "Table of all observations associated with the equipment, retrieval, or control of a tag",
   "fields": [
     {
       "name": "tag_id",
@@ -69,7 +69,7 @@
     },
     {
       "name": "observation_type",
-      "description": "Type of observation. \n - `equipment`: Attachement of the tag on the species\n - `retrieval`: Recapture and removal of the tag from the species\n - `recapture`: Recapture of the species AFTER an equipment observation but without removing the tag. This option also covers the case of recapturing a bird without device (choose `missing`in `device_status`) or the case of a recapture happening after a ` retrieval`.\n - `sighting`: An form of knowledge of existance of the bird on a date and location beside ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observations. Avoid using this, and always provide an `observation_comments` in such cases.",
+      "description": "Type of observation. \n - `equipment`: Attachment of the tag on the animal\n - `retrieval`: Recapture and removal of the tag from the animal\n - `recapture`: Recapture of the animal AFTER an equipment observation but without removing the tag. This option also covers the case of recapturing a bird without a device (choose `missing`in `device_status`) or the case of a recapture happening after a `retrieval`.\n - `sighting`: Known presence of the bird on a date and location besides ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observation. Avoid using this, and if using, always provide `observation_comments`.",
       "type": "string",
       "constraints": {
         "required": true,
@@ -79,7 +79,7 @@
     },
     {
       "name": "device_status",
-      "description": "Status of the device/tag. Assumed to be `present` if not provided. Always provide an `observation_comments` if using `other`.",
+      "description": "Status of the tag. Assumed to be `present` if not provided. Always provide `observation_comments` if using `other`.",
       "type": "string",
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
       "constraints": {
@@ -90,7 +90,7 @@
     },
     {
       "name": "observer",
-      "description": "The name of an individual or group that observed the observation.",
+      "description": "The name of the individual or group who made the observation.",
       "type": "string",
       "constraints": {
         "required": false
@@ -110,11 +110,21 @@
     },
     {
       "name": "life_stage",
-      "description": "Age class or life stage which can be entered as . See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "description": "Age class or life stage which can be entered as year class or following the age class used in [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=14).",
       "type": "string",
       "constraints": {
         "required": false,
         "enum": [
+          "pullus",
+          "unknown",
+          "1y",
+          ">1y",
+          "2y",
+          ">2y",
+          "3y",
+          ">3y",
+          "4y",
+          ">4y",
           "0",
           "1",
           "2",
@@ -125,17 +135,7 @@
           "7",
           "8",
           "9",
-          "A",
-          "pullus",
-          "unkown",
-          "1y",
-          ">1y",
-          "2y",
-          ">2y",
-          "3y",
-          ">3y",
-          "4y",
-          ">4y"
+          "A"
         ]
       },
       "skos:closeMatch": [
@@ -146,7 +146,7 @@
     },
     {
       "name": "sex",
-      "description": "Sex of the tagged species which can be enetered according to different standard (full string, single letter or number). See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "description": "Sex of the tagged species which can be entered according to different standards (full string, single letter or number). See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
       "skos:closeMatch": [
         "http://rs.tdwg.org/dwc/terms/sex",
         "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000023"
@@ -160,7 +160,7 @@
     },
     {
       "name": "condition",
-      "description": "Condition of the tagged species. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf). Assumed to be `alive` if not provided",
+      "description": "Condition of the tagged animal. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf). Assumed to be `alive` if not provided",
       "type": "string",
       "constraints": {
         "required": false,
@@ -171,7 +171,7 @@
     },
     {
       "name": "mass",
-      "description": "Mass of the tagged species. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf). Expressed in grams.",
+      "description": "Mass of the tagged animal. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf). Expressed in grams.",
       "type": "number",
       "constraints": {
         "required": false,
@@ -220,5 +220,6 @@
         "fields": "tag_id"
       }
     }
-  ]
+  ],
+  "fieldsMatch": "superset"
 }

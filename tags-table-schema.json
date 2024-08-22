@@ -115,5 +115,6 @@
     }
   ],
   "missingValues": [""],
-  "primaryKey": "tag_id"
+  "primaryKey": "tag_id",
+  "fieldsMatch": "superset"
 }

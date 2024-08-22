@@ -15,7 +15,7 @@ The core GeoLocator DP module consists of:
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | [`datapackage.json`](datapackage/){:.d-inline-block style="width:150px;"} | Metadata of the project/study.                                                                                    |
 | [`tags.csv`](tags/)                                                       | Table of tags/devices/geolocators used in the study. We assume that a `tag` is only used once on a single animal. |
-| [`measurements.csv`](measurements/)                                       | Table with the raw measurements of all measurements.                                                              |
+| [`measurements.csv`](measurements/)                                       | Table with the raw measurements of all sensors for all tags.                                                      |
 | [`observations.csv`](observations/)                                       | Table with any observations associated with tag (e.g. equipment, retrieval, control).                             |
 
 ## GeoPressureR Extension

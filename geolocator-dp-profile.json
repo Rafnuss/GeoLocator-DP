@@ -19,7 +19,7 @@
         "created",
         "contributors",
         "licenses",
-        "spatial",
+        "reference_location",
         "temporal",
         "taxonomic",
         "resources"
@@ -27,11 +27,11 @@
       "properties": {
         "$schema": {
           "description": "See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema). GeoLocator DP further requires this to be the URL of the used GeoLocator DP Profile version.",
-          "format": "uri",
+          "format": "url",
           "example": "https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json"
         },
         "name": {
-          "description": "A simple name or human-readable identifier (lowercase alphnumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
+          "description": "A simple name or human-readable identifier (any lowercase alphanumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
           "example": "mangrove-kingfisher-in-kenya"
         },
         "id": {
@@ -56,9 +56,9 @@
           "example": "Woodland Kingfisher Geolocator data"
         },
         "description": {
-          "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph.See [Data Package specification](https://datapackage.org/standard/data-package/#description).",
+          "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph. See [Data Package specification](https://datapackage.org/standard/data-package/#description).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176",
-          "example": "This datapackage contains the geolocator data collected on 8 Woodland Kingfisher equiped in South Africa."
+          "example": "This datapackage contains the geolocator data collected on 8 Woodland Kingfishers equipped in South Africa."
         },
         "homepage": {
           "description": "A URL for the home on the web related to this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#homepage).",
@@ -69,15 +69,15 @@
           "example": "https://raw.githubusercontent.com/Rafnuss/WoodlandKingfisher/main/output/NDVI_animation/077531d34e04506aeb5e3d3066a8e06e-19ff78ccc543bbb66a89d90b1ae3fd17_getPixels.gif"
         },
         "version": {
-          "description": "A version string identifying the version of the package, following Semantic Versioning. See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/).",
+          "description": "A string identifying the version of the package, following Semantic Versioning. See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/).",
           "example": "v1.2.0"
         },
         "created": {
-          "description": "The datetime on which this was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
+          "description": "The datetime on which the package was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
           "example": "2024-05-17"
         },
         "keywords": {
-          "description": "A list of keywords to assist users in searching for the package. See [Data Package specification](https://datapackage.org/standard/data-package/#keywords).",
+          "description": "A list of keywords to help users find the package. See [Data Package specification](https://datapackage.org/standard/data-package/#keywords).",
           "example": ["intra-african", "NDVI", "geopressure"]
         },
         "contributors": {
@@ -90,7 +90,7 @@
                 "description": "Name of the contributor."
               },
               "role": {
-                "description": "Role of the contributor. We strongly suggests to have at least `principalInvestigator` and `contact` to match movebank requirement. Defaults to `contributor`.",
+                "description": "Role of the contributor. We strongly suggest having at least `principalInvestigator` and `contact` to match Movebank requirements. Defaults to `contributor`.",
                 "enum": [
                   "creator",
                   "contact",
@@ -124,7 +124,7 @@
           "description": "Bibliographic/recommended citation for the package.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068",
           "type": "string",
-          "example": "Nussbaumer, R., & Rime, Y. (2024). WoodlandKingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141"
+          "example": "Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141"
         },
         "grants": {
           "description": "A list of grants and other funding sources of the project.",
@@ -135,43 +135,32 @@
           },
           "example": "Hilfsfonds für die Schweizerische Vogelwarte Sempach"
         },
-        "spatial": {
-          "description": "Spatial coverage of the package as a bounding box defined as an array with four elements representing the minimum and maximum latitude and longitude.. In the core module, this will be the bbox. See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage)",
-          "skos:exactMatch": "https://purl.org/dc/terms/spatial",
+        "reference_location": {
+          "description": "The latitude and longitude of the reference location for the study. By default, this is assumed to be the equipment site, if not please specify in the `description`. See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage)",
           "skos:relatedMatch": [
-            "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222",
-            "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
+            "https://purl.org/dc/terms/spatial",
+            "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000174"
           ],
-          "type": "array",
-          "minItems": 4,
-          "maxItems": 4,
-          "items": [
-            {
-              "description": "Minimum longitude (west).",
-              "type": "number",
-              "minimum": -180,
-              "maximum": 180
-            },
-            {
-              "description": "Minimum latitude (south).",
+          "type": "object",
+          "required": ["latitude", "longitude"],
+          "properties": {
+            "Latitude": {
+              "description": "Reference latitude in degree decimal",
               "type": "number",
               "minimum": -90,
               "maximum": 90
             },
-            {
-              "description": "Maximum longitude (east).",
+            "Longitude": {
+              "description": "Reference longitude in degree decimal",
               "type": "number",
               "minimum": -180,
               "maximum": 180
-            },
-            {
-              "description": "Maximum latitude (north).",
-              "type": "number",
-              "minimum": -90,
-              "maximum": 90
             }
-          ],
-          "example": [15, 38, -25, 13]
+          },
+          "example": {
+            "latitude": -13.02,
+            "longitude": 151.07
+          }
         },
         "temporal": {
           "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/core/observations#datetime). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage)",
@@ -196,7 +185,7 @@
           }
         },
         "taxonomic": {
-          "description": "Taxonomic coverage of the package. List of all scientific name of all tags. Computed based on the unique [`tag.scientific_name`](/core/tags/scientific_name). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage)",
+          "description": "Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/core/tags/scientific_name). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage)",
           "type": "array",
           "items": {
             "type": "string",

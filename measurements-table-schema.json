@@ -1,7 +1,7 @@
 {
   "name": "measurements",
   "title": "Measurement",
-  "description": "Table with all tag's sensor's data.",
+  "description": "Table with all sensor data for all tags.",
   "fields": [
     {
       "name": "tag_id",
@@ -58,7 +58,7 @@
     },
     {
       "name": "valid",
-      "description": "Optional column to manually mark specific measurement as invalid for various reasons (sensor malfunctioned,... )",
+      "description": "Optional column to manually mark specific measurements as invalid for various reasons (sensor malfunction, etc. )",
       "type": "boolean",
       "constraints": { "required": false },
       "example": true,
@@ -77,5 +77,6 @@
         "fields": "tag_id"
       }
     }
-  ]
+  ],
+  "fieldsMatch": "superset"
 }
