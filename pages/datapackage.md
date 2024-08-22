@@ -2,6 +2,7 @@
 layout: profile
 title: datapackage.json
 permalink: /datapackage/
+background: /assets/datapackage.png
 toc: true
 ---
 

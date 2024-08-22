@@ -137,3 +137,6 @@ Gemfile.lock
 
 # Mac OS
 .DS_Store
+
+# VS Code
+*.code-workspace
