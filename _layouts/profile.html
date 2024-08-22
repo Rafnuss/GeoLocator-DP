@@ -32,6 +32,16 @@ assign p1_id = p1_name %}
   Narrower than {% for term in p1['skos:broadMatch'] %}<a href="{{ term }}">{{ term }}</a> {% endfor
   %}
 </p>
+{% elsif p1['skos:relatedMatch'] %}
+<span class="small text-muted"
+  >Related to {% for term in p1['skos:relatedMatch'] %}<a href="{{ term }}">{{ term }}</a>{% unless
+  forloop.last %}, {% endunless %}{% endfor %}
+</span>
+{% elsif p1['skos:closeMatch'] %}
+<span class="small text-muted"
+  >Close to {% for term in p1['skos:closeMatch'] %}<a href="{{ term }}">{{ term }}</a>{% unless
+  forloop.last %}, {% endunless %}{% endfor %}
+</span>
 {% endif %} {% if p1.properties %} {% assign properties2 = p1.properties %} {% assign required2 =
 p1.required %} {% elsif p1.items.properties %} {% assign properties2 = p1.items.properties %} {%
 assign required2 = p1.items.required %} {% elsif p1.items.oneOf[0].properties %} {% assign

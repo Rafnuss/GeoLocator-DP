@@ -8,14 +8,13 @@
       "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
       "type": "string",
       "constraints": {
-        "required": true,
-        "unique": true
+        "required": true
       },
       "example": "18LX"
     },
     {
       "name": "datetime",
-      "description": "Date and time of the observation. Formatted as an ISO 8601 string with timezone designator (`YYYY-MM-DDThh:mm:ssZ` or `YYYY-MM-DDThh:mm:ss±hh:mm`).",
+      "description": "Date and time of the observation. Formatted as an ISO 8601 string (`YYYY-MM-DDThh:mm:ssZ`).",
       "skos:broadMatch": "https://rs.tdwg.org/dwc/terms/observationDate",
       "type": "datetime",
       "format": "%Y-%m-%dT%H:%M:%S%z",
@@ -33,7 +32,7 @@
       "constraints": {
         "required": false
       },
-      "example": "Białowieża MRI 01"
+      "example": "Mwamba ringing center"
     },
     {
       "name": "latitude",
@@ -45,7 +44,7 @@
       "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLatitude",
       "type": "number",
       "constraints": {
-        "required": false,
+        "required": true,
         "minimum": -90,
         "maximum": 90
       },
@@ -61,7 +60,7 @@
       "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLongitude",
       "type": "number",
       "constraints": {
-        "required": false,
+        "required": true,
         "minimum": -180,
         "maximum": 180
       },
@@ -69,7 +68,7 @@
     },
     {
       "name": "observation_type",
-      "description": "Type of observation. \n - `equipment`: Attachment of the tag on the animal\n - `retrieval`: Recapture and removal of the tag from the animal\n - `recapture`: Recapture of the animal AFTER an equipment observation but without removing the tag. This option also covers the case of recapturing a bird without a device (choose `missing`in `device_status`) or the case of a recapture happening after a `retrieval`.\n - `sighting`: Known presence of the bird on a date and location besides ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observation. Avoid using this, and if using, always provide `observation_comments`.",
+      "description": "Type of observation. \n - `equipment`: Attachment of the tag on the animal\n - `retrieval`: Recapture and removal of the tag from the animal\n - `recapture`: Recapture of the animal AFTER an equipment observation but without removing the tag. This option also covers the case of recapturing a bird without a device (choose `missing`in `device_status`) or the case of a recapture happening after a `retrieval`.\n - `sighting`: Known presence of the bird on a date and location besides ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observation. Avoid using this, and if using, always provide [`observation_comments`](core/observations/#observation_comments).",
       "type": "string",
       "constraints": {
         "required": true,
@@ -79,7 +78,7 @@
     },
     {
       "name": "device_status",
-      "description": "Status of the tag. Assumed to be `present` if not provided. Always provide `observation_comments` if using `other`.",
+      "description": "Status of the tag. Assumed to be `present` if not provided. Always provide [`observation_comments`](core/observations/#observation_comments) if using `other`.",
       "type": "string",
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
       "constraints": {

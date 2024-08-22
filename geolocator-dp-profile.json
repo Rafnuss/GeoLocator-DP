@@ -136,25 +136,24 @@
           "example": "Hilfsfonds für die Schweizerische Vogelwarte Sempach"
         },
         "reference_location": {
-          "description": "The latitude and longitude of the reference location for the study. By default, this is assumed to be the equipment site, if not please specify in the `description`. See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage)",
-          "skos:relatedMatch": [
-            "https://purl.org/dc/terms/spatial",
-            "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000174"
-          ],
+          "description": "The latitude and longitude of the reference location for the study. This is assumed to be the deployment site, if not, specify the location in [`description`](/datapackage/#description).",
+          "skos:relatedMatch": "https://purl.org/dc/terms/spatial",
           "type": "object",
           "required": ["latitude", "longitude"],
           "properties": {
-            "Latitude": {
-              "description": "Reference latitude in degree decimal",
+            "latitude": {
+              "description": "Reference latitude in degree decimal.",
               "type": "number",
               "minimum": -90,
-              "maximum": 90
+              "maximum": 90,
+              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
             },
-            "Longitude": {
-              "description": "Reference longitude in degree decimal",
+            "longitude": {
+              "description": "Reference longitude in degree decimal.",
               "type": "number",
               "minimum": -180,
-              "maximum": 180
+              "maximum": 180,
+              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
             }
           },
           "example": {
