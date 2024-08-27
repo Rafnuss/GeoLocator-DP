@@ -26,144 +26,240 @@
       ],
       "properties": {
         "$schema": {
+          "title": "Profile",
           "description": "See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema). GeoLocator DP further requires this to be the URL of the used GeoLocator DP Profile version.",
+          "type": "string",
           "format": "url",
-          "example": "https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json"
-        },
-        "name": {
-          "description": "A simple name or human-readable identifier (any lowercase alphanumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
-          "example": "mangrove-kingfisher-in-kenya"
-        },
-        "id": {
-          "description": "A globally unique identifier for the package, such as a UUID or DOI. See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172",
-          "example": "10.5281/zenodo.11207081"
-        },
-        "licenses": {
-          "description": "The license(s) under which the data is provided. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses).",
-          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257",
-          "example": [
-            {
-              "name": "CC-BY-4.0",
-              "title": "Creative Commons Attribution 4.0",
-              "path": "https://creativecommons.org/licenses/by/4.0/"
-            }
+          "default": "https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json",
+          "examples": [
+            "{\n  \"name\": \"https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json\"\n}\n"
           ]
         },
+        "name": {
+          "title": "Name",
+          "description": "A simple name or human-readable identifier (any lowercase alphanumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
+          "type": "string",
+          "examples": ["{\n  \"name\": \"mangrove-kingfisher-in-kenya\"\n}\n"]
+        },
+        "id": {
+          "title": "ID",
+          "description": "A globally unique identifier for the package, such as a UUID or DOI. See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
+          "type": "string",
+          "examples": ["{\n  \"id\": \"http://dx.doi.org/10.5281/zenodo.11207081\"\n}\n"],
+          "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
+        },
+        "licenses": {
+          "title": "Licenses",
+          "description": "The license(s) under which the data is provided. `name` or `path` must be provided. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses).",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "License",
+            "description": "A license for this descriptor.",
+            "type": "object",
+            "anyOf": [
+              {
+                "required": ["name"]
+              },
+              {
+                "required": ["path"]
+              }
+            ],
+            "properties": {
+              "name": {
+                "title": "Open Definition license identifier",
+                "description": "Open Definition license identifier, see [http://licenses.opendefinition.org/](http://licenses.opendefinition.org/)",
+                "type": "string",
+                "pattern": "^([-a-zA-Z0-9._])+$"
+              },
+              "path": {
+                "title": "Path",
+                "description": "A fully qualified URL.",
+                "type": "string",
+                "pattern": "^((?=[^./~])(?!file:)((?!\\/\\.\\.\\/)(?!\\\\)(?!:\\/\\/).)*|(http|ftp)s?:\\/\\/.*)$",
+                "examples": [
+                  "{\n  \"path\": \"file.csv\"\n}\n",
+                  "{\n  \"path\": \"http://example.com/file.csv\"\n}\n"
+                ]
+              },
+              "title": {
+                "title": "Title",
+                "description": "A human-readable name of the license.",
+                "type": "string"
+              }
+            }
+          },
+          "examples": [
+            "{\n  \"licenses\": [\n    {\n      \"name\": \"CC-BY-4.0\",\n      \"path\": \"https://creativecommons.org/licenses/by/4.0/\",\n      \"title\": \"Creative Commons Attribution 4.0\"\n    }\n  ]\n}\n"
+          ],
+          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257"
+        },
         "title": {
+          "title": "Title",
           "description": "A string providing a title or one sentence description for this package. It should be plain text (no markup), capitalised like a title, NOT end in a period and less than 65 characters. See [Data Package specification](https://datapackage.org/standard/data-package/#title).",
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172",
-          "example": "Woodland Kingfisher Geolocator data"
+          "type": "string",
+          "examples": ["{\n  \"title\": \"Woodland Kingfisher Geolocator data\"\n}\n"],
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
         },
         "description": {
+          "title": "Description",
           "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph. See [Data Package specification](https://datapackage.org/standard/data-package/#description).",
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176",
-          "example": "This datapackage contains the geolocator data collected on 8 Woodland Kingfishers equipped in South Africa."
+          "type": "string",
+          "format": "textarea",
+          "examples": [
+            "{\n  \"description\": \"# This datapackage contains the geolocator data collected on 8 Woodland Kingfishers equipped in South Africa.\"\n}\n"
+          ],
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176"
         },
         "homepage": {
+          "title": "Home Page",
           "description": "A URL for the home on the web related to this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#homepage).",
-          "example": "https://github.com/Rafnuss/WoodlandKingfisher"
+          "type": "string",
+          "format": "uri",
+          "examples": ["{\n  \"homepage\": \"https://github.com/Rafnuss/WoodlandKingfisher\"\n}\n"]
         },
         "image": {
+          "title": "Image",
           "description": "An image to use for this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#image).",
-          "example": "https://raw.githubusercontent.com/Rafnuss/WoodlandKingfisher/main/output/NDVI_animation/077531d34e04506aeb5e3d3066a8e06e-19ff78ccc543bbb66a89d90b1ae3fd17_getPixels.gif"
+          "type": "string",
+          "examples": [
+            "{\n  \"image\": \"https://raw.githubusercontent.com/Rafnuss/WoodlandKingfisher/main/output/NDVI_animation/077531d34e04506aeb5e3d3066a8e06e-19ff78ccc543bbb66a89d90b1ae3fd17_getPixels.gif\"\n}\n"
+          ]
         },
         "version": {
-          "description": "A string identifying the version of the package, following Semantic Versioning. See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/).",
-          "example": "v1.2.0"
+          "title": "Version",
+          "description": "A string identifying the version of the package, ideally following [Semantic Versioning](https://semver.org/). See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/).",
+          "type": "string",
+          "examples": ["{\n  \"version\": \"0.0.1\"\n}\n"]
         },
         "created": {
+          "title": "Created",
           "description": "The datetime on which the package was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
-          "example": "2024-05-17"
+          "type": "string",
+          "format": "date-time",
+          "examples": ["{\n  \"created\": \"2024-05-17\"\n}\n"]
         },
         "keywords": {
+          "title": "Keywords",
           "description": "A list of keywords to help users find the package. See [Data Package specification](https://datapackage.org/standard/data-package/#keywords).",
-          "example": ["intra-african", "NDVI", "geopressure"]
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            "{\n  \"keywords\": [\n    \"intra-african\",\n    \"NDVI\",\n    \"geopressure\"\n  ]\n}\n"
+          ]
         },
         "contributors": {
+          "title": "Contributors",
           "description": "A list of contributors, where each contributor is a list with properties including at least `title` but also optionally `givenName`, `familyName`, `path`, `email`, `roles`, and `organization`. See [Data Package specification](https://datapackage.org/standard/data-package/#contributors). ",
           "type": "array",
+          "minItems": 1,
           "items": {
             "required": ["title"],
             "properties": {
               "title": {
-                "description": "Name of the contributor."
+                "title": "Title",
+                "description": "Name of the contributor.",
+                "type": "string"
               },
               "role": {
                 "description": "Role of the contributor. We strongly suggest having at least `principalInvestigator` and `contact` to match Movebank requirements. Defaults to `contributor`.",
-                "enum": [
-                  "creator",
-                  "contact",
-                  "principalInvestigator",
-                  "rightsHolder",
-                  "dataCurator",
-                  "publisher",
-                  "contributor"
-                ]
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "creator",
+                    "contact",
+                    "principalInvestigator",
+                    "rightsHolder",
+                    "dataCurator",
+                    "publisher",
+                    "contributor"
+                  ]
+                }
+              },
+              "email": {
+                "title": "Email",
+                "description": "An email address.",
+                "type": "string",
+                "format": "email",
+                "examples": ["{\n  \"email\": \"example@example.com\"\n}\n"]
+              },
+              "organization": {
+                "title": "Organization",
+                "description": "An organizational affiliation for this contributor.",
+                "type": "string"
               }
             }
           },
+          "examples": [
+            "{\n  \"contributors\": [\n    {\n      \"title\": \"Yann Rime\",\n      \"email\": \"yann.rime@vogelwarte.ch\",\n      \"roles\": [\"aut\", \"contributor\"]\n    },\n    {\n      \"title\": \"Raphaël Nussbaumer\",\n      \"email\": \"raphael.nussbaumer@vogelwarte.ch\",\n      \"roles\": [\"contact\", \"creator\"]\n    }\n  ]\n}\n"
+          ],
           "skos:relatedMatch": [
             "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072",
             "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164"
-          ],
-          "example": [
-            {
-              "title": "Yann Rime",
-              "email": "yann.rime@vogelwarte.ch",
-              "roles": ["aut", "contributor"]
-            },
-            {
-              "title": "Raphaël Nussbaumer",
-              "email": "raphael.nussbaumer@vogelwarte.ch",
-              "roles": ["contact", "creator"]
-            }
           ]
         },
         "citation": {
+          "title": "Citation",
           "description": "Bibliographic/recommended citation for the package.",
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068",
           "type": "string",
-          "example": "Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141"
+          "examples": [
+            "{\n  \"citation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
+          ],
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068"
         },
         "grants": {
+          "title": "Grants",
           "description": "A list of grants and other funding sources of the project.",
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000123/",
           "type": "array",
+          "minItems": 1,
           "items": {
             "type": "string"
           },
-          "example": "Hilfsfonds für die Schweizerische Vogelwarte Sempach"
+          "examples": [
+            "{\n  \"grants\": [\"Hilfsfonds für die Schweizerische Vogelwarte Sempach\"]\n}\n"
+          ],
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000123/"
         },
         "reference_location": {
-          "description": "The latitude and longitude of the reference location for the study. This is assumed to be the deployment site, if not, specify the location in [`description`](/datapackage/#description).",
-          "skos:relatedMatch": "https://purl.org/dc/terms/spatial",
+          "title": "Reference location",
+          "description": "Reference location for the study is used to display the study on a map. Choose a central area for your study, typically the main deployment site. This is mostly used for Movebank",
           "type": "object",
-          "required": ["latitude", "longitude"],
-          "properties": {
-            "latitude": {
-              "description": "Reference latitude in degree decimal.",
-              "type": "number",
-              "minimum": -90,
-              "maximum": 90,
-              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
-            },
-            "longitude": {
-              "description": "Reference longitude in degree decimal.",
-              "type": "number",
-              "minimum": -180,
-              "maximum": 180,
-              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
+          "items": {
+            "required": ["latitude", "longitude"],
+            "properties": {
+              "latitude": {
+                "description": "Reference latitude in degree decimal.",
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90,
+                "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
+              },
+              "longitude": {
+                "description": "Reference longitude in degree decimal.",
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
+              },
+              "description": {
+                "description": "Description of the reference location.",
+                "type": "string"
+              }
             }
           },
-          "example": {
-            "latitude": -13.02,
-            "longitude": 151.07
-          }
+          "examples": [
+            "{\n  \"reference_location\": {\n    \"latitude\": -13.02,\n    \"longitude\": 151.07,\n    \"description\": \"Forest area with nest boxes\"\n  }\n}\n"
+          ],
+          "skos:relatedMatch": "https://purl.org/dc/terms/spatial"
         },
         "temporal": {
+          "title": "Temporal",
           "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/core/observations#datetime). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage)",
-          "skos:exactMatch": "https://purl.org/dc/terms/temporal",
           "type": "object",
           "required": ["start", "end"],
           "properties": {
@@ -178,12 +274,13 @@
               "format": "date"
             }
           },
-          "example": {
-            "start": "2017-01-10",
-            "end": "2019-09-29"
-          }
+          "examples": [
+            "{\n  \"temporal\": {\n    \"start\": \"2017-01-10\",\n    \"end\": \"2019-09-29\"\n  }\n}\n"
+          ],
+          "skos:exactMatch": "https://purl.org/dc/terms/temporal"
         },
         "taxonomic": {
+          "title": "Taxonomic",
           "description": "Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/core/tags/scientific_name). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage)",
           "type": "array",
           "items": {
@@ -191,9 +288,10 @@
             "description": "Scientific name",
             "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024"
           },
-          "example": ["Halcyon senegaloides"]
+          "examples": ["{\n  \"taxonomic\": [\"Halcyon senegaloides\"]\n}\n"]
         },
         "relatedIdentifiers": {
+          "title": "Related Identifiers",
           "description": "Identifiers of resources related to the package (e.g. papers, project pages, derived datasets, APIs, etc.). See [Camtrap DP specification](https://camtrap-dp.tdwg.org/metadata/#relatedIdentifiers)",
           "type": "array",
           "items": {
@@ -201,6 +299,7 @@
           }
         },
         "references": {
+          "title": "References",
           "description": "List of references related to the package, preferably including DOIs.",
           "type": "array",
           "items": {
@@ -208,7 +307,9 @@
           }
         },
         "resources": {
+          "title": "Data Resources",
           "description": "See [Data Package specification](https://datapackage.org/standard/data-resource/). GeoLocator DP further requires each object to be a [Tabular Data Resource](https://datapackage.org/standard/data-resource/#tabular) with a specific `name` and `$schema`.",
+          "type": "array",
           "minItems": 3,
           "items": {
             "oneOf": [

@@ -16,7 +16,7 @@ site.data[profile_file].allOf[1].required %}
 {% for p1_raw in properties1 %} {% assign p1_name = p1_raw[0] %} {% assign p1 = p1_raw[1] %} {%
 assign p1_id = p1_name %}
 
-<h2 id="{{ p1_id }}">{{ p1_name }} {% if required1 contains p1_name %}*{% endif %}</h2>
+<h2 id="{{ p1_id }}"><code>{{ p1_name }}{% if required1 contains p1_name %}*{% endif %}</code></h2>
 
 {{ p1.description | markdownify }} {% if p1['skos:exactMatch'] %}
 <p class="small text-muted">
@@ -115,7 +115,7 @@ else %} {% assign properties2 = false %} {% endif %} {% if properties2 %}
     {% endfor %}
   </tbody>
 </table>
-{% endif %} {% if p1.example and p1.example != "" %}
+{% endif %} {% if p1.examples and p1.examples != "" %}
 <p><strong>Example</strong>:</p>
-{% capture json_string %} { "{{ p1_name }}": {{ p1.example | jsonify }} } {% endcapture %} {%
-highlight json %} {{ json_string | strip }} {% endhighlight %} {% endif %}{% endfor %}
+{% capture json_string %} {{ p1.examples }} {% endcapture %} {% highlight json %}{{ json_string |
+strip }} {% endhighlight %} {% endif %}{% endfor %}
