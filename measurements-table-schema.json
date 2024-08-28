@@ -1,6 +1,6 @@
 {
   "name": "measurements",
-  "title": "Measurement",
+  "title": "Measurements",
   "description": "Table with all sensor data for all tags.",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
