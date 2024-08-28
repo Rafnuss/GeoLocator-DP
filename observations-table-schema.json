@@ -72,7 +72,7 @@
       "type": "string",
       "constraints": {
         "required": true,
-        "enum": ["equipment", "retrival", "recapture", "sighting", "other"]
+        "enum": ["equipment", "retrieval", "recapture", "sighting", "other"]
       },
       "example": "equipment"
     },
@@ -105,7 +105,7 @@
       "description": "Catching method according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=12). Generally, one of:\n - `M`: *M*isnet\n - `N`: on *n*est\n - `Z`: unknown",
       "type": "string",
       "constraints": {
-        "required": true,
+        "required": false,
         "enum": [
           "-",
           "A",

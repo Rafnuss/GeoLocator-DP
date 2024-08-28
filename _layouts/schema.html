@@ -2,16 +2,16 @@
 layout: default
 ---
 
-{{ content }} {% assign table_schema = site.data[page.schema] %} {% assign table_schema_id =
-table_schema.name %}
+{{ content | markdownify}} {% assign table_schema = site.data[page.schema] %} {% assign
+table_schema_id = table_schema.name %}
 
 <h2 id="{{ table_schema_id }}">{{ table_schema.title }}</h2>
 
 <p class="small">
   Source:
-  <a href="{{ site.github.repository_url }}/blob/main/{{ page.schema }}.json"
-    ><code>{{ page.schema }}.json</code></a
-  >
+  <a href="{{ site.github.repository_url }}/blob/main/{{ page.schema }}.json">
+    <code>{{ page.schema }}.json</code>
+  </a>
 </p>
 
 {{ table_schema.description | markdownify }}

@@ -140,3 +140,6 @@ Gemfile.lock
 
 # VS Code
 *.code-workspace
+
+# Opendataedito
+.Opendataeditor/*
