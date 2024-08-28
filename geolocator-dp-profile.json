@@ -185,7 +185,7 @@
                 "format": "email",
                 "examples": ["{\n  \"email\": \"example@example.com\"\n}\n"]
               },
-              "role": {
+              "roles": {
                 "description": "The type of contributor of the resource according to [DataCite Metadata Schema's contributorRole](https://support.datacite.org/docs/datacite-metadata-schema-v44-recommended-and-optional-properties#7a-contributortype). We strongly suggest having `ContactPerson` and `ProjectLeader` to match Movebank requirements for a [contact person](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072/) and a [principal investigator](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164/).",
                 "type": "array",
                 "minItems": 1,
@@ -223,7 +223,7 @@
             }
           },
           "examples": [
-            "{\n  \"contributors\": [\n    {\n      \"title\": \"Yann Rime\",\n      \"email\": \"yann.rime@vogelwarte.ch\",\n      \"roles\": [\"aut\", \"contributor\"]\n    },\n    {\n      \"title\": \"Raphaël Nussbaumer\",\n      \"email\": \"raphael.nussbaumer@vogelwarte.ch\",\n      \"roles\": [\"contact\", \"creator\"]\n    }\n  ]\n}\n"
+            "{\n  \"contributors\": [\n    {\n      \"title\": \"Yann Rime\",\n      \"email\": \"yann.rime@vogelwarte.ch\",\n      \"roles\": [\"Researcher\"]\n    },\n    {\n      \"title\": \"Raphaël Nussbaumer\",\n      \"email\": \"raphael.nussbaumer@vogelwarte.ch\",\n      \"roles\": [\"ContactPerson\", \"ProjectLeader\"]\n    }\n  ]\n}\n"
           ],
           "skos:relatedMatch": [
             "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072",
