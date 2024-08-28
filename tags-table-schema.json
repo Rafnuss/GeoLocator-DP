@@ -114,7 +114,7 @@
       "example": ""
     }
   ],
-  "missingValues": [""],
+  "missingValues": [{ "value": "", "label": "OMITTED" }],
   "primaryKey": "tag_id",
   "fieldsMatch": "superset"
 }
