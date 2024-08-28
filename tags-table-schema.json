@@ -2,6 +2,7 @@
   "name": "tags",
   "title": "Tags",
   "description": "Table with tags.",
+  "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
       "name": "tag_id",
@@ -114,7 +115,7 @@
       "example": ""
     }
   ],
-  "missingValues": [{ "value": "", "label": "OMITTED" }],
+  "missingValues": ["", "NA"],
   "primaryKey": "tag_id",
-  "fieldsMatch": "superset"
+  "fieldsMatch": ["superset"]
 }

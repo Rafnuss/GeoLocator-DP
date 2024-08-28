@@ -2,6 +2,7 @@
   "name": "observations",
   "title": "observations",
   "description": "Table of all observations associated with the equipment, retrieval, or control of a tag",
+  "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
       "name": "tag_id",
@@ -244,7 +245,7 @@
       "example": ""
     }
   ],
-  "missingValues": [{ "value": "", "label": "OMITTED" }],
+  "missingValues": ["", "NA"],
   "foreignKeys": [
     {
       "fields": "tag_id",
@@ -254,5 +255,5 @@
       }
     }
   ],
-  "fieldsMatch": "superset"
+  "fieldsMatch": ["superset"]
 }
