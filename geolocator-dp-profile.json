@@ -164,22 +164,19 @@
                 "description": "Name of the contributor.",
                 "type": "string"
               },
-              "role": {
-                "description": "Role of the contributor. We strongly suggest having at least `principalInvestigator` and `contact` to match Movebank requirements. Defaults to `contributor`.",
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "creator",
-                    "contact",
-                    "principalInvestigator",
-                    "rightsHolder",
-                    "dataCurator",
-                    "publisher",
-                    "contributor"
-                  ]
-                }
+              "givenName": {
+                "type": "string",
+                "description": "Given name of the contributor"
+              },
+              "familyName": {
+                "type": "string",
+                "description": "Family name of the contributor"
+              },
+              "path": {
+                "title": "Path",
+                "description": "A fully qualified URL pointing to a relevant location online for the contributor",
+                "type": "string",
+                "pattern": "^((?=[^./~])(?!file:)((?!\\/\\.\\.\\/)(?!\\\\)(?!:\\/\\/).)*|(http|ftp)s?:\\/\\/.*)$"
               },
               "email": {
                 "title": "Email",
@@ -187,6 +184,36 @@
                 "type": "string",
                 "format": "email",
                 "examples": ["{\n  \"email\": \"example@example.com\"\n}\n"]
+              },
+              "role": {
+                "description": "The type of contributor of the resource according to [DataCite Metadata Schema's contributorRole](https://support.datacite.org/docs/datacite-metadata-schema-v44-recommended-and-optional-properties#7a-contributortype). We strongly suggest having `ContactPerson` and `ProjectLeader` to match Movebank requirements for a [contact person](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072/) and a [principal investigator](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164/).",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ContactPerson",
+                    "DataCollector",
+                    "DataCurator",
+                    "DataManager",
+                    "Distributor",
+                    "Editor",
+                    "HostingInstitution",
+                    "Producer",
+                    "ProjectLeader",
+                    "ProjectManager",
+                    "ProjectMember",
+                    "RegistrationAgency",
+                    "RegistrationAuthority",
+                    "RelatedPerson",
+                    "Researcher",
+                    "ResearcherGroup",
+                    "RightsHolder",
+                    "Sponsor",
+                    "Supervisor",
+                    "WorkPackageLeader"
+                  ]
+                }
               },
               "organization": {
                 "title": "Organization",
