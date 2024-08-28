@@ -17,6 +17,7 @@
         "$schema",
         "title",
         "created",
+        "embargo",
         "contributors",
         "licenses",
         "reference_location",
@@ -137,6 +138,13 @@
           "description": "The datetime on which the package was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
           "type": "string",
           "format": "date-time",
+          "examples": ["{\n  \"created\": \"2024-05-17\"\n}\n"]
+        },
+        "embargo": {
+          "title": "Embargo until",
+          "description": "End date of the embargo. The repository will restrict access to the data until the end of the embargo period; at which time, the content will become publically available automatically. If no `embargo` is provided, it is assumed that there is no embargo.",
+          "type": "string",
+          "format": "date",
           "examples": ["{\n  \"created\": \"2024-05-17\"\n}\n"]
         },
         "keywords": {
