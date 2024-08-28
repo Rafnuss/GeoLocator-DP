@@ -17,6 +17,7 @@
         "$schema",
         "title",
         "created",
+        "embargo",
         "contributors",
         "licenses",
         "reference_location",
