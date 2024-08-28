@@ -139,6 +139,13 @@
           "format": "date-time",
           "examples": ["{\n  \"created\": \"2024-05-17\"\n}\n"]
         },
+        "embargo": {
+          "title": "Embargo until",
+          "description": "End date of the embargo. The repository will restrict access to the data until the end of the embargo period; at which time, the content will become publically available automatically. If no `embargo` is provided, it is assumed that there is no embargo.",
+          "type": "string",
+          "format": "date",
+          "examples": ["{\n  \"embargo\": \"2024-05-17\"\n}\n"]
+        },
         "keywords": {
           "title": "Keywords",
           "description": "A list of keywords to help users find the package. See [Data Package specification](https://datapackage.org/standard/data-package/#keywords).",
