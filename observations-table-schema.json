@@ -26,13 +26,13 @@
     },
     {
       "name": "location_name",
-      "description": "Name given to the deployment location.",
+      "description": "Given name of the observation location. It might be helpful to keep a human-readable name of the location to differentiate the location of different observations more easily.",
       "skos:exactMatch": "https://rs.tdwg.org/dwc/terms/locality",
       "type": "string",
       "constraints": {
         "required": false
       },
-      "example": "Mwamba ringing center"
+      "example": "Mwamba center--Nest box #2"
     },
     {
       "name": "latitude",
@@ -78,12 +78,12 @@
     },
     {
       "name": "device_status",
-      "description": "Status of the tag. Assumed to be `present` if not provided. Always provide [`observation_comments`](core/observations/#observation_comments) if using `other`.",
+      "description": "Status of the tag. Assumed to be `present` if not provided. Always provide [`observation_comments`](core/observations/#observation_comments) if using `unknown`.",
       "type": "string",
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
       "constraints": {
         "required": false,
-        "enum": ["present", "missing", "broken_damage", "other"]
+        "enum": ["present", "missing", "broken_damage", "unknown"]
       },
       "example": "broken_damage"
     },
@@ -101,29 +101,44 @@
       "example": "Yann Rime"
     },
     {
-      "name": "capture_method",
-      "description": "Method of capture. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "name": "catching_method",
+      "description": "Catching method according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=12). Generally, one of:\n - `M`: *M*isnet\n - `N`: on *n*est\n - `Z`: unknown",
       "type": "string",
+      "constraints": {
+        "required": true,
+        "enum": [
+          "-",
+          "A",
+          "B",
+          "C",
+          "D",
+          "F",
+          "G",
+          "H",
+          "L",
+          "M",
+          "N",
+          "O",
+          "P",
+          "R",
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "Z"
+        ]
+      },
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000397",
-      "example": "mistnet"
+      "example": "M"
     },
     {
       "name": "life_stage",
-      "description": "Age class or life stage which can be entered as year class or following the age class used in [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=14).",
+      "description": "Life stage of the bird according to the age class in [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=14). \n- `0`: Unknown\n- `1`: Pullus\n- `2`: Full-grown\n- `2`: 1yr\n- `3`: >1yr\n- `4`: 2yr\n- `5`: >2yr",
       "type": "string",
       "constraints": {
-        "required": false,
+        "required": true,
         "enum": [
-          "pullus",
-          "unknown",
-          "1y",
-          ">1y",
-          "2y",
-          ">2y",
-          "3y",
-          ">3y",
-          "4y",
-          ">4y",
           "0",
           "1",
           "2",
@@ -134,32 +149,39 @@
           "7",
           "8",
           "9",
-          "A"
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H"
         ]
       },
       "skos:closeMatch": [
         "https://rs.tdwg.org/dwc/terms/lifeStage",
         "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000018"
       ],
-      "example": ">1y"
+      "example": "1"
     },
     {
       "name": "sex",
-      "description": "Sex of the tagged species which can be entered according to different standards (full string, single letter or number). See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf).",
+      "description": "Sex of the bird according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=13) as male `M`, female `F` or unknown `U`.",
       "skos:closeMatch": [
         "http://rs.tdwg.org/dwc/terms/sex",
         "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000023"
       ],
       "type": "string",
       "constraints": {
-        "required": false,
-        "enum": ["female", "male", "unknown", "F", "M", "U", "0", "1", "2"]
+        "required": true,
+        "enum": ["U", "M", "F"]
       },
       "example": "female"
     },
     {
       "name": "condition",
-      "description": "Condition of the tagged animal. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf). Assumed to be `alive` if not provided",
+      "description": "Condition of bird follow a simplified version of [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=23). Assumed to be `alive` if not provided",
       "type": "string",
       "constraints": {
         "required": false,
@@ -170,7 +192,7 @@
     },
     {
       "name": "mass",
-      "description": "Mass of the tagged animal. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf). Expressed in grams.",
+      "description": "Mass of the tagged animal. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=27). Expressed in grams.",
       "type": "number",
       "constraints": {
         "required": false,
@@ -179,6 +201,18 @@
       "unit": "grams",
       "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000019",
       "example": 23.3
+    },
+    {
+      "name": "wing_length",
+      "description": "Maximum chord measurement. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=26). Expressed in milimeters.",
+      "type": "number",
+      "constraints": {
+        "required": false,
+        "minimum": 0
+      },
+      "unit": "mm",
+      "skos:exactMatch": "",
+      "example": 15.4
     },
     {
       "name": "additional_metric",

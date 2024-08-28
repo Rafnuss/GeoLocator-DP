@@ -16,7 +16,7 @@
     },
     {
       "name": "manufacturer",
-      "description": "The company or person that produced the tag.",
+      "description": "The company or person that produced the tag. When appropriate, please use 'Swiss Ornithological Institue', 'Migrate Technology Limited', or 'Lund University'.",
       "type": "string",
       "constraints": {
         "required": false
@@ -26,7 +26,7 @@
     },
     {
       "name": "model",
-      "description": "Model of the tag",
+      "description": "Model of the tag.",
       "type": "string",
       "constraints": {
         "required": false
@@ -57,8 +57,8 @@
       "example": 1.32
     },
     {
-      "name": "harness",
-      "description": "The way a tag is attached to an animal. Use values from [Movebank `attachment type` concept](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000052) values if possible. Assumed to be `harness` if not provided",
+      "name": "attachment_type",
+      "description": "The way a tag is attached to an animal. Use values from [Movebank `attachment type` concept](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000052) values if possible. Assumed to be `harness` if not provided. You can also provide the material used.",
       "type": "string",
       "constraints": {
         "required": false
@@ -78,7 +78,7 @@
     },
     {
       "name": "scientific_name",
-      "description": "Scientific name of the tagged species.",
+      "description": "Scientific name of the tagged species. Use `NA` if the tag was not deployed.",
       "type": "string",
       "constraints": {
         "required": true
@@ -91,10 +91,10 @@
     },
     {
       "name": "ring_number",
-      "description": "Ring number associated with the tagged species.",
+      "description": "Ring number associated with the tagged species. Use `NA` if the tag was not deployed.",
       "type": "string",
       "constraints": {
-        "required": false
+        "required": true
       },
       "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000022",
       "example": "F58445"
