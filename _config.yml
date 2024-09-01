@@ -36,4 +36,3 @@ exclude:
   - tests/*
   - "*.json"
   - vendor # Avoids https://github.com/jekyll/jekyll/issues/2938
-

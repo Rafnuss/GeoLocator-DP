@@ -1,0 +1,112 @@
+{
+  "name": "staps",
+  "title": "Stationary periods",
+  "description": "Stationary period (stap) is [a key concept of the GeoPressureR workflow](https://raphaelnussbaumer.com/GeoPressureManual/tag-object#label-tag-into-stationary-periods) which descritize the trajectory of a bird in time and space. During a single stap, the bird is assumed to remain at the same location (+/- tens of kilometers). [`flight`](https://raphaelnussbaumer.com/GeoPressureR/reference/stap2flight) is the 'converse' of `stap`, with `flight.start` corresponding to an `stap.end` and reciprocly. \n\n{:.alert .alert-info}\n`stap` are typically estimated by [`GeoPressureR::tag_label_stap()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_label_stap) based on the labels `'flight'` assigned to the pressure or acceleration measurements ([`measurements.label`](/core/measurements/#label)). See the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/labelling-tracks) for more details.",
+  "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
+  "fields": [
+    {
+      "name": "tag_id",
+      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "type": "string",
+      "constraints": {
+        "required": true
+      },
+      "example": "18LX"
+    },
+    {
+      "name": "stap_id",
+      "description": "Identifier of the stationary period to which the twilight belong to.",
+      "type": "number",
+      "constraints": {
+        "required": true
+      },
+      "example": "3"
+    },
+    {
+      "name": "start",
+      "description": "Date and time of the start of the stationary period. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
+      "type": "datetime",
+      "format": "%Y-%m-%dT%H:%M:%S%z",
+      "constraints": {
+        "required": true
+      },
+      "example": "2020-04-01T05:50:00Z",
+      "skos:closeMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000200"
+    },
+    {
+      "name": "end",
+      "description": "Date and time of the end of the stationary period. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
+      "type": "datetime",
+      "format": "%Y-%m-%dT%H:%M:%S%z",
+      "constraints": {
+        "required": true
+      },
+      "example": "2020-04-02T21:18:00Z",
+      "skos:closeMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000200"
+    },
+    {
+      "name": "known_lat",
+      "description": "Latitude of the known stationay period. This value is typically assigned by [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map).",
+      "type": "number",
+      "constraints": {
+        "required": false,
+        "minimum": -90,
+        "maximum": 90
+      },
+      "example": "52.70442",
+      "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLatitude"
+    },
+    {
+      "name": "known_lon",
+      "description": "Longitude of the known stationay period. This value is typically assigned by [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map).",
+      "type": "number",
+      "constraints": {
+        "required": false,
+        "minimum": -180,
+        "maximum": 180
+      },
+      "example": "23.84995",
+      "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLongitude"
+    },
+    {
+      "name": "include",
+      "description": "Boolean value to indicate if the stationary period should be included in the model. This value is typically assigned by [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map).",
+      "type": "boolean",
+      "constraints": {
+        "required": false
+      },
+      "example": "true"
+    },
+    {
+      "name": "duration",
+      "description": "(DUPLICATE). Duration of the stationary period (`stap.end` - `stap.start`). Typically computed with [`GeoPressureR::stap2duration()`](https://raphaelnussbaumer.com/GeoPressureR/reference/stap2duration). [https://datapackage.org/standard/table-schema/#duration] It needs to be a numeric value in days (default of the function).",
+      "type": "duration",
+      "unit": "d",
+      "constraints": {
+        "required": false,
+        "minimum": 0
+      },
+      "example": "0.635"
+    },
+    {
+      "name": "nb_sample",
+      "description": "(USELESS). Number of pressure datapoint used to compute the likelihood map. Assigned by by [`GeoPressureR::geopressure_map_mismatch()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressure_map) and ONLY used by [`GeoPressureR::geopressure_map_likelihood()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressure_map) (which actually delete this variable if `keep_mse = FALSE`.",
+      "type": "number",
+      "constraints": {
+        "required": false
+      },
+      "example": "234"
+    }
+  ],
+  "missingValues": ["", "NA"],
+  "foreignKeys": [
+    {
+      "fields": "tag_id",
+      "reference": {
+        "resource": "tags",
+        "fields": "tag_id"
+      }
+    }
+  ],
+  "fieldsMatch": ["superset"]
+}

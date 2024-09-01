@@ -353,7 +353,17 @@
                 "properties": {
                   "name": {
                     "description": "Identifier of the resource. See [Data Package specification](https://datapackage.org/standard/data-resource/#name).",
-                    "enum": ["tags", "observations", "measurements"]
+                    "enum": [
+                      "tags",
+                      "observations",
+                      "measurements",
+                      "edges",
+                      "paths",
+                      "staps",
+                      "twilights",
+                      "maps",
+                      "configs"
+                    ]
                   },
                   "type": {
                     "description": "Type of the resource. Only `table` are allowed. See [Data Package specification](https://datapackage.org/standard/data-resource/#type).",

@@ -1,0 +1,73 @@
+{
+  "name": "twilights",
+  "title": "Twilights",
+  "description": "Table with twilights data infered from light data for all tags. Twilight data is typically computed with [`GeoPressureR::twilight_create()`](https://raphaelnussbaumer.com/GeoPressureR/reference/twilight_create.html).",
+  "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
+  "fields": [
+    {
+      "name": "tag_id",
+      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "type": "string",
+      "constraints": {
+        "required": true
+      },
+      "example": "18LX"
+    },
+    {
+      "name": "twilight",
+      "description": "Date and time of the twilights. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
+      "type": "datetime",
+      "format": "%Y-%m-%dT%H:%M:%S%z",
+      "constraints": {
+        "required": true
+      },
+      "example": "2020-04-01T22:00:00Z",
+      "skos:closeMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000200"
+    },
+    {
+      "name": "rise",
+      "description": "Boolean value to indicate if the twilight is a sunrise (true) or sunset (false).",
+      "type": "boolean",
+      "constraints": {
+        "required": true
+      },
+      "example": "true"
+    },
+    {
+      "name": "stap_id",
+      "description": "Optional identifier of the stationary period to which the twilight belong to. Foreign key to [`staps.stap_id`](/geopressurer/staps#stap_id)",
+      "type": "number",
+      "constraints": {
+        "required": false
+      },
+      "example": "3"
+    },
+    {
+      "name": "label",
+      "description": "Labeling of the twilight data according to the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/light-map.html#manual-labelling-of-twilight). The value `discard` indicates that the twilight should not be used for geopositioning. Any other value can be use without affecting the workflow, typically duplicate of `stap_id` allows to visualize which twilight belong to the same stationary period on trainset.",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "example": "discard"
+    }
+  ],
+  "missingValues": ["", "NA"],
+  "foreignKeys": [
+    {
+      "fields": "tag_id",
+      "reference": {
+        "resource": "tags",
+        "fields": "tag_id"
+      }
+    },
+    {
+      "fields": "stap_id",
+      "reference": {
+        "resource": "staps",
+        "fields": "stap_id"
+      }
+    }
+  ],
+  "fieldsMatch": ["superset"]
+}
