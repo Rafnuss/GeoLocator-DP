@@ -3,8 +3,7 @@ layout: default
 ---
 
 {{ content | markdownify}} {% assign table_schema = site.data[page.schema] %} {% assign
-table_schema_id = table_schema.name %}
-
+table_schema_id = table_schema.name %} {{ table_schema.description | markdownify}}
 <h2 id="{{ table_schema_id }}">{{ table_schema.title }}</h2>
 
 <p class="small">
@@ -13,8 +12,6 @@ table_schema_id = table_schema.name %}
     <code>{{ page.schema }}.json</code>
   </a>
 </p>
-
-{{ table_schema.description | markdownify }}
 
 <table>
   <colgroup>
@@ -33,8 +30,8 @@ table_schema_id = table_schema.name %}
     {% for field in table_schema.fields %}
     <tr class="text-break">
       <td id="{{ field.name }}">
-        <a href="#{{ field.name }}"><code>{{ field.name }}</code></a>
-        {% if field.constraints.required %}*{% endif %}
+        <a href="#{{ field.name }}"><code>{{ field.name }}</code></a
+        >{% if field.constraints.required %}*{% endif %}
       </td>
       <td>
         {{ field.description | markdownify }} {% if field.constraints %}

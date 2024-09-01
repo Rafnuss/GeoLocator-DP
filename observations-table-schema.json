@@ -1,7 +1,7 @@
 {
   "name": "observations",
   "title": "observations",
-  "description": "Table of all observations associated with the equipment, retrieval, or control of a tag",
+  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) ressources from a GeoLocator Data Package containing any relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that happened typically on the field and which providing important information for the analysis. These observations must typically include at least the equipment and, if appriate, the retrieval, but also any ringing control or direct sightings for instance.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described by at least, the `datetime` of the observation, the location (`latitude` and `longitude`), the tag involved `tag_id` and the type of observations `observation_type` (e.g., equipement, retrieval or control). In addition, we require also `age` and `life_stage` (which can be set as unknown `U`).",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -49,7 +49,7 @@
         "minimum": -90,
         "maximum": 90
       },
-      "example": 52.70442
+      "example": "52.70442"
     },
     {
       "name": "longitude",
@@ -65,7 +65,7 @@
         "minimum": -180,
         "maximum": 180
       },
-      "example": 23.84995
+      "example": "23.84995"
     },
     {
       "name": "observation_type",
@@ -201,7 +201,7 @@
       },
       "unit": "grams",
       "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000019",
-      "example": 23.3
+      "example": "23.3"
     },
     {
       "name": "wing_length",
@@ -213,7 +213,7 @@
       },
       "unit": "mm",
       "skos:exactMatch": "",
-      "example": 15.4
+      "example": "15.4"
     },
     {
       "name": "additional_metric",
