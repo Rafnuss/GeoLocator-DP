@@ -30,7 +30,7 @@
           "title": "Profile",
           "description": "See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema). GeoLocator DP further requires this to be the URL of the used GeoLocator DP Profile version.",
           "type": "string",
-          "format": "url",
+          "format": "uri",
           "default": "https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json",
           "examples": [
             "{\n  \"name\": \"https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json\"\n}\n"
@@ -264,27 +264,23 @@
           "title": "Reference location",
           "description": "Reference location for the study is used to display the study on a map. Choose a central area for your study, typically the main deployment site. This is mostly used for Movebank",
           "type": "object",
-          "items": {
-            "required": ["latitude", "longitude"],
-            "properties": {
-              "latitude": {
-                "description": "Reference latitude in degree decimal.",
-                "type": "number",
-                "minimum": -90,
-                "maximum": 90,
-                "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
-              },
-              "longitude": {
-                "description": "Reference longitude in degree decimal.",
-                "type": "number",
-                "minimum": -180,
-                "maximum": 180,
-                "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
-              },
-              "description": {
-                "description": "Description of the reference location.",
-                "type": "string"
-              }
+          "minItems": 2,
+          "maxItems": 2,
+          "required": ["latitude", "longitude"],
+          "properties": {
+            "latitude": {
+              "description": "Reference latitude in degree decimal.",
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90,
+              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
+            },
+            "longitude": {
+              "description": "Reference longitude in degree decimal.",
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180,
+              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
             }
           },
           "examples": [
@@ -296,6 +292,8 @@
           "title": "Temporal",
           "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/core/observations#datetime). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage)",
           "type": "object",
+          "minItems": 2,
+          "maxItems": 2,
           "required": ["start", "end"],
           "properties": {
             "start": {
