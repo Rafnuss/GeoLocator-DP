@@ -132,17 +132,6 @@
       "skos:closeMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000200"
     },
     {
-      "name": "duration",
-      "description": "(DUPLICATE). Duration of the stationary period (`stap.end` - `stap.start`). Typically computed with [`GeoPressureR::stap2duration()`](https://raphaelnussbaumer.com/GeoPressureR/reference/stap2duration). [https://datapackage.org/standard/table-schema/#duration] It needs to be a numeric value in days (default of the function).",
-      "type": "duration",
-      "unit": "d",
-      "constraints": {
-        "required": false,
-        "minimum": 0
-      },
-      "example": "0.635"
-    },
-    {
       "name": "n",
       "description": "Number of flight.",
       "type": "integer",

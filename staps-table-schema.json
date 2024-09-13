@@ -74,26 +74,6 @@
         "required": false
       },
       "example": "true"
-    },
-    {
-      "name": "duration",
-      "description": "(DUPLICATE). Duration of the stationary period (`stap.end` - `stap.start`). Typically computed with [`GeoPressureR::stap2duration()`](https://raphaelnussbaumer.com/GeoPressureR/reference/stap2duration). [https://datapackage.org/standard/table-schema/#duration] It needs to be a numeric value in days (default of the function).",
-      "type": "duration",
-      "unit": "d",
-      "constraints": {
-        "required": false,
-        "minimum": 0
-      },
-      "example": "0.635"
-    },
-    {
-      "name": "nb_sample",
-      "description": "(USELESS). Number of pressure datapoint used to compute the likelihood map. Assigned by by [`GeoPressureR::geopressure_map_mismatch()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressure_map) and ONLY used by [`GeoPressureR::geopressure_map_likelihood()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressure_map) (which actually delete this variable if `keep_mse = FALSE`.",
-      "type": "number",
-      "constraints": {
-        "required": false
-      },
-      "example": "234"
     }
   ],
   "missingValues": ["", "NA"],
