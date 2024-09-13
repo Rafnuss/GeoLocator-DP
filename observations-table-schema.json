@@ -1,15 +1,25 @@
 {
   "name": "observations",
   "title": "observations",
-  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) ressources from a GeoLocator Data Package containing any relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that happened typically on the field and which providing important information for the analysis. These observations must typically include at least the equipment and, if appriate, the retrieval, but also any ringing control or direct sightings for instance.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described by at least, the `datetime` of the observation, the location (`latitude` and `longitude`), the tag involved `tag_id` and the type of observations `observation_type` (e.g., equipement, retrieval or control). In addition, we require also `age` and `life_stage` (which can be set as unknown `U`).",
+  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) ressources from a GeoLocator Data Package containing any relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that happened typically on the field and which providing important information for the analysis. These observations must typically include at least the equipment and, if appriate, the retrieval, but also any ringing control or direct sightings for instance.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described by at least, the `datetime` of the observation, the location (`latitude` and `longitude`), the `ring_number` of the bird and the type of observations `observation_type` (e.g., equipement, retrieval or control). In addition, we require also `age` and `life_stage` (which can be set as unknown `U`).\n\n Also include the ringing events of any control group (e.g., birds ringed but not equipped with a tag).",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
-      "name": "tag_id",
-      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "name": "ring_number",
+      "description": "Ring number associated with the observed species. Foreign key to [`tags.tag_id`](/core/tags#ring_number).",
       "type": "string",
       "constraints": {
         "required": true
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000022",
+      "example": "F58445"
+    },
+    {
+      "name": "tag_id",
+      "description": "Unique identifier of the tag. `tag_id` is NOT required in this table so that you can enter any relevant ringed specied (e.g. control group). Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "type": "string",
+      "constraints": {
+        "required": false
       },
       "example": "18LX"
     },
@@ -68,11 +78,11 @@
     },
     {
       "name": "observation_type",
-      "description": "Type of observation. \n - `equipment`: Attachment of the tag on the animal\n - `retrieval`: Recapture and removal of the tag from the animal\n - `recapture`: Recapture of the animal AFTER an equipment observation but without removing the tag. This option also covers the case of recapturing a bird without a device (choose `missing`in `device_status`) or the case of a recapture happening after a `retrieval`.\n - `sighting`: Known presence of the bird on a date and location besides ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observation. Avoid using this, and if using, always provide [`observation_comments`](core/observations/#observation_comments).",
+      "description": "Type of observation. \n - `equipment`: Attachment of the tag on the bird\n - `retrieval`: Recapture and removal of the tag from the bird\n - `capture`: Initial capture of a bird without a ring and while not deplying nor retriving a tag. - `recapture`: Recapture of the bird WITHOUT deployement nor retrieval of a tag. This option covers the case of recapturing a bird without a device (choose `missing` in `device_status`) or the case of a recapture happening after a `retrieval`.\n - `sighting`: Known presence of the bird on a date and location besides ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observation. Avoid using this, and if using, always provide [`observation_comments`](core/observations/#observation_comments).",
       "type": "string",
       "constraints": {
         "required": true,
-        "enum": ["equipment", "retrieval", "recapture", "sighting", "other"]
+        "enum": ["equipment", "retrieval", "capture", "recapture", "sighting", "other"]
       },
       "example": "equipment"
     },
@@ -192,7 +202,7 @@
     },
     {
       "name": "mass",
-      "description": "Mass of the tagged animal. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=27). Expressed in grams.",
+      "description": "Mass of the tagged bird. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=27). Expressed in grams.",
       "type": "number",
       "constraints": {
         "required": false,
@@ -251,6 +261,13 @@
       "reference": {
         "resource": "tags",
         "fields": "tag_id"
+      }
+    },
+    {
+      "fields": "ring_number",
+      "reference": {
+        "resource": "tags",
+        "fields": "ring_number"
       }
     }
   ],
