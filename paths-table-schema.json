@@ -25,7 +25,7 @@
     {
       "name": "type",
       "description": "One of:\n - `tag`: Create with [`tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path) from a likelihood map (e.g., ).\n - `most_likely`: Created with [`graph_most_likely()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_most_likely.html)\n- `simulation`: created by [`graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation): \n- `geopressureviz`: created by [`geopressureviz()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressureviz).",
-      "type": "number",
+      "type": "string",
       "constraints": {
         "required": true,
         "enum": ["tag", "most_likely", "simulation", "geopressureviz"]
