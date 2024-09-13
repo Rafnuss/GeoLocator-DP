@@ -33,17 +33,8 @@
       "example": "true"
     },
     {
-      "name": "stap_id",
-      "description": "Optional identifier of the stationary period to which the twilight belong to. Foreign key to [`staps.stap_id`](/geopressurer/staps#stap_id)",
-      "type": "number",
-      "constraints": {
-        "required": false
-      },
-      "example": "3"
-    },
-    {
       "name": "label",
-      "description": "Labeling of the twilight data according to the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/light-map.html#manual-labelling-of-twilight). The value `discard` indicates that the twilight should not be used for geopositioning. Any other value can be use without affecting the workflow, typically duplicate of `stap_id` allows to visualize which twilight belong to the same stationary period on trainset.",
+      "description": "Labeling of the twilight data according to the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/light-map.html#manual-labelling-of-twilight). The value `discard` indicates that the twilight should not be used for geopositioning. Any other value can be use without affecting the workflow, typically set to `stap_id` allows to visualize which twilight belong to the same stationary period on trainset.",
       "type": "string",
       "constraints": {
         "required": false
@@ -58,13 +49,6 @@
       "reference": {
         "resource": "tags",
         "fields": "tag_id"
-      }
-    },
-    {
-      "fields": "stap_id",
-      "reference": {
-        "resource": "staps",
-        "fields": "stap_id"
       }
     }
   ],
