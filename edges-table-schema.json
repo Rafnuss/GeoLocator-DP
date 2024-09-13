@@ -165,26 +165,44 @@
       "example": "30"
     },
     {
-      "name": "gs",
-      "description": "Groundspeed of the flight in km/h",
+      "name": "gs_u",
+      "description": "The average groundspeed of the entire flight along the longitudinal axis (east-west direction), measured in kilometers per hour (km/h).",
       "type": "number",
       "constraints": {
-        "required": false,
-        "minimum": 0
+        "required": false
       },
       "unit": "km/h",
-      "example": "35"
+      "example": "35.5"
     },
     {
-      "name": "ws",
-      "description": "Windspeed of the flight in km/h",
+      "name": "gs_v",
+      "description": "The average groundspeed of the entire flight along the latitudinal axis (north-south direction), measured in kilometers per hour (km/h).",
       "type": "number",
       "constraints": {
-        "required": false,
-        "minimum": 0
+        "required": false
       },
       "unit": "km/h",
-      "example": "35"
+      "example": "45.1"
+    },
+    {
+      "name": "ws_u",
+      "description": "The average windspeed of the entire flight along the longitudinal axis (east-west direction), measured in kilometers per hour (km/h).",
+      "type": "number",
+      "constraints": {
+        "required": false
+      },
+      "unit": "km/h",
+      "example": "15.1"
+    },
+    {
+      "name": "ws_v",
+      "description": "The average windspeed of the entire flight along the latitudinal axis (north-south direction), measured in kilometers per hour (km/h).",
+      "type": "number",
+      "constraints": {
+        "required": false
+      },
+      "unit": "km/h",
+      "example": "5.5"
     }
   ],
   "missingValues": ["", "NA"],
