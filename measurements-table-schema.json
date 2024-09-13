@@ -62,9 +62,9 @@
       "type": "string",
       "constraints": {
         "required": false,
-        "pattern": "^(flight|discard|elev_\\d+)$"
+        "pattern": "^(flight|discard|elev_\\d+|)$"
       },
-      "example": "",
+      "example": "elev_2ß",
       "skos:relatedMatch": [
         "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000156",
         "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000157"
