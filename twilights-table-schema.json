@@ -17,7 +17,6 @@
       "name": "twilight",
       "description": "Date and time of the twilights. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
       "type": "datetime",
-      "format": "%Y-%m-%dT%H:%M:%S%z",
       "constraints": {
         "required": true
       },
