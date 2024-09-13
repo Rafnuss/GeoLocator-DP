@@ -197,7 +197,14 @@
       }
     },
     {
-      "fields": "stap_id",
+      "fields": "stap_s",
+      "reference": {
+        "resource": "staps",
+        "fields": "stap_id"
+      }
+    },
+    {
+      "fields": "stap_t",
       "reference": {
         "resource": "staps",
         "fields": "stap_id"
