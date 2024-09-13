@@ -6,7 +6,7 @@
   "fields": [
     {
       "name": "ring_number",
-      "description": "Ring number associated with the observed species. Foreign key to [`tags.tag_id`](/core/tags#ring_number).",
+      "description": "Ring number associated with the observed species. Foreign key to [`tags.tag_id`](/GeoLocator-DP/core/tags#ring_number).",
       "type": "string",
       "constraints": {
         "required": true
@@ -16,7 +16,7 @@
     },
     {
       "name": "tag_id",
-      "description": "Unique identifier of the tag. `tag_id` is NOT required in this table so that you can enter any relevant ringed specied (e.g. control group). Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "description": "Unique identifier of the tag. `tag_id` is NOT required in this table so that you can enter any relevant ringed specied (e.g. control group). Foreign key to [`tags.tag_id`](/GeoLocator-DP/core/tags#tag_id).",
       "type": "string",
       "constraints": {
         "required": false

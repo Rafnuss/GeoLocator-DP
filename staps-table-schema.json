@@ -1,12 +1,12 @@
 {
   "name": "staps",
   "title": "Stationary periods",
-  "description": "Stationary period (stap) is [a key concept of the GeoPressureR workflow](https://raphaelnussbaumer.com/GeoPressureManual/tag-object#label-tag-into-stationary-periods) which descritize the trajectory of a bird in time and space. During a single stap, the bird is assumed to remain at the same location (+/- tens of kilometers). [`flight`](https://raphaelnussbaumer.com/GeoPressureR/reference/stap2flight) is the 'converse' of `stap`, with `flight.start` corresponding to an `stap.end` and reciprocly. \n\n{:.alert .alert-info}\n`stap` are typically estimated by [`GeoPressureR::tag_label_stap()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_label_stap) based on the labels `'flight'` assigned to the pressure or acceleration measurements ([`measurements.label`](/core/measurements/#label)). See the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/labelling-tracks) for more details.",
+  "description": "Stationary period (stap) is [a key concept of the GeoPressureR workflow](https://raphaelnussbaumer.com/GeoPressureManual/tag-object#label-tag-into-stationary-periods) which descritize the trajectory of a bird in time and space. During a single stap, the bird is assumed to remain at the same location (+/- tens of kilometers). [`flight`](https://raphaelnussbaumer.com/GeoPressureR/reference/stap2flight) is the 'converse' of `stap`, with `flight.start` corresponding to an `stap.end` and reciprocly. \n\n{:.alert .alert-info}\n`stap` are typically estimated by [`GeoPressureR::tag_label_stap()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_label_stap) based on the labels `'flight'` assigned to the pressure or acceleration measurements ([`measurements.label`](/GeoLocator-DP/core/measurements/#label)). See the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/labelling-tracks) for more details.",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
       "name": "tag_id",
-      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/GeoLocator-DP/core/tags#tag_id).",
       "type": "string",
       "constraints": {
         "required": true

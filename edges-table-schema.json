@@ -6,7 +6,7 @@
   "fields": [
     {
       "name": "tag_id",
-      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/core/tags#tag_id).",
+      "description": "Unique identifier of the tag. Foreign key to [`tags.tag_id`](/GeoLocator-DP/core/tags#tag_id).",
       "type": "string",
       "constraints": {
         "required": true
@@ -15,7 +15,7 @@
     },
     {
       "name": "stap_s",
-      "description": "Identifier of the SOURCE stationary period. Foreign key to [`staps.stap_id`](/geopressurer/staps#stap_id)",
+      "description": "Identifier of the SOURCE stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
       "type": "number",
       "constraints": {
         "required": true
@@ -24,7 +24,7 @@
     },
     {
       "name": "stap_t",
-      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1` exept if `include=FALSE` for intermediate stap_id. Foreign key to [`staps.stap_id`](/geopressurer/staps#stap_id).",
+      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1` exept if `include=FALSE` for intermediate stap_id. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id).",
       "type": "number",
       "constraints": {
         "required": true
