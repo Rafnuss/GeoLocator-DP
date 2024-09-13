@@ -18,7 +18,8 @@
       "description": "Identifier of the stationary period to which the twilight belong to.",
       "type": "number",
       "constraints": {
-        "required": true
+        "required": true,
+        "minimum": 1
       },
       "example": "3"
     },

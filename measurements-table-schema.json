@@ -54,7 +54,7 @@
       "constraints": {
         "required": true
       },
-      "example": 12.3
+      "example": "12.3"
     },
     {
       "name": "label",
@@ -64,7 +64,7 @@
         "required": false,
         "pattern": "^(flight|discard|elev_\\d+|)$"
       },
-      "example": "elev_2ß",
+      "example": "elev_23",
       "skos:relatedMatch": [
         "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000156",
         "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000157"
