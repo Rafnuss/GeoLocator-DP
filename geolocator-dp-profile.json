@@ -266,16 +266,16 @@
           "type": "object",
           "minItems": 2,
           "maxItems": 2,
-          "required": ["latitude", "longitude"],
+          "required": ["lat", "lon"],
           "properties": {
-            "latitude": {
+            "lat": {
               "description": "Reference latitude in degree decimal.",
               "type": "number",
               "minimum": -90,
               "maximum": 90,
               "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
             },
-            "longitude": {
+            "lon": {
               "description": "Reference longitude in degree decimal.",
               "type": "number",
               "minimum": -180,
