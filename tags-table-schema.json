@@ -16,6 +16,29 @@
       "example": "18LX"
     },
     {
+      "name": "ring_number",
+      "description": "Ring number associated with the tagged species. Use `null` if the tag was not deployed.",
+      "type": "string",
+      "constraints": {
+        "required": true
+      },
+      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000022",
+      "example": "F58445"
+    },
+    {
+      "name": "scientific_name",
+      "description": "Scientific name of the tagged species. Use `null` if the tag was not deployed.",
+      "type": "string",
+      "constraints": {
+        "required": true
+      },
+      "skos:exactMatch": [
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
+        "http://rs.tdwg.org/dwc/terms/scientificName"
+      ],
+      "example": "Tachymarptis melba"
+    },
+    {
       "name": "manufacturer",
       "description": "The company or person that produced the tag. When appropriate, please use 'Swiss Ornithological Institue', 'Migrate Technology Limited', or 'Lund University'.",
       "type": "string",
@@ -27,7 +50,7 @@
     },
     {
       "name": "model",
-      "description": "Model of the tag.",
+      "description": "Model/design/version of the tag. Any specification of the device able to identify it.",
       "type": "string",
       "constraints": {
         "required": false
@@ -76,29 +99,6 @@
       },
       "skos:relatedMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000188",
       "example": "tag-retrieval"
-    },
-    {
-      "name": "scientific_name",
-      "description": "Scientific name of the tagged species. Use `NA` if the tag was not deployed.",
-      "type": "string",
-      "constraints": {
-        "required": true
-      },
-      "skos:exactMatch": [
-        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
-        "http://rs.tdwg.org/dwc/terms/scientificName"
-      ],
-      "example": "Tachymarptis melba"
-    },
-    {
-      "name": "ring_number",
-      "description": "Ring number associated with the tagged species. Use `NA` if the tag was not deployed.",
-      "type": "string",
-      "constraints": {
-        "required": true
-      },
-      "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000022",
-      "example": "F58445"
     },
     {
       "name": "tag_comments",

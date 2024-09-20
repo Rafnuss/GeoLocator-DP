@@ -165,7 +165,6 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "required": ["title"],
             "properties": {
               "title": {
                 "title": "Title",

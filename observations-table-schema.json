@@ -6,7 +6,7 @@
   "fields": [
     {
       "name": "ring_number",
-      "description": "Ring number associated with the observed species. Foreign key to [`tags.tag_id`](/GeoLocator-DP/core/tags#ring_number).",
+      "description": "Ring number associated with the observed species. Foreign key to [`tags.ring_number`](/GeoLocator-DP/core/tags#ring_number).",
       "type": "string",
       "constraints": {
         "required": true
@@ -24,6 +24,16 @@
       "example": "18LX"
     },
     {
+      "name": "observation_type",
+      "description": "Type of observation. \n - `equipment`: Attachment of the tag on the bird\n - `retrieval`: Recapture and removal of the tag from the bird\n - `capture`: Initial capture of a bird without a ring and while not deplying nor retriving a tag. - `recapture`: Recapture of the bird WITHOUT deployement nor retrieval of a tag. This option covers the case of recapturing a bird without a device (choose `missing` in `device_status`) or the case of a recapture happening after a `retrieval`.\n - `sighting`: Known presence of the bird on a date and location besides ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observation. Avoid using this, and if using, always provide [`observation_comments`](core/observations/#observation_comments).",
+      "type": "string",
+      "constraints": {
+        "required": true,
+        "enum": ["equipment", "retrieval", "capture", "recapture", "sighting", "other"]
+      },
+      "example": "equipment"
+    },
+    {
       "name": "datetime",
       "description": "Date and time of the observation. Formatted as an ISO 8601 string (`YYYY-MM-DDThh:mm:ssZ`).",
       "skos:broadMatch": "https://rs.tdwg.org/dwc/terms/observationDate",
@@ -33,16 +43,6 @@
       },
       "example": "2020-03-01T22:00:00Z",
       "skos:closeMatch": " http://vocab.nerc.ac.uk/collection/MVB/current/MVB000352"
-    },
-    {
-      "name": "location_name",
-      "description": "Given name of the observation location. It might be helpful to keep a human-readable name of the location to differentiate the location of different observations more easily.",
-      "skos:exactMatch": "https://rs.tdwg.org/dwc/terms/locality",
-      "type": "string",
-      "constraints": {
-        "required": false
-      },
-      "example": "Mwamba center--Nest box #2"
     },
     {
       "name": "latitude",
@@ -77,14 +77,14 @@
       "example": "23.84995"
     },
     {
-      "name": "observation_type",
-      "description": "Type of observation. \n - `equipment`: Attachment of the tag on the bird\n - `retrieval`: Recapture and removal of the tag from the bird\n - `capture`: Initial capture of a bird without a ring and while not deplying nor retriving a tag. - `recapture`: Recapture of the bird WITHOUT deployement nor retrieval of a tag. This option covers the case of recapturing a bird without a device (choose `missing` in `device_status`) or the case of a recapture happening after a `retrieval`.\n - `sighting`: Known presence of the bird on a date and location besides ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observation. Avoid using this, and if using, always provide [`observation_comments`](core/observations/#observation_comments).",
+      "name": "location_name",
+      "description": "Given name of the observation location. It might be helpful to keep a human-readable name of the location to differentiate the location of different observations more easily.",
+      "skos:exactMatch": "https://rs.tdwg.org/dwc/terms/locality",
       "type": "string",
       "constraints": {
-        "required": true,
-        "enum": ["equipment", "retrieval", "capture", "recapture", "sighting", "other"]
+        "required": false
       },
-      "example": "equipment"
+      "example": "Mwamba center--Nest box #2"
     },
     {
       "name": "device_status",
@@ -144,7 +144,7 @@
     },
     {
       "name": "life_stage",
-      "description": "Life stage of the bird according to the age class in [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=14). \n- `0`: Unknown\n- `1`: Pullus\n- `2`: Full-grown\n- `2`: 1yr\n- `3`: >1yr\n- `4`: 2yr\n- `5`: >2yr",
+      "description": "Life stage of the bird according to the age class in [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=14). \n- `0`: Unknown\n- `1`: Pullus\n- `2`: Full-grown (Adult)\n- `2`: 1yr\n- `3`: >1yr\n- `4`: 2yr\n- `5`: >2yr",
       "type": "string",
       "constraints": {
         "required": true,
