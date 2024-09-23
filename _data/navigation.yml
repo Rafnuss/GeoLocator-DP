@@ -14,10 +14,6 @@
       href: /core/measurements/
 - text: GeoPressureR
   menu:
-    - text: Configuration
-      href: /geopressurer/config/
-    - text: Twilights
-      href: /geopressurer/twilights/
     - text: Stationary periods
       href: /geopressurer/staps/
     - text: Paths
@@ -26,3 +22,9 @@
       href: /geopressurer/edges/
     - text: Maps
       href: /geopressurer/maps/
+    - text: Twilights
+      href: /geopressurer/twilights/
+    - text: Configuration
+      href: /geopressurer/config/
+- text: "GitHub"
+  href: "https://github.com/rafnuss/geolocator-dp"
