@@ -16,15 +16,17 @@
   menu:
     - text: Stationary periods
       href: /geopressurer/staps/
+    - text: Twilights
+      href: /geopressurer/twilights/
     - text: Paths
       href: /geopressurer/paths/
     - text: Edges
       href: /geopressurer/edges/
-    - text: Maps
-      href: /geopressurer/maps/
-    - text: Twilights
-      href: /geopressurer/twilights/
+    - text: Pressurepath
+      href: /geopressurer/pressurepath/
     - text: Configuration
       href: /geopressurer/config/
+    - text: Maps
+      href: /geopressurer/maps/
 - text: "GitHub"
   href: "https://github.com/rafnuss/geolocator-dp"
