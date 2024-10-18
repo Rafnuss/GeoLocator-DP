@@ -93,7 +93,7 @@
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
       "constraints": {
         "required": false,
-        "enum": ["present", "missing", "broken_damage", "unknown"]
+        "enum": ["present", "none", "missing", "broken_damage", "unknown"]
       },
       "example": "broken_damage"
     },
