@@ -1,7 +1,7 @@
 {
-  "name": "paths",
-  "title": "Paths",
-  "description": "A GeoPressureR `path` constains the positions of a bird's trajectory. \n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 types of path : `tag`, `most_likely`, `simulation` and `geopressureviz`. See [`paths.type`](#type) for more details. \n\n `path` should always be used in combinaison with [`staps`](geopressurer/staps) which can be JOIN by `tag_id` and `stap_id`.",
+  "name": "pressurepaths",
+  "title": "Pressurepaths",
+  "description": "{:.alert .alert-info}\nA GeoPressureR `pressurepath` constains the ERA5 variables along the trajectory of the bird on an hourly interval and using the exact location of the bird (accounting of flight). [Read more about pressurepath on the GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/pressurepath.html) \n\nSimilarly to [`path`](geopressurer/paths), there are 4 types of pressurepath : `tag`, `most_likely`, `simulation` and `geopressureviz`. See [`pressurepaths.type`](#type) for more details. \n\n `pressurepath` should be used in combinaison with [`staps`](geopressurer/staps) and [`paths`](geopressurer/paths) which can be JOIN by `tag_id` and `stap_id`. \n\n{:.alert .alert-warning}\n The definition below does not list the ERA5 variables which can (and should!) be added to the table as additional columns (e.g. `'altitude'` or `'surface_pressure'`). Read more about these variable in [the documentation of `pressurepath_create()`](https://raphaelnussbaumer.com/GeoPressureR/reference/pressurepath_create.html#arg-variable)",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -14,8 +14,18 @@
       "example": "18LX"
     },
     {
+      "name": "datetime",
+      "description": "Date and time of the pressure measurement. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
+      "type": "datetime",
+      "constraints": {
+        "required": true
+      },
+      "example": "2020-04-01T22:00:00Z",
+      "skos:closeMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000200"
+    },
+    {
       "name": "stap_id",
-      "description": "Identifier of the stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
+      "description": "Identifier of the stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id). A main different with `pressurepath` is that `stap_id` can have decimal value indicating a pressure measurement taken while in migration between two 'integer' stationary periods.",
       "type": "number",
       "constraints": {
         "required": true
@@ -75,24 +85,6 @@
         "minimum": 1
       },
       "example": "1"
-    },
-    {
-      "name": "interp",
-      "description": "Only useful for `paths.type='tag'`. Boolean value to indicate if the position was interpolated as defined by the `interp` parameter in [`GeoPressureR::tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path).",
-      "type": "boolean",
-      "constraints": {
-        "required": false
-      },
-      "example": "true"
-    },
-    {
-      "name": "known",
-      "description": "Boolean to indicate if the position is taken from a known value. Genearally, `TRUE` if [`staps.known_lat`](geopressurer/staps#known_lat) and [`staps.known_lon`](geopressurer/staps#known_lon) provided. Only different if `paths.type='tag'` and `use_known=FALSE` used in [`GeoPressureR::tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path).",
-      "type": "boolean",
-      "constraints": {
-        "required": false
-      },
-      "example": "true"
     }
   ],
   "missingValues": ["", "NA"],

@@ -1,6 +1,6 @@
 ---
 layout: schema
 title: pressurepaths.csv
-permalink: /core/pressurepaths/
+permalink: /geopressurer/pressurepaths/
 schema: pressurepaths-table-schema
 ---

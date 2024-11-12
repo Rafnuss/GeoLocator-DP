@@ -22,8 +22,8 @@
       href: /geopressurer/paths/
     - text: Edges
       href: /geopressurer/edges/
-    - text: Pressurepath
-      href: /geopressurer/pressurepath/
+    - text: Pressurepaths
+      href: /geopressurer/pressurepaths/
     - text: Configuration
       href: /geopressurer/config/
     - text: Maps
