@@ -24,9 +24,5 @@
       href: /geopressurer/edges/
     - text: Pressurepaths
       href: /geopressurer/pressurepaths/
-    - text: Configuration
-      href: /geopressurer/config/
-    - text: Maps
-      href: /geopressurer/maps/
 - text: "GitHub"
   href: "https://github.com/rafnuss/geolocator-dp"
