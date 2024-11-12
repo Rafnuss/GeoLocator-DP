@@ -104,5 +104,5 @@
       }
     }
   ],
-  "fieldsMatch": ["superset"]
+  "fieldsMatch": ["partial"]
 }
