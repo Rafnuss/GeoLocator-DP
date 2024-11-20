@@ -5,6 +5,7 @@
   "type": "object",
   "$defs": {
     "version": {
+      "type": "string",
       "pattern": "1\\.0"
     }
   },
