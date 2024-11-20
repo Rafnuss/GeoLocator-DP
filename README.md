@@ -34,7 +34,9 @@ The GeoPressureR extensions consists of optional trajectrory data generated thro
 | [`twilights.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/twilights)         | Table of the twilights estimated from light data for all tags.                       |
 | [`pressurepaths.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/pressurepaths) | Table of the pressurepaths                                                           |
 
-## Example
+## Examples
+
+You'll be able to find all GeoLocator Data Package in the [**GeoLocator Data Package Zenodo Communitity**](https://zenodo.org/communities/geolocator-dp/). Once you've published you datapackage, make sure to [sumbit it to the cummunity](https://help.zenodo.org/docs/share/submit-to-community/).
 
 > Nussbaumer, R., Rime, Y., & Osinubi, S. T. (2024). GeoLocator Data Package: South African Woodland Kingfisher [Data set]. _Zenodo_. <https://doi.org/10.5281/zenodo.13829929>
 
