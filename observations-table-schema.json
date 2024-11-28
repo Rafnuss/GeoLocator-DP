@@ -88,12 +88,12 @@
     },
     {
       "name": "device_status",
-      "description": "Status of the tag. Assumed to be `present` if not provided. Always provide [`observation_comments`](core/observations/#observation_comments) if using `unknown`.",
+      "description": "Status of the tag itself (not the data inside the tag): \n - `present`: Tag on the bird.\n - `missing`: No tag on the bird while it was expected that there should be one with the assumption that the bird lost the tag since last capture.\n - `broken_damage`: Tag on the bird but presenting some physical damages. Provide details in [`observation_comments`](core/observations/#observation_comments). This field does not imply anything about the data content of the tag. Do not use this for mal-functioning tag (e.g. partial or no data recorded etc...), only what is visible when capturing the bird.\n - `none`: No tag present on the bird and this is expected (e.g. observation of un-equiped bird, pre-equipmenet or post-removal etc...)\n - `unknown`: Avoid if possible, and if not always provide an [`observation_comments`](core/observations/#observation_comments).",
       "type": "string",
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
       "constraints": {
         "required": false,
-        "enum": ["present", "none", "missing", "broken_damage", "unknown"]
+        "enum": ["present", "missing", "broken_damage", "none", "unknown"]
       },
       "example": "broken_damage"
     },
