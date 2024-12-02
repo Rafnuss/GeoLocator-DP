@@ -1,5 +1,7 @@
 # GeoLocator DP
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14258411.svg)](https://doi.org/10.5281/zenodo.14258411)
+
 **GeoLocator Data Package** (GeoLocator DP) is a data exchange format for geolocator data. It follows the [Data Package standard](https://datapackage.org/standard/data-package/) for the structuring of the data.
 
 A geolocator data package consists of three sets of data: (1) the metadata of the project, (2) the core resources contianing the main dataset and (3) optional trajectory data generated with the [GeoPressure suite](https://raphaelnussbaumer.com/GeoPressureManual/#the-geopressure-suite).
@@ -61,3 +63,7 @@ You'll be able to find all GeoLocator Data Package in the [**GeoLocator Data Pac
         </td>
     </tr>
 </table>
+
+## How to cite
+
+> Nussbaumer, R. (2024). GeoLocator Data Package (Version 0.1) [Computer software]. https://doi.org/10.5281/zenodo.14258411

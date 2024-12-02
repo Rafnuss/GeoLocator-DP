@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: 'To cite "GeoLocator DP" in publications use:'
 type: software
 license: MIT
-title: GeoLocator Data Package (Camtrap DP)
+title: GeoLocator Data Package
 version: 0.1
 authors:
   - family-names: Nussbaumer
@@ -13,4 +13,4 @@ authors:
 repository-code: https://github.com/rafnuss/geolocator-dp
 url: https://raphaelnussbaumer.com/GeoLocator-DP/
 date-released: "2024-12-02"
-doi:
+doi: 10.5281/zenodo.14258411
