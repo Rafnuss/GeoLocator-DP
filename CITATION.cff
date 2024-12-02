@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: 'To cite "GeoLocator DP" in publications use:'
+type: software
+license: MIT
+title: GeoLocator Data Package (Camtrap DP)
+version: 0.1
+authors:
+  - family-names: Nussbaumer
+    given-names: Raphaël
+    email: rafnuss@gmail.com
+    affiliation: Swiss Ornithological Institute
+    orcid: https://orcid.org/0000-0002-8185-1020
+repository-code: https://github.com/rafnuss/geolocator-dp
+url: https://raphaelnussbaumer.com/GeoLocator-DP/
+date-released: "2024-12-02"
+doi:
