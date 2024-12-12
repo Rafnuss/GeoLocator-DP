@@ -236,7 +236,7 @@
         "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000356",
         "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000354"
       ],
-      "example": "{'targusLengthInMeters':0.014, 'weightInGrams':120}"
+      "example": "{'tarsusLengthInMeters':0.014, 'weightInGrams':120}"
     },
     {
       "name": "observation_comments",
