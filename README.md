@@ -1,6 +1,9 @@
-# GeoLocator DP
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14258411.svg)](https://doi.org/10.5281/zenodo.14258411)
+---
+title: GeoLocator DP
+background: /assets/home.png
+permalink: /
+description: Data exchange format for geolocator data
+---
 
 **GeoLocator Data Package** (GeoLocator DP) is a data exchange format for geolocator data. It follows the [Data Package standard](https://datapackage.org/standard/data-package/) for the structuring of the data.
 
@@ -38,20 +41,31 @@ The GeoPressureR extensions consists of optional trajectrory data generated thro
 
 ## Examples
 
-You'll be able to find all GeoLocator Data Package in the [**GeoLocator Data Package Zenodo Communitity**](https://zenodo.org/communities/geolocator-dp/). Once you've published you datapackage, make sure to [sumbit it to the cummunity](https://help.zenodo.org/docs/share/submit-to-community/).
-
-> Nussbaumer, R., Rime, Y., & Osinubi, S. T. (2024). GeoLocator Data Package: South African Woodland Kingfisher [Data set]. _Zenodo_. <https://doi.org/10.5281/zenodo.13829929>
+<table>
+    <tr style="border-top-width: 1px;">
+        <td><a href="https://zenodo.org/communities/geolocator-dp/"><img src="https://zenodo.org/api/communities/b7c70316-310b-435e-9a8b-84188d60a3cc/logo" width="100px"/> </a></td>
+        <td>
+        You'll be able to find all GeoLocator Data Package in the <a href="https://zenodo.org/communities/geolocator-dp/">GeoLocator Data Package Zenodo Communitity</a>. Once you've published you datapackage, make sure to <a href="https://help.zenodo.org/docs/share/submit-to-community/">sumbit it to the cummunity</a>.
+        </td>
+        </tr>
+</table>
 
 ## User guides
 
-- [How to create a GeoLocator Data Package from a GeoPressureTemplate folder?](https://raphaelnussbaumer.com/GeoLocatoR/articles/create-from-geopressuretemplate.html)
-- [How to read and use a Data package?](https://raphaelnussbaumer.com/GeoLocatoR/articles/read-and-use-datapackage.html)
+<table>
+    <tr style="border-top-width: 1px;">
+        <td><a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html"><img src="https://raphaelnussbaumer.com/GeoPressureManual/assets/cover.png" width="100px"/></a></td>
+        <td>
+        The <a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html">GeolocatorManual</a> R book has a dedicated part on the use of Geolocator Data Pacakge. This is a great place to start learning more on how to use it with your GeoPressureTemplate project. Hello
+        </td>
+        </tr>
+</table>
 
 ## Software
 
-<table>
-    <tr>
-        <td><img src="https://raphaelnussbaumer.com/GeoLocatoR/logo.png" width="100px"/> </td>
+<table >
+    <tr style="border-top-width: 1px;">
+        <td><a href="https://raphaelnussbaumer.com/GeoLocatoR/"><img src="https://raphaelnussbaumer.com/GeoLocatoR/logo.png" width="100px"/></a></td>
         <td>
         The <a href="https://raphaelnussbaumer.com/GeoLocatoR/">GeoLocatoR</a> R package is designed to handle GeoLocator DP: creating DP, adding resources to DP, writing DP and reading DP. It is essentially an extension of the <a href="https://docs.ropensci.org/frictionless/">frictionlessr</a> package for geolocator data.
         </td>
@@ -66,4 +80,4 @@ You'll be able to find all GeoLocator Data Package in the [**GeoLocator Data Pac
 
 ## How to cite
 
-> Nussbaumer, R. (2024). GeoLocator Data Package (Version 0.1) [Computer software]. https://doi.org/10.5281/zenodo.14258411
+> Nussbaumer, R. (2024). GeoLocator Data Package (Version 0.1) [Computer software]. [https://doi.org/10.5281/zenodo.14258411](https://doi.org/10.5281/zenodo.14258411)
