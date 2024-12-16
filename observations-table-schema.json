@@ -88,14 +88,14 @@
     },
     {
       "name": "device_status",
-      "description": "Status of the tag itself (not the data inside the tag): \n - `present`: Tag on the bird.\n- `none`: No tag present on the bird and this is expected (e.g. pre-equipmenet, post-removal, or control group). Only for `observation_type='capture'`.\n - `missing`: Tag lost by the bird. Only for `observation_type='capture'`. In case a new tag is deployed on a bird which has lost his previous tag, create two rows: one `capture`-`missing` and one `equipment`-`present`.\n - `broken_damage`: Tag on the bird but presenting some physical damages. Provide details in [`observation_comments`](core/observations/#observation_comments). This field does not imply anything about the data content of the tag. Do not use this for mal-functioning tag (e.g. partial or no data recorded etc...), only what is visible when capturing the bird.\n - `unknown`: Only for `observation_type = 'sighting'`. \n\n Can only be `present` for `observation_type` `equipment` or `retrieval`.",
+      "description": "Status of the tag itself (not the data inside the tag): \n - `present`: Tag on the bird.\n- `none`: No tag present on the bird and this is expected (e.g. pre-equipmenet, post-removal, or control group). Only for `observation_type='capture'`.\n - `missing`: Tag lost by the bird. Only for `observation_type='capture'`. In case a new tag is deployed on a bird which has lost his previous tag, create two rows: one `capture`-`missing` and one `equipment`-`present`.\n - `unknown`: Only for `observation_type = 'sighting'`. \n\n Can only be `present` for `observation_type` `equipment` or `retrieval`.",
       "type": "string",
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
       "constraints": {
         "required": false,
-        "enum": ["present", "none", "missing", "broken_damage", "unknown"]
+        "enum": ["present", "none", "missing", "unknown"]
       },
-      "example": "broken_damage"
+      "example": "present"
     },
     {
       "name": "observer",
