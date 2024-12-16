@@ -260,7 +260,7 @@
           ],
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000123/"
         },
-        "reference_location": {
+        "referenceLocation": {
           "title": "Reference location",
           "description": "Reference location for the study is used to display the study on a map. Choose a central area for your study, typically the main deployment site. This is mostly used for Movebank",
           "type": "object",
