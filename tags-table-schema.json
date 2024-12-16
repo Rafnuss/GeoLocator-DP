@@ -59,7 +59,7 @@
       "example": "GDL2.3"
     },
     {
-      "name": "firwmare",
+      "name": "firmware",
       "description": "The tag firmware and version used during the deployment.",
       "type": "string",
       "constraints": {
