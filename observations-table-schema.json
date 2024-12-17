@@ -1,7 +1,7 @@
 {
   "name": "observations",
   "title": "observations",
-  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) ressources from a GeoLocator Data Package containing any relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that happened typically on the field and which providing important information for the analysis. These observations must typically include at least the equipment and, if appriate, the retrieval, but also any ringing control or direct sightings for instance.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described by at least, the `datetime` of the observation, the location (`latitude` and `longitude`), the `ring_number` of the bird and the type of observations `observation_type` (e.g., equipement, retrieval or control). In addition, we require also `age` and `life_stage` (which can be set as unknown `U`).\n\n Also include the ringing events of any control group (i.e., birds ringed but not equipped with a tag).",
+  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) ressources from a GeoLocator Data Package containing any relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that happened typically on the field and which providing important information for the analysis. These observations must typically include at least the equipment and, if appriate, the retrieval, but also any ringing control or direct sightings for instance.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described by at least, the `datetime` of the observation, the location (`latitude` and `longitude`), the `ring_number` of the bird and the type of observations `observation_type` (e.g., equipement, retrieval or control). In addition, we require also `age` and `age_class` (which can be set as unknown `U`).\n\n Also include the ringing events of any control group (i.e., birds ringed but not equipped with a tag).",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -143,7 +143,7 @@
       "example": "M"
     },
     {
-      "name": "life_stage",
+      "name": "age_class",
       "description": "Life stage of the bird according to the age class in [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=14). \n- `0`: Unknown\n- `1`: Pullus\n- `2`: Full-grown\n- `3`: 1yr\n- `4`: >1yr\n- `5`: 2yr\n- `6`: >2yr",
       "type": "string",
       "constraints": {
@@ -236,7 +236,7 @@
         "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000356",
         "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000354"
       ],
-      "example": "{'tarsusLengthInMeters':0.014, 'weightInGrams':120}"
+      "example": "{'RP3':32, 'fat':2, 'tarsusLengthInMeters':0.014, 'weightInGrams':120}"
     },
     {
       "name": "observation_comments",
