@@ -466,12 +466,11 @@
                       "tags",
                       "observations",
                       "measurements",
-                      "edges",
-                      "paths",
                       "staps",
                       "twilights",
-                      "maps",
-                      "configs"
+                      "paths",
+                      "edges",
+                      "pressurepaths"
                     ]
                   },
                   "type": {
