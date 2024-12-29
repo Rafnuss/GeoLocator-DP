@@ -226,14 +226,17 @@
             "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164"
           ]
         },
-        "citation": {
-          "title": "Citation",
+        "bibliographicCitation": {
+          "title": "bibliographicCitation",
           "description": "Bibliographic/recommended citation for the package.",
           "type": "string",
           "examples": [
-            "{\n  \"citation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
+            "{\n  \"bibliographicCitation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
           ],
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068"
+          "skos:exactMatch": [
+            "http://purl.org/dc/terms/bibliographicCitation",
+            "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068"
+          ]
         },
         "grants": {
           "title": "Grants",
