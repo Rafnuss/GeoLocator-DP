@@ -27,15 +27,12 @@
         "resources"
       ],
       "properties": {
-        "$schema": {
-          "title": "Profile",
-          "description": "See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema). GeoLocator DP further requires this to be the URL of the used GeoLocator DP Profile version.",
+        "title": {
+          "title": "Title",
+          "description": "A string providing a title or one sentence description for this package. It should be plain text (no markup), capitalised like a title, NOT end in a period and less than 65 characters. See [Data Package specification](https://datapackage.org/standard/data-package/#title).",
           "type": "string",
-          "format": "uri",
-          "default": "https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json",
-          "examples": [
-            "{\n  \"name\": \"https://raw.githubusercontent.com/rafnuss/geolocator-dp/1.0/geolocator-dp-profile.json\"\n}\n"
-          ]
+          "examples": ["{\n  \"title\": \"Woodland Kingfisher Geolocator data\"\n}\n"],
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
         },
         "name": {
           "title": "Name",
@@ -49,59 +46,6 @@
           "type": "string",
           "examples": ["{\n  \"id\": \"http://dx.doi.org/10.5281/zenodo.11207081\"\n}\n"],
           "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
-        },
-        "licenses": {
-          "title": "Licenses",
-          "description": "The license(s) under which the data is provided. `name` or `path` must be provided. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses).",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "title": "License",
-            "description": "A license for this descriptor.",
-            "type": "object",
-            "anyOf": [
-              {
-                "required": ["name"]
-              },
-              {
-                "required": ["path"]
-              }
-            ],
-            "properties": {
-              "name": {
-                "title": "Open Definition license identifier",
-                "description": "Open Definition license identifier, see [http://licenses.opendefinition.org/](http://licenses.opendefinition.org/)",
-                "type": "string",
-                "pattern": "^([-a-zA-Z0-9._])+$"
-              },
-              "path": {
-                "title": "Path",
-                "description": "A fully qualified URL.",
-                "type": "string",
-                "pattern": "^((?=[^./~])(?!file:)((?!\\/\\.\\.\\/)(?!\\\\)(?!:\\/\\/).)*|(http|ftp)s?:\\/\\/.*)$",
-                "examples": [
-                  "{\n  \"path\": \"file.csv\"\n}\n",
-                  "{\n  \"path\": \"http://example.com/file.csv\"\n}\n"
-                ]
-              },
-              "title": {
-                "title": "Title",
-                "description": "A human-readable name of the license.",
-                "type": "string"
-              }
-            }
-          },
-          "examples": [
-            "{\n  \"licenses\": [\n    {\n      \"name\": \"CC-BY-4.0\",\n      \"path\": \"https://creativecommons.org/licenses/by/4.0/\",\n      \"title\": \"Creative Commons Attribution 4.0\"\n    }\n  ]\n}\n"
-          ],
-          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257"
-        },
-        "title": {
-          "title": "Title",
-          "description": "A string providing a title or one sentence description for this package. It should be plain text (no markup), capitalised like a title, NOT end in a period and less than 65 characters. See [Data Package specification](https://datapackage.org/standard/data-package/#title).",
-          "type": "string",
-          "examples": ["{\n  \"title\": \"Woodland Kingfisher Geolocator data\"\n}\n"],
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
         },
         "description": {
           "title": "Description",
@@ -159,6 +103,52 @@
           "examples": [
             "{\n  \"keywords\": [\n    \"intra-african\",\n    \"NDVI\",\n    \"geopressure\"\n  ]\n}\n"
           ]
+        },
+        "licenses": {
+          "title": "Licenses",
+          "description": "The license(s) under which the data is provided. `name` or `path` must be provided. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses).",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "License",
+            "description": "A license for this descriptor.",
+            "type": "object",
+            "anyOf": [
+              {
+                "required": ["name"]
+              },
+              {
+                "required": ["path"]
+              }
+            ],
+            "properties": {
+              "name": {
+                "title": "Open Definition license identifier",
+                "description": "Open Definition license identifier, see [http://licenses.opendefinition.org/](http://licenses.opendefinition.org/)",
+                "type": "string",
+                "pattern": "^([-a-zA-Z0-9._])+$"
+              },
+              "path": {
+                "title": "Path",
+                "description": "A fully qualified URL.",
+                "type": "string",
+                "pattern": "^((?=[^./~])(?!file:)((?!\\/\\.\\.\\/)(?!\\\\)(?!:\\/\\/).)*|(http|ftp)s?:\\/\\/.*)$",
+                "examples": [
+                  "{\n  \"path\": \"file.csv\"\n}\n",
+                  "{\n  \"path\": \"http://example.com/file.csv\"\n}\n"
+                ]
+              },
+              "title": {
+                "title": "Title",
+                "description": "A human-readable name of the license.",
+                "type": "string"
+              }
+            }
+          },
+          "examples": [
+            "{\n  \"licenses\": [\n    {\n      \"name\": \"CC-BY-4.0\",\n      \"path\": \"https://creativecommons.org/licenses/by/4.0/\",\n      \"title\": \"Creative Commons Attribution 4.0\"\n    }\n  ]\n}\n"
+          ],
+          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257"
         },
         "contributors": {
           "title": "Contributors",
@@ -440,6 +430,16 @@
           "items": {
             "type": "string"
           }
+        },
+        "$schema": {
+          "title": "Profile",
+          "description": "See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema). GeoLocator DP further requires this to be the URL of the used GeoLocator DP Profile version.",
+          "type": "string",
+          "format": "uri",
+          "default": "https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json",
+          "examples": [
+            "{\n  \"name\": \"https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json\"\n}\n"
+          ]
         },
         "resources": {
           "title": "Data Resources",
