@@ -194,32 +194,20 @@
                 "examples": ["{\n  \"email\": \"example@example.com\"\n}\n"]
               },
               "roles": {
-                "description": "The type of contributor of the resource according to [DataCite Metadata Schema's contributorRole](https://support.datacite.org/docs/datacite-metadata-schema-v44-recommended-and-optional-properties#7a-contributortype). We strongly suggest having `ContactPerson` and `ProjectLeader` to match Movebank requirements for a [contact person](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072/) and a [principal investigator](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164/).",
+                "description": "The type of contributor of the resource according to [DataCite Metadata Schema's contributorRole](https://support.datacite.org/docs/datacite-metadata-schema-v44-recommended-and-optional-properties#7a-contributortype). We strongly suggest having `ContactPerson` and `ProjectLeader` to match Movebank requirements for a [contact person](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072/) and a [principal investigator](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164/).\n - `ContactPerson`: Person to whom to ask any questions related to the geolocator data pacakge such as how to access, use, cite, any additional information. \n - `ProjectLeader`: Person officially designated as head of project (i.e.,  principal investigator).\n - `DataCollector`: Person responsible for finding gathering/collecting the geolocator data. Typically used for ringers and field assistants.\n - `DataCurator`: Person in charge of building the geolocator data package, including the gathering and standardizing the metadata and maintaining data and software code. Typically the person that used the `GeoLocatoR` package to build the data package.\n - `Researcher`: A person involved in analyzing data or the results of the geolocator data. Typically used for the persons that run the GeoPressure analysis to produce the tracks.\n - `RightsHolder`: Person or institution owning or managing property rights, including intellectual property rights over the resource. \n - `Supervisor`: Designated administrator over the project. \n - `Other`: Any person or institution making a significant contribution to the development and/or maintenance of the resource, but whose contribution does not fit other controlled vocabulary for contributorType.",
                 "type": "array",
                 "minItems": 1,
                 "items": {
                   "type": "string",
                   "enum": [
                     "ContactPerson",
+                    "ProjectLeader",
                     "DataCollector",
                     "DataCurator",
-                    "DataManager",
-                    "Distributor",
-                    "Editor",
-                    "HostingInstitution",
-                    "Producer",
-                    "ProjectLeader",
-                    "ProjectManager",
-                    "ProjectMember",
-                    "RegistrationAgency",
-                    "RegistrationAuthority",
-                    "RelatedPerson",
                     "Researcher",
-                    "ResearcherGroup",
                     "RightsHolder",
-                    "Sponsor",
                     "Supervisor",
-                    "WorkPackageLeader"
+                    "Other"
                   ]
                 }
               },
