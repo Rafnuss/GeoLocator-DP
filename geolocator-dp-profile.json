@@ -38,7 +38,7 @@
           "title": "Name",
           "description": "A simple name or human-readable identifier (any lowercase alphanumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
           "type": "string",
-          "examples": ["{\n  \"name\": \"mangrove-kingfisher-in-kenya\"\n}\n"]
+          "examples": ["{\n  \"name\": \"mangrove-kingfisher-geolocator-data\"\n}\n"]
         },
         "id": {
           "title": "ID",
