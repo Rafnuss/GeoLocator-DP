@@ -6,6 +6,14 @@ background: /assets/datapackage.png
 toc: true
 ---
 
-The metadata is critical for describing your dataset and making your record findable. The metadata associated with a GeoLocator DP are expressed in the `datapackage.json` file. It follows the [Data Package](https://datapackage.org/standard/data-package/) specifications together with [Movebank Study Attributes]([https://www.movebank.org/cms/movebank-content/studies-page#study_details]). Properties indicated with `*` are required (i.e. cannot be empty).
+The metadata is critical for describing your dataset and making your record findable. The metadata associated with a GeoLocator DP are expressed in the `datapackage.json` file. It follows exactly the [Data Package](https://datapackage.org/standard/data-package/).
 
-We only require minimal metadata to be able to [upload the data on Zenodo](https://help.zenodo.org/docs/deposit/about-records/), [create a study page on Movebank](https://www.movebank.org/cms/movebank-content/studies-page) or [Upload on GBIF](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#metadata-elements), but we strongly encourage entering as many of the fields as possible.
+This definition of the metadata map directly Zenodo metadata structure, which follows [DataCite Metadata Schema](https://datacite-metadata-schema.readthedocs.io/). Note that we map datapackage [`contributors`](https://datapackage.org/standard/data-package/#contributors) to [`creator`](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/creator/) (and not [`contributor`](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/contributor/)).
+
+In addition, to allow export of a geolocator data package to [Movebank](https://www.movebank.org/), we add some of the specifications from [Movebank Study Attributes]([https://www.movebank.org/cms/movebank-content/studies-page#study_details]).
+
+{:.alert .alert-info style="padding-left: 32px;"}
+
+- Properties indicated with `*` are required: you'll need to provide a values
+- Properties described as **Computed** can (and should) be computed automatically from the content of the datapacakge. Even if required, these values don't need to be provided manually. These are located at the end of the page.
+- The properties are listed by order of priority/importance.

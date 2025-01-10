@@ -29,48 +29,25 @@
       "properties": {
         "title": {
           "title": "Title",
-          "description": "A string providing a title or one sentence description for this package. It should be plain text (no markup), capitalised like a title, NOT end in a period and less than 65 characters. See [Data Package specification](https://datapackage.org/standard/data-package/#title).",
+          "description": "A string providing a title or one sentence description for this package. It should be plain text (no markup), capitalised like a title, NOT end in a period and less than 65 characters. See [Data Package specification](https://datapackage.org/standard/data-package/#title) and [Datacite metadata schema](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/title/).",
           "type": "string",
           "examples": ["{\n  \"title\": \"Woodland Kingfisher Geolocator data\"\n}\n"],
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
         },
-        "name": {
-          "title": "Name",
-          "description": "A simple name or human-readable identifier (any lowercase alphanumeric characters plus `.`, `-` and `_`). See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
-          "type": "string",
-          "examples": ["{\n  \"name\": \"mangrove-kingfisher-geolocator-data\"\n}\n"]
-        },
         "id": {
           "title": "ID",
-          "description": "A globally unique identifier for the package, such as a UUID or DOI. See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
+          "description": "A globally unique identifier for the package, typically the DOI link of the corresponding Zenodo repository which [can be reserved prior to publication](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/#reserve-doi). See [Data Package specification](https://datapackage.org/standard/data-package/#id) and [Datacite metadata schema](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/identifier/).",
           "type": "string",
-          "examples": ["{\n  \"id\": \"http://dx.doi.org/10.5281/zenodo.11207081\"\n}\n"],
+          "examples": ["{\n  \"id\": \"https://doi.org/10.5281/zenodo.11207081\"\n}\n"],
           "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
         },
         "description": {
           "title": "Description",
-          "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph. See [Data Package specification](https://datapackage.org/standard/data-package/#description).",
+          "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph. See [Data Package specification](https://datapackage.org/standard/data-package/#description) and [Datacite metadata schema](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/description/).",
           "type": "string",
           "format": "textarea",
-          "examples": [
-            "{\n  \"description\": \"# This datapackage contains the geolocator data collected on 8 Woodland Kingfishers equipped in South Africa.\"\n}\n"
-          ],
+          "examples": ["{\n  \"description\": \"This datapackage contains ...\"\n}\n"],
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176"
-        },
-        "homepage": {
-          "title": "Home Page",
-          "description": "A URL for the home on the web related to this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#homepage).",
-          "type": "string",
-          "format": "uri",
-          "examples": ["{\n  \"homepage\": \"https://github.com/Rafnuss/WoodlandKingfisher\"\n}\n"]
-        },
-        "image": {
-          "title": "Image",
-          "description": "An image to use for this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#image).",
-          "type": "string",
-          "examples": [
-            "{\n  \"image\": \"https://raw.githubusercontent.com/Rafnuss/WoodlandKingfisher/main/output/NDVI_animation/077531d34e04506aeb5e3d3066a8e06e-19ff78ccc543bbb66a89d90b1ae3fd17_getPixels.gif\"\n}\n"
-          ]
         },
         "version": {
           "title": "Version",
@@ -91,18 +68,6 @@
           "type": "string",
           "format": "date",
           "examples": ["{\n  \"embargo\": \"2024-05-17\"\n}\n"]
-        },
-        "keywords": {
-          "title": "Keywords",
-          "description": "A list of keywords to help users find the package. See [Data Package specification](https://datapackage.org/standard/data-package/#keywords).",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          },
-          "examples": [
-            "{\n  \"keywords\": [\n    \"intra-african\",\n    \"NDVI\",\n    \"geopressure\"\n  ]\n}\n"
-          ]
         },
         "licenses": {
           "title": "Licenses",
@@ -218,7 +183,7 @@
         },
         "bibliographicCitation": {
           "title": "bibliographicCitation",
-          "description": "Bibliographic/recommended citation for the package.",
+          "description": "Bibliographic/recommended citation for the package. Ideally, same author as [`contributors`](#contributors), same date as [`created`](#created), same title as [`title`](#title) and same doi as [`id`](#id).",
           "type": "string",
           "examples": [
             "{\n  \"bibliographicCitation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
@@ -228,97 +193,8 @@
             "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068"
           ]
         },
-        "grants": {
-          "title": "Grants",
-          "description": "A list of grants and other funding sources of the project.",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          },
-          "examples": [
-            "{\n  \"grants\": [\"Hilfsfonds für die Schweizerische Vogelwarte Sempach\"]\n}\n"
-          ],
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000123/"
-        },
-        "referenceLocation": {
-          "title": "Reference location",
-          "description": "Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
-          "type": "object",
-          "minItems": 2,
-          "maxItems": 2,
-          "required": ["latitude", "longitude"],
-          "properties": {
-            "latitude": {
-              "description": "Reference latitude in degree decimal.",
-              "type": "number",
-              "minimum": -90,
-              "maximum": 90,
-              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
-            },
-            "longitude": {
-              "description": "Reference longitude in degree decimal.",
-              "type": "number",
-              "minimum": -180,
-              "maximum": 180,
-              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
-            }
-          },
-          "examples": [
-            "{\n  \"reference_location\": {\n    \"latitude\": -13.02,\n    \"longitude\": 151.07,\n  }\n}\n"
-          ],
-          "skos:exactMatch": "https://purl.org/dc/terms/Location"
-        },
-        "spatial": {
-          "title": "Spatial",
-          "description": "Spatial coverage of the package, expressed as GeoJSON. Generally computed as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage)",
-          "type": "object",
-          "$ref": "http://json.schemastore.org/geojson.json",
-          "examples": [
-            "{\n  \"spatial\": {\n    \"geometry\": {\n      \"type\": \"Polygon\",\n      \"coordinates\": [[[30.0, -10.0], [35.0, -10.0], [35.0, -5.0], [30.0, -5.0], [30.0, -10.0]]]\n    }\n  }\n}\n"
-          ],
-          "skos:exactMatch": "https://purl.org/dc/terms/spatial"
-        },
-        "temporal": {
-          "title": "Temporal",
-          "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage)",
-          "type": "object",
-          "minItems": 2,
-          "maxItems": 2,
-          "required": ["start", "end"],
-          "properties": {
-            "start": {
-              "description": "Start date of the first observation. Formatted as an ISO 8601 string (`YYYY-MM-DD`).",
-              "type": "string",
-              "format": "date"
-            },
-            "end": {
-              "description": "End date of the last observation. Formatted as an ISO 8601 string (`YYYY-MM-DD`).",
-              "type": "string",
-              "format": "date"
-            }
-          },
-          "examples": [
-            "{\n  \"temporal\": {\n    \"start\": \"2017-01-10\",\n    \"end\": \"2019-09-29\"\n  }\n}\n"
-          ],
-          "skos:exactMatch": "https://purl.org/dc/terms/temporal"
-        },
-        "taxonomic": {
-          "title": "Taxonomic",
-          "description": "Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage)",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Scientific name",
-            "skos:relatedMatch": [
-              "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
-              "http://rs.tdwg.org/dwc/terms/scientificName"
-            ]
-          },
-          "examples": ["{\n  \"taxonomic\": [\"Halcyon senegaloides\"]\n}\n"]
-        },
         "relatedIdentifiers": {
-          "description": "Identifiers of resources related to the package (e.g. papers, project pages, derived datasets, APIs, etc.). See [Camtrap DP specification](https://camtrap-dp.tdwg.org/metadata/#relatedIdentifiers).",
+          "description": "List of resources related to the package (e.g. papers, project pages, derived datasets, etc.). See [Camtrap DP specification](https://camtrap-dp.tdwg.org/metadata/#relatedIdentifiers) and [Datacite metadata schema](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/relatedidentifier/).",
           "type": "array",
           "items": {
             "description": "Related identifier.",
@@ -442,6 +318,52 @@
             "{\n  \"relatedIdentifiers\": [\n    {\n      \"relationType\": \"IsSupplementTo\",\n      \"relatedIdentifier\": \"10.1111/jav.02860\",\n      \"relatedIdentifierType\": \"DOI\"\n    },\n    {\n      \"relationType\": \"IsDescribedBy\",\n      \"relatedIdentifier\": \"http://dx.doi.org/10.13140/RG.2.2.34477.10721\",\n      \"relatedIdentifierType\": \"URL\"\n    }\n  ]\n}\n"
           ]
         },
+        "grants": {
+          "title": "Grants",
+          "description": "A list of grants and other funding sources of the project.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            "{\n  \"grants\": [\"Hilfsfonds für die Schweizerische Vogelwarte Sempach\"]\n}\n"
+          ],
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000123/"
+        },
+        "name": {
+          "title": "Name",
+          "description": "**Computed**.A simple name or human-readable identifier (any lowercase alphanumeric characters plus `.`, `-` and `_`). Usually, a slugification of `title`. See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
+          "type": "string",
+          "examples": ["{\n  \"name\": \"mangrove-kingfisher-geolocator-data\"\n}\n"]
+        },
+        "homepage": {
+          "title": "Home Page",
+          "description": "A URL for the home on the web related to this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#homepage).",
+          "type": "string",
+          "format": "uri",
+          "examples": ["{\n  \"homepage\": \"https://github.com/Rafnuss/WoodlandKingfisher\"\n}\n"]
+        },
+        "image": {
+          "title": "Image",
+          "description": "An image to use for this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#image).",
+          "type": "string",
+          "examples": [
+            "{\n  \"image\": \"https://raw.githubusercontent.com/Rafnuss/WoodlandKingfisher/main/output/NDVI_animation/077531d34e04506aeb5e3d3066a8e06e-19ff78ccc543bbb66a89d90b1ae3fd17_getPixels.gif\"\n}\n"
+          ]
+        },
+        "keywords": {
+          "title": "Keywords",
+          "description": "A list of keywords to help users find the package. Also called [`subject`](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/subject/). See [Data Package specification](https://datapackage.org/standard/data-package/#keywords).",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            "{\n  \"keywords\": [\n    \"intra-african\",\n    \"NDVI\",\n    \"geopressure\"\n  ]\n}\n"
+          ]
+        },
         "references": {
           "title": "References",
           "description": "List of references related to the package (e.g. references cited in package.description). References preferably include a DOI. See [Camtrap DP specification](https://camtrap-dp.tdwg.org/metadata/#references).",
@@ -449,6 +371,82 @@
           "items": {
             "type": "string"
           }
+        },
+        "spatial": {
+          "title": "Spatial",
+          "description": "**Computed**. Spatial coverage of the package, expressed as GeoJSON. Generally computed  as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage).",
+          "type": "object",
+          "$ref": "http://json.schemastore.org/geojson.json",
+          "examples": [
+            "{\n  \"spatial\": {\n    \"geometry\": {\n      \"type\": \"Polygon\",\n      \"coordinates\": [[[30.0, -10.0], [35.0, -10.0], [35.0, -5.0], [30.0, -5.0], [30.0, -10.0]]]\n    }\n  }\n}\n"
+          ],
+          "skos:exactMatch": "https://purl.org/dc/terms/spatial"
+        },
+        "temporal": {
+          "title": "Temporal",
+          "description": "**Computed**. Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage).",
+          "type": "object",
+          "minItems": 2,
+          "maxItems": 2,
+          "required": ["start", "end"],
+          "properties": {
+            "start": {
+              "description": "Start date of the first observation. Formatted as an ISO 8601 string (`YYYY-MM-DD`).",
+              "type": "string",
+              "format": "date"
+            },
+            "end": {
+              "description": "End date of the last observation. Formatted as an ISO 8601 string (`YYYY-MM-DD`).",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "examples": [
+            "{\n  \"temporal\": {\n    \"start\": \"2017-01-10\",\n    \"end\": \"2019-09-29\"\n  }\n}\n"
+          ],
+          "skos:exactMatch": "https://purl.org/dc/terms/temporal"
+        },
+        "taxonomic": {
+          "title": "Taxonomic",
+          "description": "**Computed**. Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage).",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Scientific name",
+            "skos:relatedMatch": [
+              "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
+              "http://rs.tdwg.org/dwc/terms/scientificName"
+            ]
+          },
+          "examples": ["{\n  \"taxonomic\": [\"Halcyon senegaloides\"]\n}\n"]
+        },
+        "referenceLocation": {
+          "title": "Reference location",
+          "description": "**Computed**. Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
+          "type": "object",
+          "minItems": 2,
+          "maxItems": 2,
+          "required": ["latitude", "longitude"],
+          "properties": {
+            "latitude": {
+              "description": "Reference latitude in degree decimal.",
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90,
+              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
+            },
+            "longitude": {
+              "description": "Reference longitude in degree decimal.",
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180,
+              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
+            }
+          },
+          "examples": [
+            "{\n  \"referenceLocation\": {\n    \"latitude\": -13.02,\n    \"longitude\": 151.07,\n  }\n}\n"
+          ],
+          "skos:exactMatch": "https://purl.org/dc/terms/Location"
         },
         "$schema": {
           "title": "Profile",
