@@ -327,7 +327,7 @@
         "created": {
           "title": "Created",
           "computed": true,
-          "description": " The datetime on which the package was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
+          "description": "The datetime on which the package was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
           "type": "string",
           "format": "date-time",
           "examples": ["{\n  \"created\": \"2024-05-17\"\n}\n"]
@@ -335,7 +335,7 @@
         "bibliographicCitation": {
           "title": "bibliographicCitation",
           "computed": true,
-          "description": " Bibliographic/recommended citation for the package. Ideally, same author as [`contributors`](#contributors), same date as [`created`](#created), same title as [`title`](#title) and same doi as [`id`](#id).",
+          "description": "Bibliographic/recommended citation for the package. Ideally, same author as [`contributors`](#contributors), same date as [`created`](#created), same title as [`title`](#title) and same doi as [`id`](#id).",
           "type": "string",
           "examples": [
             "{\n  \"bibliographicCitation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
@@ -348,7 +348,7 @@
         "spatial": {
           "title": "Spatial",
           "computed": true,
-          "description": " Spatial coverage of the package, expressed as GeoJSON. Generally computed  as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage).",
+          "description": "Spatial coverage of the package, expressed as GeoJSON. Generally computed  as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage).",
           "type": "object",
           "$ref": "http://json.schemastore.org/geojson.json",
           "examples": [
@@ -359,7 +359,7 @@
         "temporal": {
           "title": "Temporal",
           "computed": true,
-          "description": " Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage).",
+          "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage).",
           "type": "object",
           "minItems": 2,
           "maxItems": 2,
@@ -384,7 +384,7 @@
         "taxonomic": {
           "title": "Taxonomic",
           "computed": true,
-          "description": " Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage).",
+          "description": "Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage).",
           "type": "array",
           "items": {
             "type": "string",
@@ -399,7 +399,7 @@
         "referenceLocation": {
           "title": "Reference location",
           "computed": true,
-          "description": " Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
+          "description": "Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
           "type": "object",
           "minItems": 2,
           "maxItems": 2,
@@ -424,6 +424,77 @@
             "{\n  \"referenceLocation\": {\n    \"latitude\": -13.02,\n    \"longitude\": 151.07,\n  }\n}\n"
           ],
           "skos:exactMatch": "https://purl.org/dc/terms/Location"
+        },
+        "numberTags": {
+          "title": "Number of tags",
+          "computed": true,
+          "description": "A list of the number of tags from various category.",
+          "type": "object",
+          "minItems": 0,
+          "maxItems": 15,
+          "properties": {
+            "tags": {
+              "description": "Number of tags in `tags.csv`, thus usually the number of tags produced for the project and equipped on birds.",
+              "type": "number",
+              "minimum": 0
+            },
+            "measurements": {
+              "description": "Number of tags in `measurements.csv`, thus the number of tags for which some data were retrieved.",
+              "type": "number",
+              "minimum": 0
+            },
+            "light": {
+              "description": "Number of tags in `measurements.csv` with some light data.",
+              "type": "number",
+              "minimum": 0
+            },
+            "pressure": {
+              "description": "Number of tags in `measurements.csv` with some pressure data.",
+              "type": "number",
+              "minimum": 0
+            },
+            "activity": {
+              "description": "Number of tags in `measurements.csv` with some activity or pitch data.",
+              "type": "number",
+              "minimum": 0
+            },
+            "temperature_external": {
+              "description": "Number of tags in `measurements.csv` with some external temperature data.",
+              "type": "number",
+              "minimum": 0
+            },
+            "temperature_internal": {
+              "description": "Number of tags in `measurements.csv` with some internal temperature data.",
+              "type": "number",
+              "minimum": 0
+            },
+            "magnetic": {
+              "description": "Number of tags in `measurements.csv` with some magnetic data.",
+              "type": "number",
+              "minimum": 0
+            },
+            "wet_count": {
+              "description": "Number of tags in `measurements.csv` with some wet_count data.",
+              "type": "number",
+              "minimum": 0
+            },
+            "conductivity": {
+              "description": "Number of tags in `measurements.csv` with some conductivity data.",
+              "type": "number",
+              "minimum": 0
+            },
+            "paths": {
+              "description": "Number of tags in `paths.csv`.",
+              "type": "number",
+              "minimum": 0
+            },
+            "pressurepaths": {
+              "description": "Number of tags in `pressurepaths.csv`.",
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000227/"
         },
         "$schema": {
           "title": "Profile",
