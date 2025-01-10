@@ -184,7 +184,7 @@
                 "examples": ["{\n  \"email\": \"example@example.com\"\n}\n"]
               },
               "roles": {
-                "description": "The type of contributor of the resource according to [DataCite Metadata Schema's contributorRole](https://support.datacite.org/docs/datacite-metadata-schema-v44-recommended-and-optional-properties#7a-contributortype). We strongly suggest having `ContactPerson` and `ProjectLeader` to match Movebank requirements for a [contact person](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072/) and a [principal investigator](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164/).\n - `ContactPerson`: Person to whom to ask any questions related to the geolocator data pacakge such as how to access, use, cite, any additional information. \n - `ProjectLeader`: Person officially designated as head of project (i.e.,  principal investigator).\n - `DataCollector`: Person responsible for finding gathering/collecting the geolocator data. Typically used for ringers and field assistants.\n - `DataCurator`: Person in charge of building the geolocator data package, including the gathering and standardizing the metadata and maintaining data and software code. Typically the person that used the `GeoLocatoR` package to build the data package.\n - `Researcher`: A person involved in analyzing data or the results of the geolocator data. Typically used for the persons that run the GeoPressure analysis to produce the tracks.\n - `RightsHolder`: Person or institution owning or managing property rights, including intellectual property rights over the resource. \n - `Supervisor`: Designated administrator over the project. \n - `Other`: Any person or institution making a significant contribution to the development and/or maintenance of the resource, but whose contribution does not fit other controlled vocabulary for contributorType.",
+                "description": "The type of contribution made by the person/organzation following a subset of [DataCite Metadata Schema's contributorType](https://datacite-metadata-schema.readthedocs.io/en/4.6/appendices/appendix-1/contributorType/). We strongly suggest having `ContactPerson` and `ProjectLeader` to match Movebank requirements for a [contact person](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072/) and a [principal investigator](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164/). Any contributors should be authors of the datapackage and appear in `bibliographicCitation`. \n - `ContactPerson`: Person to whom to ask any questions related to the geolocator data pacakge such as how to access, use, cite, any additional information. \n - `ProjectLeader`: Person officially designated as head of project (i.e.,  principal investigator).\n - `DataCollector`: Person responsible for finding gathering/collecting the geolocator data. Typically used for ringers and field assistants.\n - `DataCurator`: Person in charge of building the geolocator data package, including the gathering and standardizing the metadata and maintaining data and software code. Typically the person that used the `GeoLocatoR` package to build the data package.\n - `Researcher`: A person involved in analyzing data or the results of the geolocator data. Typically used for the persons that run the GeoPressure analysis to produce the tracks.\n - `RightsHolder`: Person or institution owning or managing property rights, including intellectual property rights over the resource. \n - `Supervisor`: Designated administrator over the project. \n - `Other`: Any person or institution making a significant contribution to the development and/or maintenance of the resource, but whose contribution does not fit other controlled vocabulary for contributorType.",
                 "type": "array",
                 "minItems": 1,
                 "items": {
@@ -271,7 +271,7 @@
         },
         "temporal": {
           "title": "Temporal",
-          "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage)",
+          "description": "Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage)",
           "type": "object",
           "minItems": 2,
           "maxItems": 2,
@@ -295,12 +295,15 @@
         },
         "taxonomic": {
           "title": "Taxonomic",
-          "description": "Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). See [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage)",
+          "description": "Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage)",
           "type": "array",
           "items": {
             "type": "string",
             "description": "Scientific name",
-            "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024"
+            "skos:relatedMatch": [
+              "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
+              "http://rs.tdwg.org/dwc/terms/scientificName"
+            ]
           },
           "examples": ["{\n  \"taxonomic\": [\"Halcyon senegaloides\"]\n}\n"]
         },
@@ -312,8 +315,8 @@
             "required": ["relationType", "relatedIdentifier", "relatedIdentifierType"],
             "properties": {
               "relationType": {
-                "description": "Description of the relationship between the resource (the package) and the related resource.",
-                "skos:exactMatch": "https://schema.datacite.org/meta/kernel-4.4/include/datacite-relationType-v4.xsd",
+                "description": "Description of the relationship between the the package and the related resource. To help you choose the type, think of *'This package {relationType} the related resource'*. [Learn more about these relationships](https://datacite-metadata-schema.readthedocs.io/en/4.6/appendices/appendix-1/relationType/).",
+                "skos:exactMatch": "https://schema.datacite.org/meta/kernel-4.6/include/datacite-relationType-v4.xsd",
                 "type": "string",
                 "enum": [
                   "IsCitedBy",
@@ -349,15 +352,47 @@
                   "Requires",
                   "IsRequiredBy",
                   "Obsoletes",
-                  "IsObsoletedBy"
+                  "IsObsoletedBy",
+                  "Collects",
+                  "IsCollectedBy",
+                  "HasTranslation",
+                  "IsTranslationOf"
                 ]
               },
               "relatedIdentifier": {
-                "description": "Unique identifier of the related resource (e.g. a DOI or URL).",
+                "description": "Unique identifier of the related resource (e.g. the DOI or URL of the related resource).",
                 "type": "string"
               },
+              "relatedIdentifierType": {
+                "description": "Type of the `relatedIdentifier`. [Learn more about these types](https://datacite-metadata-schema.readthedocs.io/en/4.6/appendices/appendix-1/relatedIdentifierType/).",
+                "skos:exactMatch": "https://schema.datacite.org/meta/kernel-4.6/include/datacite-relatedIdentifierType-v4.xsd",
+                "type": "string",
+                "enum": [
+                  "DOI",
+                  "URL",
+                  "ARK",
+                  "arXiv",
+                  "bibcode",
+                  "CSTR",
+                  "EAN13",
+                  "EISSN",
+                  "Handle",
+                  "IGSN",
+                  "ISBN",
+                  "ISSN",
+                  "ISTC",
+                  "LISSN",
+                  "LSID",
+                  "PMID",
+                  "PURL",
+                  "RRID",
+                  "UPC",
+                  "URN",
+                  "w3id"
+                ]
+              },
               "resourceTypeGeneral": {
-                "description": "General type of the related resource.",
+                "description": "General type of the related resource. [Learn more about these type of resources](https://datacite-metadata-schema.readthedocs.io/en/4.6/appendices/appendix-1/resourceTypeGeneral/).",
                 "skos:exactMatch": "https://schema.datacite.org/meta/kernel-4.4/include/datacite-resourceType-v4.xsd",
                 "type": "string",
                 "enum": [
@@ -389,32 +424,6 @@
                   "Text",
                   "Workflow",
                   "Other"
-                ]
-              },
-              "relatedIdentifierType": {
-                "description": "Type of the `RelatedIdentifier`.",
-                "skos:exactMatch": "https://schema.datacite.org/meta/kernel-4.4/include/datacite-relatedIdentifierType-v4.xsd",
-                "type": "string",
-                "enum": [
-                  "ARK",
-                  "arXiv",
-                  "bibcode",
-                  "DOI",
-                  "EAN13",
-                  "EISSN",
-                  "Handle",
-                  "IGSN",
-                  "ISBN",
-                  "ISSN",
-                  "ISTC",
-                  "LISSN",
-                  "LSID",
-                  "PMID",
-                  "PURL",
-                  "UPC",
-                  "URL",
-                  "URN",
-                  "w3id"
                 ]
               }
             }

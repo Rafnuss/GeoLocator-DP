@@ -4,10 +4,6 @@ author: GeoLocator Development Team
 url: https://raphaelnussbaumer.com
 baseurl: /GeoLocator-DP
 
-# SOCIAL PROFILES
-social:
-  github: rafnuss/geolocator-dp
-
 # THEME SETTINGS
 theme: minima
 remote_theme: tdwg/petridish
