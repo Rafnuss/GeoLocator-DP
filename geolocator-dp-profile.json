@@ -34,87 +34,6 @@
           "examples": ["{\n  \"title\": \"Woodland Kingfisher Geolocator data\"\n}\n"],
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
         },
-        "id": {
-          "title": "ID",
-          "description": "A globally unique identifier for the package, typically the DOI link of the corresponding Zenodo repository which [can be reserved prior to publication](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/#reserve-doi). See [Data Package specification](https://datapackage.org/standard/data-package/#id) and [Datacite metadata schema](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/identifier/).",
-          "type": "string",
-          "examples": ["{\n  \"id\": \"https://doi.org/10.5281/zenodo.11207081\"\n}\n"],
-          "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
-        },
-        "description": {
-          "title": "Description",
-          "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph. See [Data Package specification](https://datapackage.org/standard/data-package/#description) and [Datacite metadata schema](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/description/).",
-          "type": "string",
-          "format": "textarea",
-          "examples": ["{\n  \"description\": \"This datapackage contains ...\"\n}\n"],
-          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176"
-        },
-        "version": {
-          "title": "Version",
-          "description": "A string identifying the version of the package, ideally following [Semantic Versioning](https://semver.org/). See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/).",
-          "type": "string",
-          "examples": ["{\n  \"version\": \"0.0.1\"\n}\n"]
-        },
-        "created": {
-          "title": "Created",
-          "description": "The datetime on which the package was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
-          "type": "string",
-          "format": "date-time",
-          "examples": ["{\n  \"created\": \"2024-05-17\"\n}\n"]
-        },
-        "embargo": {
-          "title": "Embargo until",
-          "description": "End date of the embargo. The repository will restrict access to the data until the end of the embargo period; at which time, the content will become publically available automatically. If no `embargo` is provided, it is assumed that there is no embargo.",
-          "type": "string",
-          "format": "date",
-          "examples": ["{\n  \"embargo\": \"2024-05-17\"\n}\n"]
-        },
-        "licenses": {
-          "title": "Licenses",
-          "description": "The license(s) under which the data is provided. `name` or `path` must be provided. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses).",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "title": "License",
-            "description": "A license for this descriptor.",
-            "type": "object",
-            "anyOf": [
-              {
-                "required": ["name"]
-              },
-              {
-                "required": ["path"]
-              }
-            ],
-            "properties": {
-              "name": {
-                "title": "Open Definition license identifier",
-                "description": "Open Definition license identifier, see [http://licenses.opendefinition.org/](http://licenses.opendefinition.org/)",
-                "type": "string",
-                "pattern": "^([-a-zA-Z0-9._])+$"
-              },
-              "path": {
-                "title": "Path",
-                "description": "A fully qualified URL.",
-                "type": "string",
-                "pattern": "^((?=[^./~])(?!file:)((?!\\/\\.\\.\\/)(?!\\\\)(?!:\\/\\/).)*|(http|ftp)s?:\\/\\/.*)$",
-                "examples": [
-                  "{\n  \"path\": \"file.csv\"\n}\n",
-                  "{\n  \"path\": \"http://example.com/file.csv\"\n}\n"
-                ]
-              },
-              "title": {
-                "title": "Title",
-                "description": "A human-readable name of the license.",
-                "type": "string"
-              }
-            }
-          },
-          "examples": [
-            "{\n  \"licenses\": [\n    {\n      \"name\": \"CC-BY-4.0\",\n      \"path\": \"https://creativecommons.org/licenses/by/4.0/\",\n      \"title\": \"Creative Commons Attribution 4.0\"\n    }\n  ]\n}\n"
-          ],
-          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257"
-        },
         "contributors": {
           "title": "Contributors",
           "description": "A list of contributors, where each contributor is a list with properties including at least `title` but also optionally `givenName`, `familyName`, `path`, `email`, `roles`, and `organization`. See [Data Package specification](https://datapackage.org/standard/data-package/#contributors). ",
@@ -181,17 +100,79 @@
             "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164"
           ]
         },
-        "bibliographicCitation": {
-          "title": "bibliographicCitation",
-          "description": "Bibliographic/recommended citation for the package. Ideally, same author as [`contributors`](#contributors), same date as [`created`](#created), same title as [`title`](#title) and same doi as [`id`](#id).",
+        "embargo": {
+          "title": "Embargo until",
+          "description": "End date of the embargo. The repository will restrict access to the data until the end of the embargo period; at which time, the content will become publically available automatically. If no `embargo` is provided, it is assumed that there is no embargo.",
           "type": "string",
+          "format": "date",
+          "examples": ["{\n  \"embargo\": \"2024-05-17\"\n}\n"]
+        },
+        "licenses": {
+          "title": "Licenses",
+          "description": "The license(s) under which the data is provided. `name` or `path` must be provided. If you're not sure, check out the [Creative Commons License Chooser](https://chooser-beta.creativecommons.org/) and the [Open Data Commons](https://opendatacommons.org/). Usually, a single license if sufficient and prefered. See [Data Package specification](https://datapackage.org/standard/data-package/#licenses). ",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "License",
+            "description": "A license for this descriptor.",
+            "type": "object",
+            "anyOf": [
+              {
+                "required": ["name"]
+              },
+              {
+                "required": ["path"]
+              }
+            ],
+            "properties": {
+              "name": {
+                "title": "Open Definition license identifier",
+                "description": "Open Definition license identifier, see [http://licenses.opendefinition.org/](http://licenses.opendefinition.org/)",
+                "type": "string",
+                "pattern": "^([-a-zA-Z0-9._])+$"
+              },
+              "path": {
+                "title": "Path",
+                "description": "A fully qualified URL.",
+                "type": "string",
+                "pattern": "^((?=[^./~])(?!file:)((?!\\/\\.\\.\\/)(?!\\\\)(?!:\\/\\/).)*|(http|ftp)s?:\\/\\/.*)$",
+                "examples": [
+                  "{\n  \"path\": \"file.csv\"\n}\n",
+                  "{\n  \"path\": \"http://example.com/file.csv\"\n}\n"
+                ]
+              },
+              "title": {
+                "title": "Title",
+                "description": "A human-readable name of the license.",
+                "type": "string"
+              }
+            }
+          },
           "examples": [
-            "{\n  \"bibliographicCitation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
+            "{\n  \"licenses\": [\n    {\n      \"name\": \"CC-BY-4.0\",\n      \"path\": \"https://creativecommons.org/licenses/by/4.0/\",\n      \"title\": \"Creative Commons Attribution 4.0\"\n    }\n  ]\n}\n"
           ],
-          "skos:exactMatch": [
-            "http://purl.org/dc/terms/bibliographicCitation",
-            "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068"
-          ]
+          "skos:narrowMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000257"
+        },
+        "id": {
+          "title": "ID",
+          "description": "A globally unique identifier for the package, typically the DOI link of the corresponding Zenodo repository which [can be reserved prior to publication](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/#reserve-doi). See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
+          "type": "string",
+          "examples": ["{\n  \"id\": \"https://doi.org/10.5281/zenodo.11207081\"\n}\n"],
+          "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
+        },
+        "description": {
+          "title": "Description",
+          "description": "A markdown-formatted string describing the package. You can (and should!) use multiple sentences, but limited to a single paragraph. See [Data Package specification](https://datapackage.org/standard/data-package/#description) and [Datacite metadata schema](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/description/).",
+          "type": "string",
+          "format": "textarea",
+          "examples": ["{\n  \"description\": \"This datapackage contains ...\"\n}\n"],
+          "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000176"
+        },
+        "version": {
+          "title": "Version",
+          "description": "A string identifying the version of the package, ideally following [Semantic Versioning](https://semver.org/). See the [Data Package specification](https://datapackage.org/standard/data-package/#version) and [Data Package Version recipe](https://datapackage.org/recipes/data-package-version/).",
+          "type": "string",
+          "examples": ["{\n  \"version\": \"0.0.1\"\n}\n"]
         },
         "relatedIdentifiers": {
           "description": "List of resources related to the package (e.g. papers, project pages, derived datasets, etc.). See [Camtrap DP specification](https://camtrap-dp.tdwg.org/metadata/#relatedIdentifiers) and [Datacite metadata schema](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/relatedidentifier/).",
@@ -331,27 +312,6 @@
           ],
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000123/"
         },
-        "name": {
-          "title": "Name",
-          "description": "**Computed**.A simple name or human-readable identifier (any lowercase alphanumeric characters plus `.`, `-` and `_`). Usually, a slugification of `title`. See [Data Package specification](https://datapackage.org/standard/data-package/#name).",
-          "type": "string",
-          "examples": ["{\n  \"name\": \"mangrove-kingfisher-geolocator-data\"\n}\n"]
-        },
-        "homepage": {
-          "title": "Home Page",
-          "description": "A URL for the home on the web related to this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#homepage).",
-          "type": "string",
-          "format": "uri",
-          "examples": ["{\n  \"homepage\": \"https://github.com/Rafnuss/WoodlandKingfisher\"\n}\n"]
-        },
-        "image": {
-          "title": "Image",
-          "description": "An image to use for this data package. See [Data Package specification](https://datapackage.org/standard/data-package/#image).",
-          "type": "string",
-          "examples": [
-            "{\n  \"image\": \"https://raw.githubusercontent.com/Rafnuss/WoodlandKingfisher/main/output/NDVI_animation/077531d34e04506aeb5e3d3066a8e06e-19ff78ccc543bbb66a89d90b1ae3fd17_getPixels.gif\"\n}\n"
-          ]
-        },
         "keywords": {
           "title": "Keywords",
           "description": "A list of keywords to help users find the package. Also called [`subject`](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/subject/). See [Data Package specification](https://datapackage.org/standard/data-package/#keywords).",
@@ -364,17 +324,29 @@
             "{\n  \"keywords\": [\n    \"intra-african\",\n    \"NDVI\",\n    \"geopressure\"\n  ]\n}\n"
           ]
         },
-        "references": {
-          "title": "References",
-          "description": "List of references related to the package (e.g. references cited in package.description). References preferably include a DOI. See [Camtrap DP specification](https://camtrap-dp.tdwg.org/metadata/#references).",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "created": {
+          "title": "Created",
+          "description": " The datetime on which the package was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
+          "type": "string",
+          "format": "date-time",
+          "examples": ["{\n  \"created\": \"2024-05-17\"\n}\n"]
+        },
+        "bibliographicCitation": {
+          "title": "bibliographicCitation",
+          "computed": true,
+          "description": " Bibliographic/recommended citation for the package. Ideally, same author as [`contributors`](#contributors), same date as [`created`](#created), same title as [`title`](#title) and same doi as [`id`](#id).",
+          "type": "string",
+          "examples": [
+            "{\n  \"bibliographicCitation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
+          ],
+          "skos:exactMatch": [
+            "http://purl.org/dc/terms/bibliographicCitation",
+            "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068"
+          ]
         },
         "spatial": {
           "title": "Spatial",
-          "description": "**Computed**. Spatial coverage of the package, expressed as GeoJSON. Generally computed  as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage).",
+          "description": " Spatial coverage of the package, expressed as GeoJSON. Generally computed  as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage).",
           "type": "object",
           "$ref": "http://json.schemastore.org/geojson.json",
           "examples": [
@@ -384,7 +356,7 @@
         },
         "temporal": {
           "title": "Temporal",
-          "description": "**Computed**. Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage).",
+          "description": " Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage).",
           "type": "object",
           "minItems": 2,
           "maxItems": 2,
@@ -408,7 +380,8 @@
         },
         "taxonomic": {
           "title": "Taxonomic",
-          "description": "**Computed**. Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage).",
+          "computed": true,
+          "description": " Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage).",
           "type": "array",
           "items": {
             "type": "string",
@@ -422,7 +395,7 @@
         },
         "referenceLocation": {
           "title": "Reference location",
-          "description": "**Computed**. Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
+          "description": " Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
           "type": "object",
           "minItems": 2,
           "maxItems": 2,
