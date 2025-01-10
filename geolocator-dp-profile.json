@@ -326,6 +326,7 @@
         },
         "created": {
           "title": "Created",
+          "computed": true,
           "description": " The datetime on which the package was created. See [Data Package specification](https://datapackage.org/standard/data-package/#created).",
           "type": "string",
           "format": "date-time",
@@ -346,6 +347,7 @@
         },
         "spatial": {
           "title": "Spatial",
+          "computed": true,
           "description": " Spatial coverage of the package, expressed as GeoJSON. Generally computed  as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage).",
           "type": "object",
           "$ref": "http://json.schemastore.org/geojson.json",
@@ -356,6 +358,7 @@
         },
         "temporal": {
           "title": "Temporal",
+          "computed": true,
           "description": " Temporal coverage of the package. Computed based on [`observations.datetime`](/GeoLocator-DP/core/observations#datetime). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#temporal-coverage).",
           "type": "object",
           "minItems": 2,
@@ -395,6 +398,7 @@
         },
         "referenceLocation": {
           "title": "Reference location",
+          "computed": true,
           "description": " Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
           "type": "object",
           "minItems": 2,

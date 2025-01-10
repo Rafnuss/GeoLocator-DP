@@ -14,6 +14,6 @@ In addition, to allow export of a geolocator data package to [Movebank](https://
 
 {:.alert .alert-info style="padding-left: 32px;"}
 
-- Properties indicated with `*` are required: you'll need to provide a values
-- Properties described as **Computed** can (and should) be computed automatically from the content of the datapacakge. Even if required, these values don't need to be provided manually. These are located at the end of the page.
-- The properties are listed by order of priority/importance.
+- Properties indicated with `*` are required.
+- Properties indicated with `+` can (and should) be derived/computed directly from the content of the datapacakge rather than provided manually.
+- The properties are listed by order of priority/importance with computed properties listed at the bottom as usually less relevant for users.
