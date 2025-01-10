@@ -21,7 +21,7 @@
         "embargo",
         "contributors",
         "licenses",
-        "reference_location",
+        "spatial",
         "temporal",
         "taxonomic",
         "resources"
@@ -243,20 +243,20 @@
         },
         "referenceLocation": {
           "title": "Reference location",
-          "description": "Reference location for the study is used to display the study on a map. Choose a central area for your study, typically the main deployment site. This is mostly used for Movebank",
+          "description": "Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
           "type": "object",
           "minItems": 2,
           "maxItems": 2,
-          "required": ["lat", "lon"],
+          "required": ["latitude", "longitude"],
           "properties": {
-            "lat": {
+            "latitude": {
               "description": "Reference latitude in degree decimal.",
               "type": "number",
               "minimum": -90,
               "maximum": 90,
               "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
             },
-            "lon": {
+            "longitude": {
               "description": "Reference longitude in degree decimal.",
               "type": "number",
               "minimum": -180,
@@ -265,9 +265,19 @@
             }
           },
           "examples": [
-            "{\n  \"reference_location\": {\n    \"latitude\": -13.02,\n    \"longitude\": 151.07,\n    \"description\": \"Forest area with nest boxes\"\n  }\n}\n"
+            "{\n  \"reference_location\": {\n    \"latitude\": -13.02,\n    \"longitude\": 151.07,\n  }\n}\n"
           ],
-          "skos:relatedMatch": "https://purl.org/dc/terms/spatial"
+          "skos:exactMatch": "https://purl.org/dc/terms/Location"
+        },
+        "spatial": {
+          "title": "Spatial",
+          "description": "Spatial coverage of the package, expressed as GeoJSON. Generally computed as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage)",
+          "type": "object",
+          "$ref": "http://json.schemastore.org/geojson.json",
+          "examples": [
+            "{\n  \"spatial\": {\n    \"geometry\": {\n      \"type\": \"Polygon\",\n      \"coordinates\": [[[30.0, -10.0], [35.0, -10.0], [35.0, -5.0], [30.0, -5.0], [30.0, -10.0]]]\n    }\n  }\n}\n"
+          ],
+          "skos:exactMatch": "https://purl.org/dc/terms/spatial"
         },
         "temporal": {
           "title": "Temporal",
