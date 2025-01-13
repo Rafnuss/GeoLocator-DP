@@ -24,6 +24,7 @@
         "spatial",
         "temporal",
         "taxonomic",
+        "numberTags",
         "resources"
       ],
       "properties": {
@@ -155,7 +156,7 @@
         },
         "id": {
           "title": "ID",
-          "description": "A globally unique identifier for the package, typically the DOI link of the corresponding Zenodo repository which [can be reserved prior to publication](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/#reserve-doi). See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
+          "description": "A globally unique identifier for the package, typically the [concept DOI](https://support.zenodo.org/help/en-gb/1-upload-deposit/97-what-is-doi-versioning) as full link. Note that you [can reserve the first version DOI prior to publication](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/#reserve-doi). The corresponding concept DOI can be construct by substracting the ZENODO ID by 1 (`https://doi.org/10.5281/zenodo.14620590` for a DOI reserved as `10.5281/zenodo.14620591`) See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
           "type": "string",
           "examples": ["{\n  \"id\": \"https://doi.org/10.5281/zenodo.11207081\"\n}\n"],
           "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
@@ -332,30 +333,6 @@
           "format": "date-time",
           "examples": ["{\n  \"created\": \"2024-05-17\"\n}\n"]
         },
-        "bibliographicCitation": {
-          "title": "bibliographicCitation",
-          "computed": true,
-          "description": "Bibliographic/recommended citation for the package. Ideally, same author as [`contributors`](#contributors), same date as [`created`](#created), same title as [`title`](#title) and same doi as [`id`](#id).",
-          "type": "string",
-          "examples": [
-            "{\n  \"bibliographicCitation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
-          ],
-          "skos:exactMatch": [
-            "http://purl.org/dc/terms/bibliographicCitation",
-            "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068"
-          ]
-        },
-        "spatial": {
-          "title": "Spatial",
-          "computed": true,
-          "description": "Spatial coverage of the package, expressed as GeoJSON. Generally computed  as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage).",
-          "type": "object",
-          "$ref": "http://json.schemastore.org/geojson.json",
-          "examples": [
-            "{\n  \"spatial\": {\n    \"geometry\": {\n      \"type\": \"Polygon\",\n      \"coordinates\": [[[30.0, -10.0], [35.0, -10.0], [35.0, -5.0], [30.0, -5.0], [30.0, -10.0]]]\n    }\n  }\n}\n"
-          ],
-          "skos:exactMatch": "https://purl.org/dc/terms/spatial"
-        },
         "temporal": {
           "title": "Temporal",
           "computed": true,
@@ -381,6 +358,17 @@
           ],
           "skos:exactMatch": "https://purl.org/dc/terms/temporal"
         },
+        "spatial": {
+          "title": "Spatial",
+          "computed": true,
+          "description": "Spatial coverage of the package, expressed as GeoJSON. Generally computed  as the bounding box of `observations`, `paths` and `pressurepath`. Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#geographic-coverage).",
+          "type": "object",
+          "$ref": "https://geojson.org/schema/GeoJSON.json",
+          "examples": [
+            "{\n  \"spatial\": {\n    \"geometry\": {\n      \"type\": \"Polygon\",\n      \"coordinates\": [[[30.0, -10.0], [35.0, -10.0], [35.0, -5.0], [30.0, -5.0], [30.0, -10.0]]]\n    }\n  }\n}\n"
+          ],
+          "skos:exactMatch": "https://purl.org/dc/terms/spatial"
+        },
         "taxonomic": {
           "title": "Taxonomic",
           "computed": true,
@@ -395,35 +383,6 @@
             ]
           },
           "examples": ["{\n  \"taxonomic\": [\"Halcyon senegaloides\"]\n}\n"]
-        },
-        "referenceLocation": {
-          "title": "Reference location",
-          "computed": true,
-          "description": "Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
-          "type": "object",
-          "minItems": 2,
-          "maxItems": 2,
-          "required": ["latitude", "longitude"],
-          "properties": {
-            "latitude": {
-              "description": "Reference latitude in degree decimal.",
-              "type": "number",
-              "minimum": -90,
-              "maximum": 90,
-              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
-            },
-            "longitude": {
-              "description": "Reference longitude in degree decimal.",
-              "type": "number",
-              "minimum": -180,
-              "maximum": 180,
-              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
-            }
-          },
-          "examples": [
-            "{\n  \"referenceLocation\": {\n    \"latitude\": -13.02,\n    \"longitude\": 151.07,\n  }\n}\n"
-          ],
-          "skos:exactMatch": "https://purl.org/dc/terms/Location"
         },
         "numberTags": {
           "title": "Number of tags",
@@ -495,6 +454,48 @@
             }
           },
           "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000227/"
+        },
+        "bibliographicCitation": {
+          "title": "bibliographicCitation",
+          "computed": true,
+          "description": "Bibliographic/recommended citation for the package. Ideally, same author as [`contributors`](#contributors), same date as [`created`](#created), same title as [`title`](#title) and same doi as [`id`](#id).",
+          "type": "string",
+          "examples": [
+            "{\n  \"bibliographicCitation\": \"Nussbaumer, R., & Rime, Y. (2024). Woodland Kingfisher: Migration route and timing of South African Woodland Kingfisher (v1.1). Zenodo. https://doi.org/10.5281/zenodo.11207141\"\n}\n"
+          ],
+          "skos:exactMatch": [
+            "http://purl.org/dc/terms/bibliographicCitation",
+            "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000068"
+          ]
+        },
+        "referenceLocation": {
+          "title": "Reference location",
+          "computed": true,
+          "description": "Reference location for the study is used to display the study on a map. Choose a central position for your study, typically the main deployment site. This is required to upload your data on Movebank.",
+          "type": "object",
+          "minItems": 2,
+          "maxItems": 2,
+          "required": ["latitude", "longitude"],
+          "properties": {
+            "latitude": {
+              "description": "Reference latitude in degree decimal.",
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90,
+              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000222"
+            },
+            "longitude": {
+              "description": "Reference longitude in degree decimal.",
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180,
+              "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000223"
+            }
+          },
+          "examples": [
+            "{\n  \"referenceLocation\": {\n    \"latitude\": -13.02,\n    \"longitude\": 151.07,\n  }\n}\n"
+          ],
+          "skos:exactMatch": "https://purl.org/dc/terms/Location"
         },
         "$schema": {
           "title": "Profile",
