@@ -54,9 +54,9 @@ The GeoPressureR extensions consists of optional trajectrory data generated thro
 
 <table>
     <tr style="border-top-width: 1px;">
-        <td><a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html"><img src="https://raphaelnussbaumer.com/GeoPressureManual/assets/cover.png" width="100px"/></a></td>
+        <td><a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html"><img src="https://raphaelnussbaumer.com/GeoPressureManual/assets/cover.png" width="100px" alt="GeoPressureManual logo"/></a></td>
         <td>
-        The <a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html">GeolocatorManual</a> R book has a dedicated part on the use of Geolocator Data Pacakge. This is a great place to start learning more on how to use it with your GeoPressureTemplate project. Hello
+        The <a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html">GeolocatorManual</a> R book has a dedicated part on the use of Geolocator Data Pacakge. This is a great place to start learning more on how to use it with your GeoPressureTemplate project.
         </td>
         </tr>
 </table>
@@ -65,13 +65,13 @@ The GeoPressureR extensions consists of optional trajectrory data generated thro
 
 <table >
     <tr style="border-top-width: 1px;">
-        <td><a href="https://raphaelnussbaumer.com/GeoLocatoR/"><img src="https://raphaelnussbaumer.com/GeoLocatoR/logo.png" width="100px"/></a></td>
+        <td><a href="https://raphaelnussbaumer.com/GeoLocatoR/"><img src="https://raphaelnussbaumer.com/GeoLocatoR/logo.png" width="100px" alt="GeoLocatoR logo"/></a></td>
         <td>
         The <a href="https://raphaelnussbaumer.com/GeoLocatoR/">GeoLocatoR</a> R package is designed to handle GeoLocator DP: creating DP, adding resources to DP, writing DP and reading DP. It is essentially an extension of the <a href="https://docs.ropensci.org/frictionless/">frictionlessr</a> package for geolocator data.
         </td>
         </tr>
         <tr>
-        <td><img src="https://raphaelnussbaumer.com/GeoPressureR/logo.png" width="100px"/></td>
+        <td><img src="https://raphaelnussbaumer.com/GeoPressureR/logo.png" width="100px" alt="GeoPressureR logo"/></td>
         <td>
         <a href="https://raphaelnussbaumer.com/GeoPressureR/">GeoPressureR</a> is the main package to analyse geolocator data. Once a Geolocator data package is created, GeoPressureR is our recommended software to read the data into R and analyse the data.
         </td>
@@ -80,4 +80,4 @@ The GeoPressureR extensions consists of optional trajectrory data generated thro
 
 ## How to cite
 
-> Nussbaumer, R. (2024). GeoLocator Data Package (Version 0.1) [Computer software]. [https://doi.org/10.5281/zenodo.14258411](https://doi.org/10.5281/zenodo.14258411)
+> Nussbaumer, R. (2024). GeoLocator Data Package. Zenodo. [10.5281/zenodo.14258411](https://doi.org/10.5281/zenodo.14258411)

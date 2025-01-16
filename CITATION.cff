@@ -3,7 +3,7 @@ message: 'To cite "GeoLocator DP" in publications use:'
 type: software
 license: MIT
 title: GeoLocator Data Package
-version: 0.1
+version: 0.2
 authors:
   - family-names: Nussbaumer
     given-names: Raphaël

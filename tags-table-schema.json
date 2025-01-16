@@ -40,10 +40,10 @@
     },
     {
       "name": "manufacturer",
-      "description": "The company or person that produced the tag. When appropriate, please use 'Swiss Ornithological Institue', 'Migrate Technology Limited', or 'Lund University'.",
+      "description": "The company or person that produced the tag. When appropriate, please use the terms `'Swiss Ornithological Institue'`, `'Migrate Technology Limited'`, or `'Lund University'`.",
       "type": "string",
       "constraints": {
-        "required": false
+        "required": true
       },
       "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000183",
       "example": "Swiss Ornithological Institue"
@@ -53,13 +53,13 @@
       "description": "Model/design/version of the tag. Any specification of the device able to identify it.",
       "type": "string",
       "constraints": {
-        "required": false
+        "required": true
       },
       "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000185",
       "example": "GDL2.3"
     },
     {
-      "name": "firwmare",
+      "name": "firmware",
       "description": "The tag firmware and version used during the deployment.",
       "type": "string",
       "constraints": {

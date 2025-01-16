@@ -9,7 +9,7 @@
 
 columns:
   - description: > # E.g. funding acknowledgement. Can be Markdown
-      This website was created based on [camtrap-dp](https://camtrap-dp.tdwg.org/) using the [petridish](https://peterdesmet.com/petridish/) jekyll theme.
+      This website and Data Package extension were greatly inspired from [Camtrap DP](https://camtrap-dp.tdwg.org/) and the website is using the [petridish](https://peterdesmet.com/petridish/) jekyll theme.
 
 # Small print license statement to add at the bottom of the footer. Can be Markdown
 # Will be prefixed by "© {{ site.author }}" if defined in _config.yml
