@@ -40,13 +40,13 @@
     },
     {
       "name": "manufacturer",
-      "description": "The company or person that produced the tag. When appropriate, please use the terms `'Swiss Ornithological Institue'`, `'Migrate Technology Limited'`, or `'Lund University'`.",
+      "description": "The company or person that produced the tag. When appropriate, please use the terms `'Swiss Ornithological Institute'`, `'Migrate Technology Limited'`, or `'Lund University'`.",
       "type": "string",
       "constraints": {
         "required": true
       },
       "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000183",
-      "example": "Swiss Ornithological Institue"
+      "example": "Swiss Ornithological Institute"
     },
     {
       "name": "model",
