@@ -6,7 +6,7 @@
   "$defs": {
     "version": {
       "type": "string",
-      "pattern": "0\\.2"
+      "pattern": "^0\\.2$"
     }
   },
   "allOf": [
