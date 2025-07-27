@@ -7,15 +7,16 @@ from frictionless import validate
 
 THIS_SCRIPT_PATH = Path(__file__).parent
 REPOSITORY_ROOT_PATH = THIS_SCRIPT_PATH / ".."
-EXAMPLE_PATH = REPOSITORY_ROOT_PATH / "example" / "datapackage.json"
 PROFILE_PATH = REPOSITORY_ROOT_PATH / "geolocator-dp-profile.json"
-RELAXED_PROFILE_PATH = (
-    REPOSITORY_ROOT_PATH / "geolocator-dp-profile-relaxed.json"
-)  # File created in later step
 TABLE_SCHEMA_PATHS = [
     REPOSITORY_ROOT_PATH / "observations-table-schema.json",
     REPOSITORY_ROOT_PATH / "tags-table-schema.json",
     REPOSITORY_ROOT_PATH / "measurements-table-schema.json",
+    REPOSITORY_ROOT_PATH / "staps-table-schema.json",
+    REPOSITORY_ROOT_PATH / "twilights-table-schema.json",
+    REPOSITORY_ROOT_PATH / "paths-table-schema.json",
+    REPOSITORY_ROOT_PATH / "edges-table-schema.json",
+    REPOSITORY_ROOT_PATH / "pressurepaths-table-schema.json",
 ]
 
 
