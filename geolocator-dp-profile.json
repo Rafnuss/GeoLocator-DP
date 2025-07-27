@@ -504,7 +504,7 @@
           "format": "uri",
           "default": "https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json",
           "examples": [
-            "{\n  \"name\": \"https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json\"\n}\n"
+            "{\n  \"$schema\": \"https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json\"\n}\n"
           ]
         },
         "resources": {
