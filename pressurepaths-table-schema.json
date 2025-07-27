@@ -1,7 +1,7 @@
 {
   "name": "pressurepaths",
   "title": "Pressurepaths",
-  "description": "{:.alert .alert-info}\nA GeoPressureR `pressurepath` constains the ERA5 variables along the trajectory of the bird on an hourly interval and using the exact location of the bird (accounting of flight). [Read more about pressurepath on the GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/pressurepath.html) \n\nSimilarly to [`path`](geopressurer/paths), there are 4 types of pressurepath : `tag`, `most_likely`, `simulation` and `geopressureviz`. See [`pressurepaths.type`](#type) for more details. \n\n `pressurepath` should be used in combinaison with [`staps`](geopressurer/staps) and [`paths`](geopressurer/paths) which can be JOIN by `tag_id` and `stap_id`. \n\n{:.alert .alert-warning}\n The definition below does not list the ERA5 variables which can (and should!) be added to the table as additional columns (e.g. `'altitude'` or `'surface_pressure'`). Read more about these variable in [the documentation of `pressurepath_create()`](https://raphaelnussbaumer.com/GeoPressureR/reference/pressurepath_create.html#arg-variable)",
+  "description": "{:.alert .alert-info}\nA GeoPressureR `pressurepath` contains the ERA5 variables along the trajectory of the bird on an hourly interval and using the exact location of the bird (accounting of flight). [Read more about pressurepath on the GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/pressurepath.html) \n\nSimilarly to [`path`](geopressurer/paths), there are 4 types of pressurepath : `tag`, `most_likely`, `simulation` and `geopressureviz`. See [`pressurepaths.type`](#type) for more details. \n\n `pressurepath` should be used in combination with [`staps`](geopressurer/staps) and [`paths`](geopressurer/paths) which can be JOIN by `tag_id` and `stap_id`. \n\n{:.alert .alert-warning}\n The definition below does not list the ERA5 variables which can (and should!) be added to the table as additional columns (e.g. `'altitude'` or `'surface_pressure'`). Read more about these variable in [the documentation of `pressurepath_create()`](https://raphaelnussbaumer.com/GeoPressureR/reference/pressurepath_create.html#arg-variable)",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -44,7 +44,7 @@
     },
     {
       "name": "lat",
-      "description": "Latitude of the stationay period.",
+      "description": "Latitude of the stationary period.",
       "type": "number",
       "constraints": {
         "required": true,
@@ -56,7 +56,7 @@
     },
     {
       "name": "lon",
-      "description": "Longitude of the stationay period.",
+      "description": "Longitude of the stationary period.",
       "type": "number",
       "constraints": {
         "required": true,

@@ -1,7 +1,7 @@
 {
   "name": "paths",
   "title": "Paths",
-  "description": "A GeoPressureR `path` constains the positions of a bird's trajectory. \n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 types of path : `tag`, `most_likely`, `simulation` and `geopressureviz`. See [`paths.type`](#type) for more details. \n\n `path` should always be used in combinaison with [`staps`](geopressurer/staps) which can be JOIN by `tag_id` and `stap_id`.",
+  "description": "A GeoPressureR `path` contains the positions of a bird's trajectory. \n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 types of path : `tag`, `most_likely`, `simulation` and `geopressureviz`. See [`paths.type`](#type) for more details. \n\n `path` should always be used in combination with [`staps`](geopressurer/staps) which can be JOIN by `tag_id` and `stap_id`.",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -34,7 +34,7 @@
     },
     {
       "name": "lat",
-      "description": "Latitude of the stationay period.",
+      "description": "Latitude of the stationary period.",
       "type": "number",
       "constraints": {
         "required": true,
@@ -46,7 +46,7 @@
     },
     {
       "name": "lon",
-      "description": "Longitude of the stationay period.",
+      "description": "Longitude of the stationary period.",
       "type": "number",
       "constraints": {
         "required": true,

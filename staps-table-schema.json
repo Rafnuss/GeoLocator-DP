@@ -45,7 +45,7 @@
     },
     {
       "name": "known_lat",
-      "description": "Latitude of the known stationay period. This value is typically assigned by [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map).",
+      "description": "Latitude of the known stationary period. This value is typically assigned by [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map).",
       "type": "number",
       "constraints": {
         "required": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "known_lon",
-      "description": "Longitude of the known stationay period. This value is typically assigned by [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map).",
+      "description": "Longitude of the known stationary period. This value is typically assigned by [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map).",
       "type": "number",
       "constraints": {
         "required": false,

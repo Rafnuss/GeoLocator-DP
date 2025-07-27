@@ -1,7 +1,7 @@
 {
   "name": "edges",
   "title": "Edges",
-  "description": "In GeoPressureR, we uses `edges` (of a graph; See more infomration on the movement model in the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/trajectory.html)) to extract flight information from GeoPressureP [`paths`](geopressurer/paths) using path2edge().",
+  "description": "In GeoPressureR, we uses `edges` (of a graph; See more information on the movement model in the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/trajectory.html)) to extract flight information from GeoPressureP [`paths`](geopressurer/paths) using path2edge().",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -24,7 +24,7 @@
     },
     {
       "name": "stap_t",
-      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1` exept if `include=FALSE` for intermediate stap_id. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id).",
+      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1` except if `include=FALSE` for intermediate stap_id. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id).",
       "type": "number",
       "constraints": {
         "required": true
@@ -33,7 +33,7 @@
     },
     {
       "name": "lat_s",
-      "description": "Latitude of source the stationay period.",
+      "description": "Latitude of source the stationary period.",
       "type": "number",
       "constraints": {
         "required": true,
@@ -45,7 +45,7 @@
     },
     {
       "name": "lon_s",
-      "description": "Longitude of the source stationay period.",
+      "description": "Longitude of the source stationary period.",
       "type": "number",
       "constraints": {
         "required": true,
@@ -57,7 +57,7 @@
     },
     {
       "name": "lat_t",
-      "description": "Latitude of the target stationay period.",
+      "description": "Latitude of the target stationary period.",
       "type": "number",
       "constraints": {
         "required": true,
@@ -69,7 +69,7 @@
     },
     {
       "name": "lon_t",
-      "description": "Longitude of the target stationay period.",
+      "description": "Longitude of the target stationary period.",
       "type": "number",
       "constraints": {
         "required": true,

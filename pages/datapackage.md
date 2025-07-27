@@ -15,5 +15,5 @@ In addition, to allow export of a geolocator data package to [Movebank](https://
 {:.alert .alert-info style="padding-left: 32px;"}
 
 - Properties indicated with `*` are required.
-- Properties indicated with `+` can (and should) be derived/computed directly from the content of the datapacakge rather than provided manually.
+- Properties indicated with `+` can (and should) be derived/computed directly from the content of the datapackage rather than provided manually.
 - The properties are listed by order of priority/importance with computed properties listed at the bottom as usually less relevant for users.

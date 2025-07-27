@@ -7,7 +7,7 @@ description: Data exchange format for geolocator data
 
 **GeoLocator Data Package** (GeoLocator DP) is a data exchange format for geolocator data. It follows the [Data Package standard](https://datapackage.org/standard/data-package/) for the structuring of the data.
 
-A geolocator data package consists of three sets of data: (1) the metadata of the project, (2) the core resources contianing the main dataset and (3) optional trajectory data generated with the [GeoPressure suite](https://raphaelnussbaumer.com/GeoPressureManual/#the-geopressure-suite).
+A geolocator data package consists of three sets of data: (1) the metadata of the project, (2) the core resources containing the main dataset and (3) optional trajectory data generated with the [GeoPressure suite](https://raphaelnussbaumer.com/GeoPressureManual/#the-geopressure-suite).
 
 ## 1. Metadata
 
@@ -19,7 +19,7 @@ The description of project and the data is contained in [`datapackage.json`](htt
 
 ## 2. Core Resources
 
-The core GeoLocator DP resources contain of the raw geolocator data. These `resources` can be generated without any analysis of the geolocator data.
+The core GeoLocator DP resources consist of the raw geolocator data. These `resources` can be generated without any analysis of the geolocator data.
 
 | File                                                                                 | Description                                                                                            |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
@@ -29,13 +29,13 @@ The core GeoLocator DP resources contain of the raw geolocator data. These `reso
 
 ## 3. GeoPressureR Resources
 
-The GeoPressureR extensions consists of optional trajectrory data generated through the GeoPressureR workflow anaylsis[](https://raphaelnussbaumer.com/GeoPressureManual/geopressuretemplate-workflow.html).
+The GeoPressureR extensions consists of optional trajectory data generated through the GeoPressureR workflow analysis[](https://raphaelnussbaumer.com/GeoPressureManual/geopressuretemplate-workflow.html).
 
 | File                                                                                          | Description                                                                          |
 | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | [`staps.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/staps)                 | Table of the stationary periods of all tags.                                         |
 | [`paths.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/paths)                 | Table of the trajectory of all tags, typically most likely path or simulation paths. |
-| [`edges.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/edges)                 | Table containing the flight informations of the edges associated with the paths.     |
+| [`edges.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/edges)                 | Table containing the flight information of the edges associated with the paths.      |
 | [`twilights.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/twilights)         | Table of the twilights estimated from light data for all tags.                       |
 | [`pressurepaths.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/pressurepaths) | Table of the pressurepaths                                                           |
 
@@ -47,7 +47,7 @@ The GeoPressureR extensions consists of optional trajectrory data generated thro
             <a href="https://zenodo.org/communities/geolocator-dp/"><img src="https://zenodo.org/api/communities/b7c70316-310b-435e-9a8b-84188d60a3cc/logo" width="100px"/> </a>
         </td>
         <td>
-            You'll be able to find all GeoLocator Data Package in the <a href="https://zenodo.org/communities/geolocator-dp/">GeoLocator Data Package Zenodo Communitity</a>. Once you've published you datapackage, make sure to <a href="https://help.zenodo.org/docs/share/submit-to-community/">sumbit it to the cummunity</a>.
+            You'll be able to find all GeoLocator Data Package in the <a href="https://zenodo.org/communities/geolocator-dp/">GeoLocator Data Package Zenodo Community</a>. Once you've published you datapackage, make sure to <a href="https://help.zenodo.org/docs/share/submit-to-community/">submit it to the community</a>.
         </td>
     </tr>
     <tr>
@@ -68,7 +68,7 @@ The GeoPressureR extensions consists of optional trajectrory data generated thro
             <a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html"><img src="https://raphaelnussbaumer.com/GeoPressureManual/assets/cover.png" width="100px" alt="GeoPressureManual logo"/></a>
         </td>
         <td>
-            The <a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html">GeolocatorManual</a> R book has a dedicated part on the use of Geolocator Data Pacakge. This is a great place to start learning more on how to use it with your GeoPressureTemplate project.
+            The <a href="https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html">GeolocatorManual</a> R book has a dedicated part on the use of Geolocator Data Package. This is a great place to start learning more on how to use it with your GeoPressureTemplate project.
         </td>
     </tr>
 </table>
