@@ -35,8 +35,7 @@
     },
     {
       "name": "datetime",
-      "description": "Date and time of the observation. Formatted as an ISO 8601 string (`YYYY-MM-DDThh:mm:ssZ`).",
-      "skos:broadMatch": "https://rs.tdwg.org/dwc/terms/observationDate",
+      "description": "Date and optionally time of the observation. Accepts any valid [ISO 8601](https://wikipedia.org/wiki/ISO_8601) date or datetime string, including date-only (`YYYY-MM-DD`), full datetime in local time (`YYYY-MM-DDThh:mm`), in UTC (`YYYY-MM-DDThh:mmZ`) or any specific timezone ()`YYYY-MM-DDThh:mm+hh:mm`).",
       "skos:broadMatch": "http://rs.tdwg.org/dwc/terms/eventDate",
       "type": "datetime",
       "constraints": {
