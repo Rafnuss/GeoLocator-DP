@@ -1,7 +1,7 @@
 {
   "name": "measurements",
   "title": "Measurements",
-  "description": "`measurements.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) resources from a GeoLocator Data Package containing the raw data from the sensors of all tag.\n{:.alert .alert-warning}\nCompared to most other data structure, `measurements` combines all sensors and all tag in a single table!",
+  "description": "`measurements.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) resources from a GeoLocator Data Package containing the raw data from the sensors of all tag.\n\n{:.alert .alert-warning}\nCompared to most other data structure, `measurements` combines all sensors and all tag in a single table!",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
