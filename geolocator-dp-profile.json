@@ -6,7 +6,7 @@
   "$defs": {
     "version": {
       "type": "string",
-      "pattern": "0\\.2"
+      "pattern": "^0\\.2$"
     }
   },
   "allOf": [
@@ -18,7 +18,6 @@
         "$schema",
         "title",
         "created",
-        "embargo",
         "contributors",
         "licenses",
         "spatial",
@@ -504,7 +503,7 @@
           "format": "uri",
           "default": "https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json",
           "examples": [
-            "{\n  \"name\": \"https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json\"\n}\n"
+            "{\n  \"$schema\": \"https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json\"\n}\n"
           ]
         },
         "resources": {
@@ -539,15 +538,9 @@
                   },
                   "$schema": {
                     "description": "URL of the used GeoLocator DP Table Schema version. See [Data Package specification](https://datapackage.org/standard/data-resource/#dollar-schema).",
-                    "allOf": [
-                      {
-                        "$ref": "#/$defs/version"
-                      },
-                      {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    ]
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https://raw\\.githubusercontent\\.com/Rafnuss/GeoLocator-DP/refs/tags/v\\d+\\.\\d+/.*-table-schema\\.json$"
                   }
                 }
               }
