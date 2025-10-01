@@ -36,7 +36,7 @@
     {
       "name": "datetime",
       "description": "Date and time of the observation. Formatted as an ISO 8601 string (`YYYY-MM-DDThh:mm:ssZ`).",
-      "skos:broadMatch": "https://rs.tdwg.org/dwc/terms/observationDate",
+      "skos:broadMatch": "http://rs.tdwg.org/dwc/terms/eventDate",
       "type": "datetime",
       "constraints": {
         "required": true
@@ -79,7 +79,7 @@
     {
       "name": "location_name",
       "description": "Given name of the observation location. It might be helpful to keep a human-readable name of the location to differentiate the location of different observations more easily.",
-      "skos:exactMatch": "https://rs.tdwg.org/dwc/terms/locality",
+      "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/locality",
       "type": "string",
       "constraints": {
         "required": false
@@ -170,7 +170,7 @@
         ]
       },
       "skos:closeMatch": [
-        "https://rs.tdwg.org/dwc/terms/lifeStage",
+        "http://rs.tdwg.org/dwc/terms/lifeStage",
         "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000018"
       ],
       "example": "1"
