@@ -1,7 +1,7 @@
 {
   "name": "observations",
   "title": "observations",
-  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) resources from a GeoLocator Data Package containing any relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that happened typically on the field and which provide important information for the analysis. These observations must typically include at least the equipment and, if appropriate, the retrieval, but also any ringing control or direct sightings for instance.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described by at least, the `datetime` of the observation, the location (`latitude` and `longitude`), the `ring_number` of the bird and the type of observations `observation_type` (e.g., equipment, retrieval or control). In addition, we require also `age` and `age_class` (which can be set as unknown `U`).\n\n Also include the ringing events of any control group (i.e., birds ringed but not equipped with a tag).",
+  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) resources from a GeoLocator Data Package containing any relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that happened typically on the field and which provide important information for the analysis. These observations must typically include at least the equipment and, if appropriate, the retrieval, but also any ringing control or direct sightings for instance.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described by at least, the `datetime` of the observation, the location (`latitude` and `longitude`), the `ring_number` of the bird and the type of observations `observation_type` (e.g., equipment, retrieval or control). In addition, we require also `age` and `age_class` (which can be set as unknown `U`).\n\n Also include the ringing events of any control group (i.e., birds ringed but not equipped with a tag).\n\n **Example:** [`observations.csv`](https://github.com/Rafnuss/GeoLocator-DP/blob/main/example/observations.csv)",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -35,7 +35,7 @@
     },
     {
       "name": "datetime",
-      "description": "Date and time of the observation. Formatted as an ISO 8601 string (`YYYY-MM-DDThh:mm:ssZ`).",
+      "description": "Date and optionally time of the observation. Accepts any valid [ISO 8601](https://wikipedia.org/wiki/ISO_8601) date or datetime string, including date-only (`YYYY-MM-DD`), full datetime in local time (`YYYY-MM-DDThh:mm`), in UTC (`YYYY-MM-DDThh:mmZ`) or any specific timezone ()`YYYY-MM-DDThh:mm+hh:mm`).",
       "skos:broadMatch": "http://rs.tdwg.org/dwc/terms/eventDate",
       "type": "datetime",
       "constraints": {
