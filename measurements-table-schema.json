@@ -41,7 +41,7 @@
     },
     {
       "name": "datetime",
-      "description": "Date and time of the measurement. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
+      "description": "Date and time of the measurement. Accepts any valid [ISO 8601](https://wikipedia.org/wiki/ISO_8601) datetime string, including datetime in local time (`YYYY-MM-DDThh:mm`), in UTC (`YYYY-MM-DDThh:mmZ`) or any specific timezone (`YYYY-MM-DDThh:mm+hh:mm`).",
       "type": "datetime",
       "constraints": {
         "required": true
