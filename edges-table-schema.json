@@ -152,12 +152,12 @@
     },
     {
       "name": "bearing",
-      "description": "Direction of the flight in degree. 0 indicates north, positive indicate eastward direction, and negative indicate westward direction.",
+      "description": "Direction of the flight in degree. 0 indicates north, clockwise. In general should be 0°-365°, but also allows -180° to 180°.",
       "type": "number",
       "constraints": {
         "required": false,
         "minimum": -180,
-        "maximum": 180
+        "maximum": 360
       },
       "unit": "degree",
       "example": "30"
