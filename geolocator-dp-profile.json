@@ -7,6 +7,27 @@
     "version": {
       "type": "string",
       "pattern": "^0\\.3\\.1$"
+    },
+    "taxonomicName": {
+      "type": "string",
+      "description": "Scientific name",
+      "skos:relatedMatch": [
+        "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
+        "http://rs.tdwg.org/dwc/terms/scientificName"
+      ]
+    },
+    "contributorRole": {
+      "type": "string",
+      "enum": [
+        "ContactPerson",
+        "ProjectLeader",
+        "DataCollector",
+        "DataCurator",
+        "Researcher",
+        "RightsHolder",
+        "Supervisor",
+        "Other"
+      ]
     }
   },
   "allOf": [
@@ -69,21 +90,18 @@
               },
               "roles": {
                 "description": "The type of contribution made by the person/organization following a subset of [DataCite Metadata Schema's contributorType](https://datacite-metadata-schema.readthedocs.io/en/4.6/appendices/appendix-1/contributorType/). We strongly suggest having `ContactPerson` and `ProjectLeader` to match Movebank requirements for a [contact person](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000072/) and a [principal investigator](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000164/). Any contributors should be authors of the datapackage and appear in `bibliographicCitation`. \n - `ContactPerson`: Person to whom to ask any questions related to the geolocator data package such as how to access, use, cite, any additional information. \n - `ProjectLeader`: Person officially designated as head of project (i.e.,  principal investigator).\n - `DataCollector`: Person responsible for finding gathering/collecting the geolocator data. Typically used for ringers and field assistants.\n - `DataCurator`: Person in charge of building the geolocator data package, including the gathering and standardizing the metadata and maintaining data and software code. Typically the person that used the `GeoLocatoR` package to build the data package.\n - `Researcher`: A person involved in analyzing data or the results of the geolocator data. Typically used for the persons that run the GeoPressure analysis to produce the tracks.\n - `RightsHolder`: Person or institution owning or managing property rights, including intellectual property rights over the resource. \n - `Supervisor`: Designated administrator over the project. \n - `Other`: Any person or institution making a significant contribution to the development and/or maintenance of the resource, but whose contribution does not fit other controlled vocabulary for contributorType.",
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "ContactPerson",
-                    "ProjectLeader",
-                    "DataCollector",
-                    "DataCurator",
-                    "Researcher",
-                    "RightsHolder",
-                    "Supervisor",
-                    "Other"
-                  ]
-                }
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/$defs/contributorRole"
+                    }
+                  },
+                  {
+                    "$ref": "#/$defs/contributorRole"
+                  }
+                ]
               },
               "organization": {
                 "title": "Organization",
@@ -371,16 +389,18 @@
         "taxonomic": {
           "title": "Taxonomic",
           "computed": true,
-          "description": "Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage).",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Scientific name",
-            "skos:relatedMatch": [
-              "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000024",
-              "http://rs.tdwg.org/dwc/terms/scientificName"
-            ]
-          },
+          "description": "Taxonomic coverage of the package. List of all scientific names of all animals equipped. Computed based on the unique [`tag.scientific_name`](/GeoLocator-DP/core/tags/scientific_name). Different in format, but equivalent in idea to [GBIF metadata profile](https://ipt.gbif.org/manual/en/ipt/latest/gbif-metadata-profile#taxonomic-coverage). When only a single taxon is present, a single string value is allowed.",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/taxonomicName"
+              }
+            },
+            {
+              "$ref": "#/$defs/taxonomicName"
+            }
+          ],
           "examples": ["{\n  \"taxonomic\": [\"Halcyon senegaloides\"]\n}\n"]
         },
         "numberTags": {
