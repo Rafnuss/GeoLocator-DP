@@ -37,7 +37,7 @@
       "description": "Latitude of the stationary period.",
       "type": "number",
       "constraints": {
-        "required": true,
+        "required": false,
         "minimum": -90,
         "maximum": 90
       },
@@ -49,7 +49,7 @@
       "description": "Longitude of the stationary period.",
       "type": "number",
       "constraints": {
-        "required": true,
+        "required": false,
         "minimum": -180,
         "maximum": 180
       },

@@ -16,6 +16,15 @@
       "example": "18LX"
     },
     {
+      "name": "datapackage_id",
+      "description": "Optional identifier of the data package for this tag, typically corresponding to the`datapackage.id`. This field is mostly used when [merging multiple data packages](https://raphaelnussbaumer.com/GeoLocatoR/reference/merge_gldp.html).",
+      "type": "string",
+      "constraints": {
+        "required": false
+      },
+      "example": "https://doi.org/10.5281/zenodo.11207081"
+    },
+    {
       "name": "ring_number",
       "description": "Ring number associated with the tagged species. Use `null` if the tag was not deployed.",
       "type": "string",
