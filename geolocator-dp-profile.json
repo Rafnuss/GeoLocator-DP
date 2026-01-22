@@ -273,7 +273,8 @@
                   "RRID",
                   "UPC",
                   "URN",
-                  "w3id"
+                  "w3id",
+                  "Other"
                 ]
               },
               "resourceTypeGeneral": {
