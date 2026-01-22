@@ -111,7 +111,7 @@
     },
     {
       "name": "j",
-      "description": "Unique identifier for each simulated trajectory, integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
+      "description": "Same as [`paths.j`](geopressurer/paths#j). Unique identifier for each trajectory. Only useful for `edges.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
       "type": "integer",
       "constraints": {
         "required": false,

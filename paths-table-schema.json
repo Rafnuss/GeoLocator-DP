@@ -14,21 +14,21 @@
       "example": "18LX"
     },
     {
-      "name": "stap_id",
-      "description": "Identifier of the stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
-      "type": "number",
-      "constraints": {
-        "required": true
-      },
-      "example": "3"
-    },
-    {
       "name": "type",
       "description": "One of:\n - `tag`: Create with [`tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path) from a likelihood map.\n - `most_likely`: Created with [`graph_most_likely()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_most_likely.html)\n- `simulation`: created by [`graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation): \n- `geopressureviz`: created by [`geopressureviz()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressureviz).",
       "type": "string",
       "constraints": {
         "required": true,
         "enum": ["tag", "most_likely", "simulation", "geopressureviz"]
+      },
+      "example": "most_likely"
+    },
+    {
+      "name": "stap_id",
+      "description": "Identifier of the stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
+      "type": "number",
+      "constraints": {
+        "required": true
       },
       "example": "3"
     },
@@ -68,7 +68,7 @@
     },
     {
       "name": "j",
-      "description": "Only useful for `paths.type='simulation'`. Unique identifier for each trajectory, integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
+      "description": "Unique identifier for each trajectory. Only useful for `paths.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
       "type": "integer",
       "constraints": {
         "required": false,
