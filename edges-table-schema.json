@@ -14,6 +14,16 @@
       "example": "18LX"
     },
     {
+      "name": "type",
+      "description": "Same as [`paths.type`](/GeoLocator-DP/geopressurer/paths#type). One of: `tag`, `most_likely`, `simulation` or `geopressureviz`.",
+      "type": "string",
+      "constraints": {
+        "required": true,
+        "enum": ["tag", "most_likely", "simulation", "geopressureviz"]
+      },
+      "example": "tag"
+    },
+    {
       "name": "stap_s",
       "description": "Identifier of the SOURCE stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
       "type": "number",
