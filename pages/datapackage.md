@@ -10,7 +10,7 @@ The metadata is critical for describing your dataset and making your record find
 
 This definition of the metadata map directly Zenodo metadata structure, which follows [DataCite Metadata Schema](https://datacite-metadata-schema.readthedocs.io/). Note that we map datapackage [`contributors`](https://datapackage.org/standard/data-package/#contributors) to [`creator`](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/creator/) (and not [`contributor`](https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/contributor/)).
 
-In addition, to allow export of a geolocator data package to [Movebank](https://www.movebank.org/), we add some of the specifications from [Movebank Study Attributes]([https://www.movebank.org/cms/movebank-content/studies-page#study_details]).
+In addition, to allow export of a geolocator data package to [Movebank](https://www.movebank.org/), we add some of the specifications from [Movebank Study Attributes](https://www.movebank.org/cms/movebank-content/movebank-attribute-dictionary).
 
 {:.alert .alert-info style="padding-left: 32px;"}
 
