@@ -12,7 +12,7 @@
       "properties": {
         "id": {
           "title": "ID",
-          "description": "A globally unique identifier for the package, typically the [concept DOI](https://support.zenodo.org/help/en-gb/1-upload-deposit/97-what-is-doi-versioning) as full link. Note that you [can reserve the first version DOI prior to publication](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/#reserve-doi). The corresponding concept DOI can be construct by substracting the ZENODO ID by 1 (`https://doi.org/10.5281/zenodo.14620590` for a DOI reserved as `10.5281/zenodo.14620591`) See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
+          "description": "A globally unique identifier for the package. Use the full [version DOI](https://support.zenodo.org/help/en-gb/1-upload-deposit/97-what-is-doi-versioning) URL (`https://doi.org/...`) of the Zenodo record for reproducibility. If a concept DOI is used, metadata should be resolved from the latest available version. See [Data Package specification](https://datapackage.org/standard/data-package/#id).",
           "type": "string",
           "examples": ["{\n  \"id\": \"https://doi.org/10.5281/zenodo.11207081\"\n}\n"],
           "skos:closeMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000172"
