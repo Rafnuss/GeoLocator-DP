@@ -54,7 +54,9 @@
                     "enum": ["table"]
                   },
                   "path": {
-                    "description": "Path or URL to the data file. See [Data Package specification](https://datapackage.org/standard/data-resource/#path)."
+                    "description": "Path or URL to a CSV resource file (`.csv`) or a zipped CSV file (`.csv.gz`, `.csv.zip`, `.zip`). See [Data Package specification](https://datapackage.org/standard/data-resource/#path).",
+                    "type": "string",
+                    "pattern": "^.+\\.(csv|csv\\.gz|csv\\.zip|zip)(\\?.*)?(#.*)?$"
                   },
                   "$schema": {
                     "description": "URL of the used GeoLocator DP Table Schema version. See [Data Package specification](https://datapackage.org/standard/data-resource/#dollar-schema).",
