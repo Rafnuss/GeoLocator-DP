@@ -19,11 +19,12 @@
         },
         "$schema": {
           "title": "Profile",
-          "description": "See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema). GeoLocator DP further requires this to be the URL of the used GeoLocator DP Profile version.",
+          "description": "URL of the GeoLocator DP profile providing the version information. Use a short Git ref in the URL path. URLs using `refs/tags` are also accepted. See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema).",
           "type": "string",
           "format": "uri",
+          "pattern": "^https://raw\\.githubusercontent\\.com/Rafnuss/GeoLocator-DP/(?:(?:v\\d+\\.\\d+(?:\\.\\d+)?)|dev|(?:refs/tags/(?:v\\d+\\.\\d+(?:\\.\\d+)?|dev)))/geolocator-dp-profile\\.json$",
           "examples": [
-            "{\n  \"$schema\": \"https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/refs/tags/v0.2/geolocator-dp-profile.json\"\n}\n"
+            "{\n  \"$schema\": \"https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/v1.0/geolocator-dp-profile.json\"\n}\n"
           ]
         },
         "resources": {
