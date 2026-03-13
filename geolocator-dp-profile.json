@@ -63,6 +63,31 @@
                     "pattern": "^https://raw\\.githubusercontent\\.com/Rafnuss/GeoLocator-DP/refs/tags/v\\d+\\.\\d+/.*-table-schema\\.json$"
                   }
                 }
+              },
+              {
+                "required": ["name", "path"],
+                "properties": {
+                  "name": {
+                    "description": "Identifier of a custom resource. Must not reuse reserved GeoLocator DP resource names.",
+                    "type": "string",
+                    "not": {
+                      "enum": [
+                        "tags",
+                        "observations",
+                        "measurements",
+                        "staps",
+                        "twilights",
+                        "paths",
+                        "edges",
+                        "pressurepaths",
+                        "params"
+                      ]
+                    }
+                  },
+                  "path": {
+                    "description": "Path or URL to the custom resource file."
+                  }
+                }
               }
             ]
           }
