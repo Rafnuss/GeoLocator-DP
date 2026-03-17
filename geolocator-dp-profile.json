@@ -29,7 +29,7 @@
         },
         "resources": {
           "title": "Data Resources",
-          "description": "See [Data Package specification](https://datapackage.org/standard/data-resource/). GeoLocator DP further requires each object to be a [Tabular Data Resource](https://datapackage.org/standard/data-resource/#tabular) with a specific `name` and `$schema`.",
+          "description": "GeoLocator DP supports tabular resources with a fixed table schema (`tags`, `observations`, `measurements`, `staps`, `twilights`, `paths`, `edges`, `pressurepaths`), a `params` JSON resource, and additional custom resources with non-reserved names. See [Data Package specification](https://datapackage.org/standard/data-resource/).",
           "type": "array",
           "minItems": 3,
           "items": {
@@ -64,6 +64,20 @@
                     "type": "string",
                     "format": "uri",
                     "pattern": "^https://raw\\.githubusercontent\\.com/Rafnuss/GeoLocator-DP/refs/tags/v\\d+\\.\\d+/.*-table-schema\\.json$"
+                  }
+                }
+              },
+              {
+                "required": ["name", "path"],
+                "properties": {
+                  "name": {
+                    "description": "GeoPressureR parameters resource. This JSON file stores the parameters used to build trajectories in the GeoPressureR workflow (the `param` object, organized as `param$<function_name>$<argument_name>`).",
+                    "const": "params"
+                  },
+                  "path": {
+                    "description": "Path or URL to a JSON file containing GeoPressureR parameters (typically `params.json`).",
+                    "type": "string",
+                    "pattern": "^.+\\.json(\\?.*)?(#.*)?$"
                   }
                 }
               },
