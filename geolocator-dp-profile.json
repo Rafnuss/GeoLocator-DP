@@ -63,7 +63,7 @@
                     "description": "URL of the used GeoLocator DP Table Schema version. See [Data Package specification](https://datapackage.org/standard/data-resource/#dollar-schema).",
                     "type": "string",
                     "format": "uri",
-                    "pattern": "^https://raw\\.githubusercontent\\.com/Rafnuss/GeoLocator-DP/refs/tags/v\\d+\\.\\d+/.*-table-schema\\.json$"
+                    "pattern": "^https://raw\\.githubusercontent\\.com/Rafnuss/GeoLocator-DP/(?:(?:v\\d+\\.\\d+(?:\\.\\d+)?)|dev|(?:refs/tags/(?:v\\d+\\.\\d+(?:\\.\\d+)?|dev)))/.*-table-schema\\.json$"
                   }
                 }
               },
