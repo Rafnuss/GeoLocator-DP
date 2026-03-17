@@ -66,15 +66,6 @@
       },
       "example": "23.84995",
       "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLongitude"
-    },
-    {
-      "name": "include",
-      "description": "Boolean value to indicate if the stationary period should be included in the model. This value is typically assigned by [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map).",
-      "type": "boolean",
-      "constraints": {
-        "required": false
-      },
-      "example": "true"
     }
   ],
   "missingValues": ["", "NA"],

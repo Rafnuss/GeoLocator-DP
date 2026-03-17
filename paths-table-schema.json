@@ -57,16 +57,6 @@
       "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLongitude"
     },
     {
-      "name": "ind",
-      "description": "Indices of the 2D coordinate of the spatial map defined in [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map) (see also [`GeoPressureR::map_expand()`](https://raphaelnussbaumer.com/GeoPressureR/reference/map_expand). Useful to retrieve information on the graph (e.g. [`GeoPressureR::path2edge()`](https://raphaelnussbaumer.com/GeoPressureR/reference/path2edge). This value is the main way to create a path in GeoPressureR through [`GeoPressureR::ind2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/ind2path).",
-      "type": "integer",
-      "constraints": {
-        "required": false,
-        "minimum": 1
-      },
-      "example": "23343"
-    },
-    {
       "name": "j",
       "description": "Unique identifier for each trajectory. Only useful for `paths.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
       "type": "integer",
@@ -75,24 +65,6 @@
         "minimum": 1
       },
       "example": "1"
-    },
-    {
-      "name": "interp",
-      "description": "Only useful for `paths.type='tag'`. Boolean value to indicate if the position was interpolated as defined by the `interp` parameter in [`GeoPressureR::tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path).",
-      "type": "boolean",
-      "constraints": {
-        "required": false
-      },
-      "example": "true"
-    },
-    {
-      "name": "known",
-      "description": "Boolean to indicate if the position is taken from a known value. Genearally, `TRUE` if [`staps.known_lat`](geopressurer/staps#known_lat) and [`staps.known_lon`](geopressurer/staps#known_lon) provided. Only different if `paths.type='tag'` and `use_known=FALSE` used in [`GeoPressureR::tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path).",
-      "type": "boolean",
-      "constraints": {
-        "required": false
-      },
-      "example": "true"
     }
   ],
   "missingValues": ["", "NA"],
