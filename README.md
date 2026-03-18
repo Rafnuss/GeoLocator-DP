@@ -15,3 +15,23 @@ GeoLocator DP is a Data Package profile for geolocator data (raw measurements, f
 - `pages/`: website pages rendered by Jekyll
 - `example/`: example CSV resources
 - `tests/`: validation tests
+
+## Local Development
+
+Install Ruby dependencies:
+
+```bash
+bundle install
+```
+
+Run the website locally with live reload:
+
+```bash
+bundle exec jekyll serve --livereload --incremental
+```
+
+Create a production-style build:
+
+```bash
+JEKYLL_ENV=production bundle exec jekyll build
+```
