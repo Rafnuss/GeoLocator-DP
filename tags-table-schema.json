@@ -26,7 +26,7 @@
     },
     {
       "name": "ring_number",
-      "description": "Ring number associated with the tagged bird.",
+      "description": "Ring number associated with the tagged bird. This value is not unique at table level because the same bird can receive multiple tag deployments (`tag_id`).",
       "type": "string",
       "constraints": {
         "required": true

@@ -1,7 +1,7 @@
 {
   "name": "paths",
   "title": "Paths",
-  "description": "A GeoPressureR `path` contains positions along a bird trajectory.\n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 path types: `tag`, `most_likely`, `simulation`, and `geopressureviz`. See [`paths.type`](#type) for more details.\n\n`path` should always be used in combination with [`staps`](/GeoLocator-DP/geopressurer/staps), which can be joined by `tag_id` and `stap_id`.",
+  "description": "A GeoPressureR `path` contains positions along a bird trajectory.\n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 path types: `tag`, `most_likely`, `simulation`, and `geopressureviz`. See [`paths.type`](#type) for more details.\n\n`path` should always be used in combination with [`staps`](/GeoLocator-DP/geopressurer/staps), joined by the composite key (`tag_id`, `stap_id`).",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -25,7 +25,7 @@
     },
     {
       "name": "stap_id",
-      "description": "Identifier of the stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
+      "description": "Identifier of the stationary period. Together with [`tag_id`](#tag_id), this forms a foreign key to [`staps`](/GeoLocator-DP/geopressurer/staps) (`tag_id`, `stap_id`).",
       "type": "number",
       "constraints": {
         "required": true
@@ -77,10 +77,10 @@
       }
     },
     {
-      "fields": "stap_id",
+      "fields": ["tag_id", "stap_id"],
       "reference": {
         "resource": "staps",
-        "fields": "stap_id"
+        "fields": ["tag_id", "stap_id"]
       }
     }
   ],

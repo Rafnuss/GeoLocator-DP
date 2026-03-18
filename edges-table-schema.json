@@ -25,7 +25,7 @@
     },
     {
       "name": "stap_s",
-      "description": "Identifier of the SOURCE stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
+      "description": "Identifier of the SOURCE stationary period. Together with [`tag_id`](#tag_id), this forms a foreign key to [`staps`](/GeoLocator-DP/geopressurer/staps) (`tag_id`, `stap_id`).",
       "type": "number",
       "constraints": {
         "required": true
@@ -34,7 +34,7 @@
     },
     {
       "name": "stap_t",
-      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1`, except if `include=FALSE` for intermediate `stap_id` values. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id).",
+      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1`, except if `include=FALSE` for intermediate `stap_id` values. Together with [`tag_id`](#tag_id), this forms a foreign key to [`staps`](/GeoLocator-DP/geopressurer/staps) (`tag_id`, `stap_id`).",
       "type": "number",
       "constraints": {
         "required": true
@@ -203,17 +203,17 @@
       }
     },
     {
-      "fields": "stap_s",
+      "fields": ["tag_id", "stap_s"],
       "reference": {
         "resource": "staps",
-        "fields": "stap_id"
+        "fields": ["tag_id", "stap_id"]
       }
     },
     {
-      "fields": "stap_t",
+      "fields": ["tag_id", "stap_t"],
       "reference": {
         "resource": "staps",
-        "fields": "stap_id"
+        "fields": ["tag_id", "stap_id"]
       }
     }
   ],

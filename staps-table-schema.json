@@ -1,7 +1,7 @@
 {
   "name": "staps",
   "title": "Stationary periods",
-  "description": "A stationary period (`stap`) is [a key concept in the GeoPressureR workflow](https://raphaelnussbaumer.com/GeoPressureManual/tag-object#label-tag-into-stationary-periods) that discretizes a bird trajectory in time and space. During a single `stap`, the bird is assumed to remain at the same location (+/- tens of kilometers). [`flight`](https://raphaelnussbaumer.com/GeoPressureR/reference/stap2flight) is the converse of `stap`, with `flight.start` corresponding to a `stap.end`, and vice versa.\n\n{:.alert .alert-info}\n`staps` are typically estimated by [`GeoPressureR::tag_label_stap()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_label_stap) based on the `'flight'` labels assigned to pressure or acceleration measurements ([`measurements.label`](/GeoLocator-DP/core/measurements#label)). See the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/labelling-tracks) for more details.",
+  "description": "A stationary period (`stap`) is [a key concept in the GeoPressureR workflow](https://raphaelnussbaumer.com/GeoPressureManual/tag-object#label-tag-into-stationary-periods) that discretizes a bird trajectory in time and space. During a single `stap`, the bird is assumed to remain at the same location (+/- tens of kilometers). [`flight`](https://raphaelnussbaumer.com/GeoPressureR/reference/stap2flight) is the converse of `stap`, with `flight.start` corresponding to a `stap.end`, and vice versa.\n\n{:.alert .alert-info}\n`stap_id` is indexed within each `tag_id` (it is not globally unique), so the table key is the composite pair (`tag_id`, `stap_id`). `staps` are typically estimated by [`GeoPressureR::tag_label_stap()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_label_stap) based on the `'flight'` labels assigned to pressure or acceleration measurements ([`measurements.label`](/GeoLocator-DP/core/measurements#label)). See the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/labelling-tracks) for more details.",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "name": "stap_id",
-      "description": "Identifier of the stationary period to which the twilight belongs.",
+      "description": "Identifier of the stationary period for a given `tag_id`.",
       "type": "number",
       "constraints": {
         "required": true,
@@ -78,5 +78,6 @@
       }
     }
   ],
+  "primaryKey": ["tag_id", "stap_id"],
   "fieldsMatch": ["superset"]
 }
