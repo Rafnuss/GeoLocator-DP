@@ -1,7 +1,7 @@
 {
   "name": "paths",
   "title": "Paths",
-  "description": "A GeoPressureR `path` contains the positions of a bird's trajectory. \n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 types of path : `tag`, `most_likely`, `simulation` and `geopressureviz`. See [`paths.type`](#type) for more details. \n\n `path` should always be used in combination with [`staps`](geopressurer/staps) which can be JOIN by `tag_id` and `stap_id`.",
+  "description": "A GeoPressureR `path` contains positions along a bird trajectory.\n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 path types: `tag`, `most_likely`, `simulation`, and `geopressureviz`. See [`paths.type`](#type) for more details.\n\n`path` should always be used in combination with [`staps`](/GeoLocator-DP/geopressurer/staps), which can be joined by `tag_id` and `stap_id`.",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "name": "type",
-      "description": "One of:\n - `tag`: Create with [`tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path) from a likelihood map.\n - `most_likely`: Created with [`graph_most_likely()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_most_likely.html)\n- `simulation`: created by [`graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation): \n- `geopressureviz`: created by [`geopressureviz()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressureviz).",
+      "description": "One of:\n - `tag`: Created with [`tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path) from a likelihood map.\n - `most_likely`: Created with [`graph_most_likely()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_most_likely.html).\n - `simulation`: Created by [`graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation).\n - `geopressureviz`: Created by [`geopressureviz()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressureviz).",
       "type": "string",
       "constraints": {
         "required": true,
@@ -58,7 +58,7 @@
     },
     {
       "name": "j",
-      "description": "Unique identifier for each trajectory. Only useful for `paths.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
+      "description": "Unique identifier for each trajectory. Only useful for `paths.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation).",
       "type": "integer",
       "constraints": {
         "required": false,

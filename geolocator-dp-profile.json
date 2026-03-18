@@ -51,7 +51,7 @@
                     ]
                   },
                   "type": {
-                    "description": "Type of the resource. Only `table` are allowed. See [Data Package specification](https://datapackage.org/standard/data-resource/#type).",
+                    "description": "Type of the resource. Only `table` is allowed. See [Data Package specification](https://datapackage.org/standard/data-resource/#type).",
                     "enum": ["table"]
                   },
                   "path": {
