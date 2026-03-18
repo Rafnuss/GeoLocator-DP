@@ -90,26 +90,6 @@
       "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLongitude"
     },
     {
-      "name": "s",
-      "description": "Index of the 2D coordinate of the source stap. See [`paths.ind`](geopressurer/paths#ind) for more information",
-      "type": "integer",
-      "constraints": {
-        "required": false,
-        "minimum": 1
-      },
-      "example": "23343"
-    },
-    {
-      "name": "t",
-      "description": "Index of the 2D coordinate of the target stap. See [`paths.ind`](geopressurer/paths#ind) for more information",
-      "type": "integer",
-      "constraints": {
-        "required": false,
-        "minimum": 1
-      },
-      "example": "23343"
-    },
-    {
       "name": "j",
       "description": "Same as [`paths.j`](geopressurer/paths#j). Unique identifier for each trajectory. Only useful for `edges.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
       "type": "integer",
