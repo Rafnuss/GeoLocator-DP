@@ -111,7 +111,7 @@
     },
     {
       "name": "tag_comments",
-      "description": "Comments or notes about the tag, deployment or animal.",
+      "description": "Comments or notes about the tag, deployment, or animal. Use this field to provide additional information that does not fit in other fields, such as data-quality issues, deployment/retrieval details, or analysis notes (e.g., labeling effort, quality checks, or issues encountered).",
       "type": "string",
       "constraints": {
         "required": false
