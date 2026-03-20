@@ -10,7 +10,7 @@
   content: "";
   position: absolute;
   left: 0.8rem;
-  top: 1rem;
+  top: calc(var(--bs-alert-padding-y) + 0.35rem);
   width: 1rem;
   height: 1rem;
   background-color: currentColor;
@@ -29,8 +29,8 @@
 }
 
 .alert-primary::before {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.97 11.03a.75.75 0 0 0 1.08-.022L11.992 7 10.932 5.94 7.477 9.395 5.383 7.301a.75.75 0 0 0-1.06 1.06z'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.97 11.03a.75.75 0 0 0 1.08-.022L11.992 7 10.932 5.94 7.477 9.395 5.383 7.301a.75.75 0 0 0-1.06 1.06z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("../../icons/check-circle-fill.svg");
+  mask-image: url("../../icons/check-circle-fill.svg");
 }
 
 .alert-info {
@@ -42,8 +42,21 @@
 }
 
 .alert-info::before {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16M8.93 4.588l-1 4.705c-.07.34-.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16M8.93 4.588l-1 4.705c-.07.34-.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("../../icons/info-circle-fill.svg");
+  mask-image: url("../../icons/info-circle-fill.svg");
+}
+
+.alert-tips {
+  --bs-alert-color: #3f3307;
+  --bs-alert-bg: #fff8e8;
+  --bs-alert-border-color: #ecd8a3;
+  --bs-alert-link-color: #2f2505;
+  border-left-color: #bf8b12;
+}
+
+.alert-tips::before {
+  -webkit-mask-image: url("../../icons/info-circle-fill.svg");
+  mask-image: url("../../icons/info-circle-fill.svg");
 }
 
 .alert-warning {
@@ -55,6 +68,19 @@
 }
 
 .alert-warning::before {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.71c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.71c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("../../icons/exclamation-triangle-fill.svg");
+  mask-image: url("../../icons/exclamation-triangle-fill.svg");
+}
+
+.alert-danger {
+  --bs-alert-color: #6d1f23;
+  --bs-alert-bg: #fbeaea;
+  --bs-alert-border-color: #f2c7c9;
+  --bs-alert-link-color: #5a171b;
+  border-left-color: #c1353f;
+}
+
+.alert-danger::before {
+  -webkit-mask-image: url("../../icons/exclamation-triangle-fill.svg");
+  mask-image: url("../../icons/exclamation-triangle-fill.svg");
 }
