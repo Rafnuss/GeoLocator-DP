@@ -1,7 +1,7 @@
 {
   "name": "edges",
   "title": "Edges",
-  "description": "In GeoPressureR, we uses `edges` (of a graph; See more information on the movement model in the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/trajectory.html)) to extract flight information from GeoPressureP [`paths`](geopressurer/paths) using path2edge().",
+  "description": "In GeoPressureR, `edges` (graph edges; see more information on the movement model in the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/trajectory.html)) are used to extract flight information from GeoPressureR [`paths`](/GeoLocator-DP/geopressurer/paths) using `path2edge()`.",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -25,7 +25,7 @@
     },
     {
       "name": "stap_s",
-      "description": "Identifier of the SOURCE stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
+      "description": "Identifier of the SOURCE stationary period. Together with [`tag_id`](#tag_id), this forms a foreign key to [`staps`](/GeoLocator-DP/geopressurer/staps) (`tag_id`, `stap_id`).",
       "type": "number",
       "constraints": {
         "required": true
@@ -34,7 +34,7 @@
     },
     {
       "name": "stap_t",
-      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1` except if `include=FALSE` for intermediate stap_id. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id).",
+      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1`, except if `include=FALSE` for intermediate `stap_id` values. Together with [`tag_id`](#tag_id), this forms a foreign key to [`staps`](/GeoLocator-DP/geopressurer/staps) (`tag_id`, `stap_id`).",
       "type": "number",
       "constraints": {
         "required": true
@@ -43,7 +43,7 @@
     },
     {
       "name": "lat_s",
-      "description": "Latitude of source the stationary period.",
+      "description": "Latitude of the source stationary period.",
       "type": "number",
       "constraints": {
         "required": true,
@@ -90,28 +90,8 @@
       "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLongitude"
     },
     {
-      "name": "s",
-      "description": "Index of the 2D coordinate of the source stap. See [`paths.ind`](geopressurer/paths#ind) for more information",
-      "type": "integer",
-      "constraints": {
-        "required": false,
-        "minimum": 1
-      },
-      "example": "23343"
-    },
-    {
-      "name": "t",
-      "description": "Index of the 2D coordinate of the target stap. See [`paths.ind`](geopressurer/paths#ind) for more information",
-      "type": "integer",
-      "constraints": {
-        "required": false,
-        "minimum": 1
-      },
-      "example": "23343"
-    },
-    {
       "name": "j",
-      "description": "Same as [`paths.j`](geopressurer/paths#j). Unique identifier for each trajectory. Only useful for `edges.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
+      "description": "Same as [`paths.j`](/GeoLocator-DP/geopressurer/paths#j). Unique identifier for each trajectory. Only useful for `edges.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation).",
       "type": "integer",
       "constraints": {
         "required": false,
@@ -141,7 +121,7 @@
     },
     {
       "name": "n",
-      "description": "Number of flight.",
+      "description": "Flight number.",
       "type": "integer",
       "constraints": {
         "required": false,
@@ -151,7 +131,7 @@
     },
     {
       "name": "distance",
-      "description": "distance of the flight in km.",
+      "description": "Distance of the flight in km.",
       "type": "number",
       "constraints": {
         "required": false,
@@ -162,7 +142,7 @@
     },
     {
       "name": "bearing",
-      "description": "Direction of the flight in degree. 0 indicates north, clockwise. In general should be 0°-365°, but also allows -180° to 180°.",
+      "description": "Direction of the flight in degrees. 0 indicates north and values increase clockwise. In general, this should be 0°-360°, but -180° to 180° is also allowed.",
       "type": "number",
       "constraints": {
         "required": false,
@@ -223,17 +203,17 @@
       }
     },
     {
-      "fields": "stap_s",
+      "fields": ["tag_id", "stap_s"],
       "reference": {
         "resource": "staps",
-        "fields": "stap_id"
+        "fields": ["tag_id", "stap_id"]
       }
     },
     {
-      "fields": "stap_t",
+      "fields": ["tag_id", "stap_t"],
       "reference": {
         "resource": "staps",
-        "fields": "stap_id"
+        "fields": ["tag_id", "stap_id"]
       }
     }
   ],

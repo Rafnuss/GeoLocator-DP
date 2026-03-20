@@ -2,8 +2,6 @@
 
 - text: Home
   href: /
-- text: Datapackage
-  href: /datapackage/
 - text: Core
   menu:
     - text: Tags
