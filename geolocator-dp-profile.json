@@ -15,9 +15,9 @@
           "description": "URL of the GeoLocator DP profile providing the version information. Use a short Git ref in the URL path. URLs using `refs/tags` are also accepted. See [Data Package specification](https://datapackage.org/standard/data-package/#dollar-schema).",
           "type": "string",
           "format": "uri",
-          "pattern": "^https://raw\\.githubusercontent\\.com/Rafnuss/GeoLocator-DP/(?:(?:v\\d+\\.\\d+(?:\\.\\d+)?)|dev|(?:refs/tags/(?:v\\d+\\.\\d+(?:\\.\\d+)?|dev)))/geolocator-dp-profile\\.json$",
+          "pattern": "^https://raw\\.githubusercontent\\.com/GeoPressure/GeoLocator-DP/(?:(?:v\\d+\\.\\d+(?:\\.\\d+)?)|dev|(?:refs/tags/(?:v\\d+\\.\\d+(?:\\.\\d+)?|dev)))/geolocator-dp-profile\\.json$",
           "examples": [
-            "{\n  \"$schema\": \"https://raw.githubusercontent.com/Rafnuss/GeoLocator-DP/v1.0/geolocator-dp-profile.json\"\n}\n"
+            "{\n  \"$schema\": \"https://raw.githubusercontent.com/GeoPressure/GeoLocator-DP/v1.0/geolocator-dp-profile.json\"\n}\n"
           ]
         },
         "resources": {
@@ -56,7 +56,7 @@
                     "description": "URL of the used GeoLocator DP Table Schema version. See [Data Package specification](https://datapackage.org/standard/data-resource/#dollar-schema).",
                     "type": "string",
                     "format": "uri",
-                    "pattern": "^https://raw\\.githubusercontent\\.com/Rafnuss/GeoLocator-DP/(?:(?:v\\d+\\.\\d+(?:\\.\\d+)?)|dev|(?:refs/tags/(?:v\\d+\\.\\d+(?:\\.\\d+)?|dev)))/.*-table-schema\\.json$"
+                    "pattern": "^https://raw\\.githubusercontent\\.com/GeoPressure/GeoLocator-DP/(?:(?:v\\d+\\.\\d+(?:\\.\\d+)?)|dev|(?:refs/tags/(?:v\\d+\\.\\d+(?:\\.\\d+)?|dev)))/.*-table-schema\\.json$"
                   }
                 }
               },

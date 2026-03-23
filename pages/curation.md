@@ -6,7 +6,7 @@ permalink: /curation/
 
 ## 1. Mandatory Technical Validation
 
-All submitted records must pass the automated validation of [`validate_gldp()`](https://raphaelnussbaumer.com/GeoLocatoR/reference/validate_gldp.html).
+All submitted records must pass the automated validation of [`validate_gldp()`](https://geopressure.com/GeoLocatoR/reference/validate_gldp.html).
 
 ## 2. Visual Check
 

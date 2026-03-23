@@ -1,7 +1,7 @@
 {
   "name": "pressurepaths",
   "title": "Pressurepaths",
-  "description": "{:.alert .alert-info}\nA GeoPressureR `pressurepath` contains ERA5 variables along the bird trajectory at hourly intervals, using the exact bird location (including flight segments). [Read more about pressurepaths in the GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/pressurepath.html)\n\nSimilarly to [`path`](/GeoLocator-DP/geopressurer/paths), there are 4 `pressurepath` types: `tag`, `most_likely`, `simulation`, and `geopressureviz`. See [`pressurepaths.type`](#type) for more details.\n\n`pressurepath` should be used in combination with [`staps`](/GeoLocator-DP/geopressurer/staps) and [`paths`](/GeoLocator-DP/geopressurer/paths). Joins are performed on `tag_id` and, for stationary rows, `stap_id`.\n\n{:.alert .alert-warning}\nOnly `tag_id` is defined as a strict foreign key here. `stap_id` can be decimal during migration segments, so it cannot be enforced as a strict foreign key to `staps` in all rows.\n\nThe definition below does not list ERA5 variables, which can (and should!) be added to the table as additional columns (e.g., `'altitude'` or `'surface_pressure'`). Read more about these variables in [the documentation of `pressurepath_create()`](https://raphaelnussbaumer.com/GeoPressureR/reference/pressurepath_create.html#arg-variable).",
+  "description": "{:.alert .alert-info}\nA GeoPressureR `pressurepath` contains ERA5 variables along the bird trajectory at hourly intervals, using the exact bird location (including flight segments). [Read more about pressurepaths in the GeoPressureManual](https://geopressure.com/GeoPressureManual/pressurepath.html)\n\nSimilarly to [`path`](/GeoLocator-DP/geopressurer/paths), there are 4 `pressurepath` types: `tag`, `most_likely`, `simulation`, and `geopressureviz`. See [`pressurepaths.type`](#type) for more details.\n\n`pressurepath` should be used in combination with [`staps`](/GeoLocator-DP/geopressurer/staps) and [`paths`](/GeoLocator-DP/geopressurer/paths). Joins are performed on `tag_id` and, for stationary rows, `stap_id`.\n\n{:.alert .alert-warning}\nOnly `tag_id` is defined as a strict foreign key here. `stap_id` can be decimal during migration segments, so it cannot be enforced as a strict foreign key to `staps` in all rows.\n\nThe definition below does not list ERA5 variables, which can (and should!) be added to the table as additional columns (e.g., `'altitude'` or `'surface_pressure'`). Read more about these variables in [the documentation of `pressurepath_create()`](https://geopressure.com/GeoPressureR/reference/pressurepath_create.html#arg-variable).",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -34,7 +34,7 @@
     },
     {
       "name": "type",
-      "description": "One of:\n - `tag`: Created with [`tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path) from a likelihood map.\n - `most_likely`: Created with [`graph_most_likely()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_most_likely.html).\n - `simulation`: Created by [`graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation).\n - `geopressureviz`: Created by [`geopressureviz()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressureviz).",
+      "description": "One of:\n - `tag`: Created with [`tag2path()`](https://geopressure.com/GeoPressureR/reference/tag2path) from a likelihood map.\n - `most_likely`: Created with [`graph_most_likely()`](https://geopressure.com/GeoPressureR/reference/graph_most_likely.html).\n - `simulation`: Created by [`graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation).\n - `geopressureviz`: Created by [`geopressureviz()`](https://geopressure.com/GeoPressureR/reference/geopressureviz).",
       "type": "string",
       "constraints": {
         "required": true,
@@ -68,7 +68,7 @@
     },
     {
       "name": "j",
-      "description": "Only useful for `pressurepaths.type='simulation'`. Unique identifier for each trajectory, integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation).",
+      "description": "Only useful for `pressurepaths.type='simulation'`. Unique identifier for each trajectory, integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation).",
       "type": "integer",
       "constraints": {
         "required": false,

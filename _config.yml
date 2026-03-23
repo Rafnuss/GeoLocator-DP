@@ -19,7 +19,7 @@ rounded_corners: true # Enable (default) rounded corners on boxes and buttons
 # BUILD SETTINGS
 # The repository contains symlinks and therefore requires GitHub Actions to build the website
 # See https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/troubleshooting-jekyll-build-errors-for-github-pages-sites#config-file-error
-repository: rafnuss/GeoLocator-DP # Required so Jekyll on GitHub Actions can access repo metadata
+repository: GeoPressure/GeoLocator-DP # Required so Jekyll on GitHub Actions can access repo metadata
 markdown: kramdown
 plugins:
   - jekyll-feed

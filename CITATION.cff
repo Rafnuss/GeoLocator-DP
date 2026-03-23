@@ -5,7 +5,7 @@ title: GeoLocator Data Package
 authors:
   - family-names: Nussbaumer
     given-names: Raphaël
-    email: rafnuss@gmail.com
+    email: GeoPressure@gmail.com
     affiliation: Swiss Ornithological Institute
     orcid: https://orcid.org/0000-0002-8185-1020
   - family-names: Capilla-Lasheras
@@ -18,7 +18,7 @@ authors:
     email: peter.desmet@inbo.be
     affiliation: Research Institute for Nature and Forest
     orcid: https://orcid.org/0000-0002-8442-8025
-repository-code: https://github.com/rafnuss/geolocator-dp
+repository-code: https://github.com/GeoPressure/geolocator-dp
 url: https://geopressure.org/GeoLocator-DP/
 date-released: "2024-12-02"
 doi: 10.5281/zenodo.14258411
