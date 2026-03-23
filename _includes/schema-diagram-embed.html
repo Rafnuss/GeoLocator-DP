@@ -1,0 +1,1571 @@
+<style>
+  :root {
+    --page-width: min(1200px, calc(100vw - 24px));
+    --text: #111827;
+    --table-bg: #ffffff;
+    --table-header-text: #0f172a;
+    --table-row-text: #1f2937;
+    --table-radius: 16px;
+    --table-border-width: 3px;
+    --table-row-height: 36px;
+    --shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    --line-color: #111827;
+    --line-width: 2.5;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .schema-diagram-root {
+    margin: 0;
+    font-family: "Avenir Next", "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+  }
+
+  #diagram-wrapper {
+    position: relative;
+    width: var(--page-width);
+    min-height: 420px;
+    padding: 12px;
+  }
+
+  .diagram-loading {
+    position: absolute;
+    inset: 12px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: rgba(250, 252, 251, 0.92);
+    color: #2f4742;
+    transition: opacity 160ms ease;
+  }
+
+  .diagram-loading[data-status="error"] {
+    background: #fbeaea;
+    color: #6d1f23;
+    border: 1px solid #f2c7c9;
+  }
+
+  .diagram-loading[aria-hidden="true"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .diagram-loading-text {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    max-width: min(520px, calc(100% - 32px));
+  }
+
+  .diagram-loading[data-status="error"] .diagram-loading-text {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  #tables-grid {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 72px;
+  }
+
+  .schema-column {
+    flex: 0 0 220px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  #connector-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: auto;
+    overflow: visible;
+  }
+
+  .schema-table {
+    --accent: #5b8bd8;
+    --header-bg: #dce8fb;
+    border: var(--table-border-width) solid var(--accent);
+    border-radius: var(--table-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--table-bg);
+  }
+
+  .schema-title {
+    margin: 0;
+    padding: 14px 14px;
+    background: var(--header-bg);
+    color: var(--table-header-text);
+    font-size: 1.3rem;
+    line-height: 1.25;
+    text-align: center;
+    text-transform: none;
+    transition: filter 140ms ease;
+    cursor: default;
+  }
+
+  .schema-title:hover {
+    filter: brightness(0.96);
+  }
+
+  .schema-title-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .schema-title-link {
+    color: inherit;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 3px 10px;
+    transition:
+      background-color 140ms ease,
+      box-shadow 140ms ease,
+      transform 140ms ease;
+  }
+
+  .schema-title-link:hover,
+  .schema-title-link:focus-visible {
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.18);
+    transform: translateY(-1px);
+  }
+
+  .schema-title-icon {
+    display: inline-block;
+    width: 1.18rem;
+    height: 1.18rem;
+    flex: 0 0 auto;
+    background-color: currentColor;
+    -webkit-mask-image: var(--icon-url);
+    mask-image: var(--icon-url);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .schema-fields {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .schema-field {
+    min-height: var(--table-row-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--table-row-text);
+    border-top: 2px solid var(--accent);
+    padding: 4px 0px;
+    line-height: 1.2;
+    font-size: 1.2rem;
+    background: #fff;
+    transition: background-color 140ms ease;
+    cursor: default;
+  }
+
+  .schema-field:hover {
+    background: #eaeaea;
+    box-shadow: none;
+  }
+
+  .schema-field-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .schema-pk-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    background-color: currentColor;
+    -webkit-mask-image: url("{{ '/assets/icons/key-fill.svg' | relative_url }}");
+    mask-image: url("{{ '/assets/icons/key-fill.svg' | relative_url }}");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .schema-field--partial {
+    font-style: italic;
+    color: #475569;
+    letter-spacing: 0.03em;
+  }
+
+  .connector {
+    fill: none;
+    stroke: var(--edge-color, var(--line-color));
+    stroke-width: var(--line-width);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    marker-end: url(#connector-arrowhead);
+    pointer-events: stroke;
+    cursor: pointer;
+    transition:
+      opacity 120ms ease,
+      stroke-width 120ms ease;
+  }
+
+  .connector--dim {
+    opacity: 0.12;
+  }
+
+  .connector--active {
+    opacity: 1;
+    stroke-width: calc(var(--line-width) + 1.2);
+  }
+
+  .schema-field--linked-target {
+    background: #fff7d6;
+    box-shadow: inset 0 0 0 2px #f59e0b;
+  }
+
+  .tooltip.schema-tooltip {
+    --bs-tooltip-max-width: 420px;
+  }
+
+  .tooltip.schema-tooltip .tooltip-inner {
+    text-align: left;
+  }
+
+  .tooltip.schema-tooltip code {
+    font-size: 0.88em;
+  }
+
+  .legend-box {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 4;
+    margin: 0;
+    width: 800px;
+    max-width: calc(100% - 40px);
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .legend-box[aria-hidden="true"] {
+    display: none;
+  }
+
+  .legend-title {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+
+  .legend-item {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .legend-token {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    min-width: 38px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    padding: 1px 6px;
+    background: #f9fafb;
+  }
+
+  .legend-token--pk {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend-key-icon {
+    width: 0.72rem;
+    height: 0.72rem;
+  }
+
+  .legend-label {
+    line-height: 1.2;
+  }
+
+  .legend-arrow {
+    width: 44px;
+    height: 0;
+    border-top: 2px solid var(--line-color);
+    position: relative;
+    flex: 0 0 44px;
+  }
+
+  .legend-arrow::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -4px;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid var(--line-color);
+    border-right: 2px solid var(--line-color);
+    transform: rotate(45deg);
+    box-sizing: border-box;
+  }
+
+  .legend-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin: 0 6px 0 2px;
+    vertical-align: -1px;
+  }
+
+  .legend-swatch--core {
+    background: #d86b5f;
+  }
+
+  .legend-swatch--geo {
+    background: #2d8d9f;
+  }
+
+  @media (max-width: 1200px) {
+    #tables-grid {
+      gap: 28px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    #diagram-wrapper {
+      min-height: 340px;
+    }
+
+    #tables-grid {
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .schema-column {
+      min-width: min(320px, 100%);
+      flex: 1 1 calc(50% - 24px);
+      gap: 24px;
+    }
+
+    .legend-box {
+      width: min(440px, calc(100% - 24px));
+      left: 12px;
+      bottom: 12px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    #tables-grid {
+      gap: 18px;
+    }
+
+    .schema-column {
+      flex-basis: 100%;
+      gap: 18px;
+    }
+  }
+
+  @media print {
+    @page {
+      margin: 10mm;
+    }
+
+    .schema-diagram-root {
+      display: block;
+      margin: 0;
+    }
+
+    #diagram-wrapper {
+      width: 1200px !important;
+      min-height: 0 !important;
+      margin: 0 auto;
+      padding: 12px 0;
+    }
+
+    #tables-grid {
+      justify-content: center;
+      flex-wrap: nowrap !important;
+      gap: 72px !important;
+    }
+
+    .schema-column {
+      flex: 0 0 220px !important;
+      min-width: 220px !important;
+      gap: 36px !important;
+    }
+
+    .legend-box {
+      width: 440px !important;
+      max-width: calc(100% - 24px) !important;
+      left: 12px !important;
+      bottom: 12px !important;
+    }
+  }
+</style>
+<div class="schema-diagram-root">
+  <section id="diagram-wrapper" aria-label="Table schema diagram">
+    <div
+      id="diagram-loading"
+      class="diagram-loading"
+      aria-live="polite"
+      aria-hidden="false"
+      data-status="loading"
+    >
+      <p id="diagram-loading-text" class="diagram-loading-text">Loading schema diagram...</p>
+    </div>
+    <svg id="connector-layer" aria-hidden="true"></svg>
+    <div id="tables-grid"></div>
+    <aside id="diagram-legend" class="legend-box" aria-label="Diagram legend" aria-hidden="true">
+      <p class="legend-title">Legend</p>
+      <div class="legend-items">
+        <div class="legend-item">
+          <span class="legend-token">field*</span>
+          <span class="legend-label">Required</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-token legend-token--pk"
+            ><span class="schema-pk-icon legend-key-icon" aria-hidden="true"></span>field</span
+          >
+          <span class="legend-label">Primary key</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-token">field</span>
+          <span class="legend-label">Foreign key</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-token">...</span>
+          <span class="legend-label">Additional columns allowed</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-arrow" aria-hidden="true"></span>
+          <span class="legend-label">Foreign key relationship</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch legend-swatch--core" aria-hidden="true"></span>
+          <span class="legend-label">Core tables</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch legend-swatch--geo" aria-hidden="true"></span>
+          <span class="legend-label">GeoPressureR tables</span>
+        </div>
+      </div>
+    </aside>
+  </section>
+</div>
+<script>
+  const CONFIG = {
+    schemaBaseUrl: "https://raw.githubusercontent.com/rafnuss/geolocator-dp/main",
+    schemaFiles: [
+      "edges-table-schema.json",
+      "measurements-table-schema.json",
+      "observations-table-schema.json",
+      "paths-table-schema.json",
+      "pressurepaths-table-schema.json",
+      "staps-table-schema.json",
+      "tags-table-schema.json",
+      "twilights-table-schema.json",
+    ],
+    // Array-of-arrays: each inner array is one column from top to bottom.
+    layout: [
+      ["measurements", "observations"],
+      ["tags", "paths"],
+      ["twilights", "staps"],
+      ["pressurepaths", "edges"],
+    ],
+    tableStyles: {
+      tags: { accent: "#cf5b7f" },
+      observations: { accent: "#d86b5f" },
+      measurements: { accent: "#c9636a" },
+      twilights: { accent: "#1f9d8b" },
+      staps: { accent: "#2e9f73" },
+      paths: { accent: "#2d8d9f" },
+      pressurepaths: { accent: "#3b7fc4" },
+      edges: { accent: "#4a7fb0" },
+    },
+    tableIcons: {
+      tags: "{{ '/assets/icons/cpu-fill.svg' | relative_url }}",
+      observations: "{{ '/assets/icons/binoculars-fill.svg' | relative_url }}",
+      measurements: "{{ '/assets/icons/speedometer2.svg' | relative_url }}",
+      twilights: "{{ '/assets/icons/sunrise-fill.svg' | relative_url }}",
+      staps: "{{ '/assets/icons/pin-map-fill.svg' | relative_url }}",
+      paths: "{{ '/assets/icons/signpost-split.svg' | relative_url }}",
+      pressurepaths: "{{ '/assets/icons/wind.svg' | relative_url }}",
+      edges: "{{ '/assets/icons/bezier2.svg' | relative_url }}",
+    },
+    tableDocs: {
+      tags: "{{ '/core/tags/' | relative_url }}",
+      observations: "{{ '/core/observations/' | relative_url }}",
+      measurements: "{{ '/core/measurements/' | relative_url }}",
+      twilights: "{{ '/geopressurer/twilights/' | relative_url }}",
+      staps: "{{ '/geopressurer/staps/' | relative_url }}",
+      paths: "{{ '/geopressurer/paths/' | relative_url }}",
+      pressurepaths: "{{ '/geopressurer/pressurepaths/' | relative_url }}",
+      edges: "{{ '/geopressurer/edges/' | relative_url }}",
+    },
+    excludedRelations: [
+      { sourceTable: "paths", sourceField: "tag_id", targetTable: "tags", targetField: "tag_id" },
+      { sourceTable: "edges", sourceField: "tag_id", targetTable: "tags", targetField: "tag_id" },
+    ],
+    preferSourceBusRelations: [
+      { sourceTable: "pressurepaths", targetTable: "staps" },
+      { sourceTable: "edges", targetTable: "staps" },
+      {
+        sourceTable: "pressurepaths",
+        sourceField: "tag_id",
+        targetTable: "tags",
+        targetField: "tag_id",
+      },
+      {
+        sourceTable: "tags",
+        sourceField: "tag_id",
+        targetTable: "pressurepaths",
+        targetField: "tag_id",
+      },
+    ],
+    // Manual order for vertical trunk lanes; lower value sorts first.
+    trunkOrder: [
+      {
+        sourceTable: "pressurepaths",
+        sourceField: "tag_id",
+        targetTable: "tags",
+        targetField: "tag_id",
+        order: 10,
+      },
+      {
+        sourceTable: "paths",
+        sourceField: "tag_id",
+        targetTable: "staps",
+        targetField: "tag_id",
+        order: 10,
+      },
+    ],
+    connectorStyle: {
+      // Marker size in SVG user units. Increase/decrease to tune arrow head size.
+      arrowHeadSize: 15,
+      // Gap (px) between arrow tip and the property box border.
+      arrowHeadPadding: 2,
+    },
+  };
+
+  const state = {
+    tables: [],
+    relations: [],
+  };
+
+  function setLoadingState(isLoading, text, status = "loading") {
+    const overlay = document.getElementById("diagram-loading");
+    if (!overlay) {
+      return;
+    }
+    const label = document.getElementById("diagram-loading-text");
+    if (label && text) {
+      label.textContent = text;
+    }
+    overlay.setAttribute("data-status", status);
+    overlay.setAttribute("aria-hidden", isLoading ? "false" : "true");
+  }
+
+  function setLegendState(isVisible) {
+    const legend = document.getElementById("diagram-legend");
+    if (!legend) {
+      return;
+    }
+    legend.setAttribute("aria-hidden", isVisible ? "false" : "true");
+  }
+
+  const SVG_NS = "http://www.w3.org/2000/svg";
+
+  const slug = (value) =>
+    String(value)
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+
+  const asArray = (value) => (Array.isArray(value) ? value : value == null ? [] : [value]);
+
+  function hexToRgba(hex, alpha) {
+    const normalized = String(hex).replace("#", "");
+    const value =
+      normalized.length === 3
+        ? normalized
+            .split("")
+            .map((c) => c + c)
+            .join("")
+        : normalized;
+    if (!/^[a-fA-F0-9]{6}$/.test(value)) {
+      return null;
+    }
+    const r = Number.parseInt(value.slice(0, 2), 16);
+    const g = Number.parseInt(value.slice(2, 4), 16);
+    const b = Number.parseInt(value.slice(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  function tableNameFromFile(file) {
+    return file.replace(/-table-schema\.json$/i, "").trim();
+  }
+
+  function extractFields(schema) {
+    if (Array.isArray(schema.fields)) {
+      return schema.fields
+        .map((field) => {
+          if (typeof field === "string") {
+            return { name: field, required: false, description: "" };
+          }
+          if (!field || !field.name) {
+            return null;
+          }
+          return {
+            name: field.name,
+            required: !!(field.constraints && field.constraints.required),
+            description: field.description || "",
+          };
+        })
+        .filter(Boolean);
+    }
+    if (schema.properties && typeof schema.properties === "object") {
+      const requiredSet = new Set(asArray(schema.required));
+      return Object.keys(schema.properties).map((name) => ({
+        name,
+        required: requiredSet.has(name),
+        description: (schema.properties[name] && schema.properties[name].description) || "",
+      }));
+    }
+    if (Array.isArray(schema.allOf)) {
+      for (const block of schema.allOf) {
+        if (block && block.properties && typeof block.properties === "object") {
+          const requiredSet = new Set(asArray(block.required));
+          return Object.keys(block.properties).map((name) => ({
+            name,
+            required: requiredSet.has(name),
+            description: (block.properties[name] && block.properties[name].description) || "",
+          }));
+        }
+      }
+    }
+    return [];
+  }
+
+  function extractForeignKeys(schema, sourceTable) {
+    const links = [];
+
+    if (Array.isArray(schema.foreignKeys)) {
+      for (const fk of schema.foreignKeys) {
+        const fromFields = asArray(fk.fields);
+        const toFields = asArray(fk.reference && fk.reference.fields);
+        const targetTable = fk.reference && fk.reference.resource;
+        if (!targetTable || fromFields.length === 0) {
+          continue;
+        }
+        for (let i = 0; i < fromFields.length; i += 1) {
+          links.push({
+            sourceTable,
+            sourceField: fromFields[i],
+            targetTable,
+            targetField: toFields[i] || toFields[0] || "",
+          });
+        }
+      }
+    }
+
+    if (Array.isArray(schema.fields)) {
+      for (const field of schema.fields) {
+        const description = (field && field.description) || "";
+        const match = description.match(/Foreign key to\s+\[`([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)`\]/i);
+        if (!match) {
+          continue;
+        }
+        links.push({
+          sourceTable,
+          sourceField: field.name,
+          targetTable: match[1],
+          targetField: match[2],
+        });
+      }
+    }
+
+    const deduped = new Map();
+    for (const link of links) {
+      const key = [link.sourceTable, link.sourceField, link.targetTable, link.targetField].join(
+        "::",
+      );
+      deduped.set(key, link);
+    }
+    return [...deduped.values()];
+  }
+
+  function extractPrimaryKeys(schema) {
+    const keys = new Set();
+
+    for (const key of asArray(schema.primaryKey)) {
+      if (typeof key === "string" && key.trim()) {
+        keys.add(key);
+      }
+    }
+
+    if (Array.isArray(schema.allOf)) {
+      for (const block of schema.allOf) {
+        for (const key of asArray(block && block.primaryKey)) {
+          if (typeof key === "string" && key.trim()) {
+            keys.add(key);
+          }
+        }
+      }
+    }
+
+    return keys;
+  }
+
+  function isExcludedRelation(relation) {
+    return CONFIG.excludedRelations.some(
+      (rule) =>
+        rule.sourceTable === relation.sourceTable &&
+        rule.sourceField === relation.sourceField &&
+        rule.targetTable === relation.targetTable &&
+        rule.targetField === relation.targetField,
+    );
+  }
+
+  function matchRelationRule(relation, rule) {
+    return (
+      (!rule.sourceTable || rule.sourceTable === relation.sourceTable) &&
+      (!rule.sourceField || rule.sourceField === relation.sourceField) &&
+      (!rule.targetTable || rule.targetTable === relation.targetTable) &&
+      (!rule.targetField || rule.targetField === relation.targetField)
+    );
+  }
+
+  function shouldPreferSourceBus(relation) {
+    return CONFIG.preferSourceBusRelations.some((rule) => matchRelationRule(relation, rule));
+  }
+
+  function relationSortKey(relation) {
+    return `${relation.sourceTable}.${relation.sourceField}->${relation.targetTable}.${relation.targetField}`;
+  }
+
+  function trunkOrderValue(relation) {
+    for (const rule of CONFIG.trunkOrder) {
+      if (matchRelationRule(relation, rule)) {
+        return Number.isFinite(rule.order) ? rule.order : 0;
+      }
+    }
+    return 0;
+  }
+
+  async function fetchSchema(file) {
+    const url = `${CONFIG.schemaBaseUrl}/${file}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Could not load ${file} (${res.status})`);
+    }
+    const json = await res.json();
+    const tableName = json.name || tableNameFromFile(file);
+    const links = extractForeignKeys(json, tableName).filter((link) => !isExcludedRelation(link));
+    const fkFields = new Set(links.map((link) => link.sourceField));
+    const pkFields = extractPrimaryKeys(json);
+    const fieldsMatch = asArray(json.fieldsMatch).map((value) => String(value).toLowerCase());
+    const hasPartialFields = fieldsMatch.includes("partial");
+    const fields = extractFields(json).map((field) => ({
+      ...field,
+      foreignKey: fkFields.has(field.name),
+      primaryKey: pkFields.has(field.name),
+    }));
+
+    return {
+      file,
+      name: tableName,
+      description: json.description || json.title || "",
+      fields,
+      links,
+      hasPartialFields,
+    };
+  }
+
+  function renderTables(tables) {
+    const grid = document.getElementById("tables-grid");
+    grid.innerHTML = "";
+
+    const tableByName = new Map(tables.map((table) => [table.name, table]));
+    const usedNames = new Set();
+
+    const makeCard = (table) => {
+      const tableId = slug(table.name);
+      const card = document.createElement("article");
+      card.className = "schema-table";
+      card.id = `table-${tableId}`;
+      card.dataset.table = table.name;
+
+      const style = CONFIG.tableStyles[table.name] || {};
+      if (style.accent) {
+        card.style.setProperty("--accent", style.accent);
+        const fallbackHeader = hexToRgba(style.accent, 0.35);
+        if (fallbackHeader) {
+          card.style.setProperty("--header-bg", fallbackHeader);
+        }
+      }
+      if (style.headerBg) {
+        card.style.setProperty("--header-bg", style.headerBg);
+      }
+
+      const heading = document.createElement("h2");
+      heading.className = "schema-title";
+      heading.id = `title-${tableId}`;
+      const headingTooltipMarkdown = firstMarkdownParagraph(table.description);
+      if (headingTooltipMarkdown) {
+        heading.setAttribute("data-bs-toggle", "tooltip");
+        heading.setAttribute("data-bs-title", headingTooltipMarkdown);
+        heading.setAttribute("data-md-description", headingTooltipMarkdown);
+        heading.setAttribute("data-bs-custom-class", "schema-tooltip");
+        heading.setAttribute("data-bs-placement", "top");
+      }
+      const tableDocHref = CONFIG.tableDocs[table.name];
+      const titleContent = document.createElement(tableDocHref ? "a" : "span");
+      titleContent.className = `schema-title-content${tableDocHref ? " schema-title-link" : ""}`;
+      if (tableDocHref) {
+        titleContent.href = tableDocHref;
+        titleContent.setAttribute("aria-label", `${table.name} table documentation`);
+      }
+      const iconPath = CONFIG.tableIcons[table.name];
+      if (iconPath) {
+        const icon = document.createElement("span");
+        icon.className = "schema-title-icon";
+        icon.style.setProperty("--icon-url", `url("${iconPath}")`);
+        icon.setAttribute("aria-hidden", "true");
+        titleContent.appendChild(icon);
+      }
+      const titleText = document.createElement("span");
+      titleText.textContent = table.name;
+      titleContent.appendChild(titleText);
+      heading.appendChild(titleContent);
+      card.appendChild(heading);
+
+      const list = document.createElement("ul");
+      list.className = "schema-fields";
+
+      for (const field of table.fields) {
+        const item = document.createElement("li");
+        item.className = "schema-field";
+        item.id = `field-${tableId}-${slug(field.name)}`;
+        if (field.description) {
+          item.setAttribute("data-bs-toggle", "tooltip");
+          item.setAttribute("data-bs-title", field.description);
+          item.setAttribute("data-md-description", field.description);
+          item.setAttribute("data-bs-custom-class", "schema-tooltip");
+          item.setAttribute("data-bs-placement", "auto");
+        }
+
+        const content = document.createElement("span");
+        content.className = "schema-field-content";
+        if (field.primaryKey) {
+          const pkIcon = document.createElement("span");
+          pkIcon.className = "schema-pk-icon";
+          pkIcon.setAttribute("aria-hidden", "true");
+          content.appendChild(pkIcon);
+        }
+
+        const text = document.createElement("span");
+        text.textContent = `${field.name}${field.required ? "*" : ""}`;
+        content.appendChild(text);
+
+        item.appendChild(content);
+        list.appendChild(item);
+      }
+
+      if (table.hasPartialFields) {
+        const partialItem = document.createElement("li");
+        partialItem.className = "schema-field schema-field--partial";
+        partialItem.textContent = "...";
+        list.appendChild(partialItem);
+      }
+
+      card.appendChild(list);
+      return card;
+    };
+
+    for (const columnNames of CONFIG.layout) {
+      const column = document.createElement("div");
+      column.className = "schema-column";
+
+      for (const tableName of columnNames) {
+        const table = tableByName.get(tableName);
+        if (!table) {
+          continue;
+        }
+        usedNames.add(tableName);
+        column.appendChild(makeCard(table));
+      }
+
+      if (column.childElementCount > 0) {
+        grid.appendChild(column);
+      }
+    }
+
+    const remaining = tables.filter((table) => !usedNames.has(table.name));
+    if (remaining.length > 0) {
+      const extraColumn = document.createElement("div");
+      extraColumn.className = "schema-column";
+      for (const table of remaining) {
+        extraColumn.appendChild(makeCard(table));
+      }
+      grid.appendChild(extraColumn);
+    }
+  }
+
+  function clearConnectors() {
+    const svg = document.getElementById("connector-layer");
+    svg.innerHTML = "";
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function sanitizeHref(href) {
+    const value = String(href || "").trim();
+    if (/^(https?:|mailto:|\/|#)/i.test(value)) {
+      return value;
+    }
+    return "#";
+  }
+
+  function normalizeClassList(classValue) {
+    const cleaned = String(classValue || "")
+      .replace(/[^a-zA-Z0-9_\- ]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    return cleaned;
+  }
+
+  function stripMarkdownAttributes(markdown) {
+    return String(markdown || "")
+      .replace(/^\s*\{:\s*[^}]+\}\s*$/gm, "")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+  }
+
+  function firstMarkdownParagraph(markdown) {
+    const text = stripMarkdownAttributes(markdown);
+    if (!text) {
+      return "";
+    }
+    return text.split(/\n\s*\n/)[0].trim();
+  }
+
+  function preserveAllowedHtml(markdown) {
+    const placeholders = [];
+    const save = (html) => {
+      const token = `__HTML_TOKEN_${placeholders.length}__`;
+      placeholders.push(html);
+      return token;
+    };
+
+    let text = String(markdown || "");
+
+    text = text.replace(/<br\s*\/?>/gi, () => save("<br>"));
+
+    text = text.replace(/<span([^>]*)>/gi, (_m, attrs) => {
+      const classMatch = String(attrs || "").match(/\bclass\s*=\s*["']([^"']+)["']/i);
+      const className = normalizeClassList(classMatch ? classMatch[1] : "");
+      if (!className) {
+        return save("<span>");
+      }
+      return save(`<span class="${escapeHtml(className)}">`);
+    });
+    text = text.replace(/<\/span>/gi, () => save("</span>"));
+
+    text = text.replace(/<a([^>]*)>/gi, (_m, attrs) => {
+      const hrefMatch = String(attrs || "").match(/\bhref\s*=\s*["']([^"']+)["']/i);
+      const safeHref = sanitizeHref(hrefMatch ? hrefMatch[1] : "#");
+      return save(`<a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener noreferrer">`);
+    });
+    text = text.replace(/<\/a>/gi, () => save("</a>"));
+
+    return { text, placeholders };
+  }
+
+  function markdownInlineToHtml(markdown) {
+    const preserved = preserveAllowedHtml(markdown);
+    let html = escapeHtml(preserved.text);
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, label, href) => {
+      const safeHref = sanitizeHref(href);
+      return `<a href="${safeHref}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+    });
+    html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+    html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+
+    preserved.placeholders.forEach((value, i) => {
+      const token = `__HTML_TOKEN_${i}__`;
+      html = html.split(token).join(value);
+    });
+
+    return html;
+  }
+
+  function markdownToHtml(markdown) {
+    const text = stripMarkdownAttributes(markdown);
+    if (!text) {
+      return "";
+    }
+
+    const blocks = text.split(/\n\s*\n/);
+    const htmlBlocks = blocks.map((block) => {
+      const lines = block.split("\n").map((line) => line.trimEnd());
+      const isList = lines.every((line) => /^\s*[-*]\s+/.test(line));
+      if (isList) {
+        const items = lines
+          .map((line) => line.replace(/^\s*[-*]\s+/, ""))
+          .map((line) => `<li>${markdownInlineToHtml(line)}</li>`)
+          .join("");
+        return `<ul>${items}</ul>`;
+      }
+      return `<p>${lines.map((line) => markdownInlineToHtml(line)).join("<br>")}</p>`;
+    });
+
+    return htmlBlocks.join("");
+  }
+
+  function initTooltips() {
+    if (!window.bootstrap || !window.bootstrap.Tooltip) {
+      return;
+    }
+    const hideDelayMs = 150;
+    const elements = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    for (const el of elements) {
+      const existing = window.bootstrap.Tooltip.getInstance(el);
+      if (existing) {
+        existing.dispose();
+      }
+      const markdown =
+        el.getAttribute("data-md-description") || el.getAttribute("data-bs-title") || "";
+      const htmlTitle = markdownToHtml(markdown);
+      const tooltip = new window.bootstrap.Tooltip(el, {
+        container: "body",
+        trigger: "manual",
+        html: true,
+        sanitize: false,
+        title: htmlTitle,
+      });
+
+      let hideTimer = null;
+      const clearHideTimer = () => {
+        if (hideTimer) {
+          window.clearTimeout(hideTimer);
+          hideTimer = null;
+        }
+      };
+      const showTooltip = () => {
+        clearHideTimer();
+        tooltip.show();
+      };
+      const scheduleHide = () => {
+        clearHideTimer();
+        hideTimer = window.setTimeout(() => {
+          tooltip.hide();
+        }, hideDelayMs);
+      };
+
+      el.addEventListener("mouseenter", showTooltip);
+      el.addEventListener("focusin", showTooltip);
+      el.addEventListener("mouseleave", scheduleHide);
+      el.addEventListener("focusout", scheduleHide);
+      el.addEventListener("shown.bs.tooltip", () => {
+        const tipEl =
+          typeof tooltip.getTipElement === "function" ? tooltip.getTipElement() : tooltip.tip;
+        if (!tipEl || tipEl.dataset.hoverBound === "true") {
+          return;
+        }
+        tipEl.dataset.hoverBound = "true";
+        tipEl.addEventListener("mouseenter", clearHideTimer);
+        tipEl.addEventListener("mouseleave", scheduleHide);
+      });
+    }
+  }
+
+  function clearConnectorHoverState() {
+    const svg = document.getElementById("connector-layer");
+    for (const path of svg.querySelectorAll(".connector")) {
+      path.classList.remove("connector--dim", "connector--active");
+    }
+    for (const field of document.querySelectorAll(".schema-field--linked-target")) {
+      field.classList.remove("schema-field--linked-target");
+    }
+  }
+
+  function setupConnectorHover() {
+    const svg = document.getElementById("connector-layer");
+    if (svg.dataset.hoverBound === "true") {
+      return;
+    }
+    svg.dataset.hoverBound = "true";
+
+    svg.addEventListener("pointerover", (event) => {
+      const connector = event.target.closest(".connector");
+      if (!connector) {
+        return;
+      }
+
+      const connectors = [...svg.querySelectorAll(".connector")];
+      for (const path of connectors) {
+        path.classList.toggle("connector--dim", path !== connector);
+        path.classList.toggle("connector--active", path === connector);
+      }
+
+      for (const field of document.querySelectorAll(".schema-field--linked-target")) {
+        field.classList.remove("schema-field--linked-target");
+      }
+
+      const targetDomId = connector.getAttribute("data-target-dom-id");
+      if (targetDomId) {
+        const targetEl = document.getElementById(targetDomId);
+        if (targetEl) {
+          targetEl.classList.add("schema-field--linked-target");
+        }
+      }
+    });
+
+    svg.addEventListener("pointerleave", () => {
+      clearConnectorHoverState();
+    });
+  }
+
+  function makeSvgElement(tag, attrs = {}) {
+    const node = document.createElementNS(SVG_NS, tag);
+    for (const [key, value] of Object.entries(attrs)) {
+      node.setAttribute(key, value);
+    }
+    return node;
+  }
+
+  function anchorFor(elRect, side, baseRect) {
+    if (side === "left") {
+      return { x: elRect.left - baseRect.left, y: elRect.top + elRect.height / 2 - baseRect.top };
+    }
+    if (side === "right") {
+      return { x: elRect.right - baseRect.left, y: elRect.top + elRect.height / 2 - baseRect.top };
+    }
+    if (side === "top") {
+      return { x: elRect.left + elRect.width / 2 - baseRect.left, y: elRect.top - baseRect.top };
+    }
+    return { x: elRect.left + elRect.width / 2 - baseRect.left, y: elRect.bottom - baseRect.top };
+  }
+
+  function groupAndOffset(edges, keyFn, spacing, applyOffset, sortFn) {
+    const groups = new Map();
+    for (const edge of edges) {
+      const key = keyFn(edge);
+      if (!groups.has(key)) {
+        groups.set(key, []);
+      }
+      groups.get(key).push(edge);
+    }
+
+    for (const group of groups.values()) {
+      group.sort(sortFn || ((a, b) => a.start.y + a.end.y - (b.start.y + b.end.y)));
+      const center = (group.length - 1) / 2;
+      group.forEach((edge, i) => {
+        applyOffset(edge, (i - center) * spacing);
+      });
+    }
+  }
+
+  function getColumnIndexMap() {
+    const columnIndexByTable = new Map();
+    CONFIG.layout.forEach((columnTables, colIdx) => {
+      for (const tableName of columnTables) {
+        columnIndexByTable.set(tableName, colIdx);
+      }
+    });
+    return columnIndexByTable;
+  }
+
+  function applyMixedEndpointPairOffsets(edges, spacing) {
+    const groups = new Map();
+
+    for (const edge of edges) {
+      const startKey = `endpoint:${edge.sourceTableSlug}:${edge.sourceFieldSlug}:${edge.sourceSide}`;
+      const endKey = `endpoint:${edge.targetTableSlug}:${edge.targetFieldSlug}:${edge.targetSide}`;
+
+      if (!groups.has(startKey)) {
+        groups.set(startKey, []);
+      }
+      groups.get(startKey).push({
+        edge,
+        endpoint: "start",
+        peerY: edge.end.y,
+        sortKey: relationSortKey(edge.rel),
+      });
+
+      if (!groups.has(endKey)) {
+        groups.set(endKey, []);
+      }
+      groups.get(endKey).push({
+        edge,
+        endpoint: "end",
+        peerY: edge.start.y,
+        sortKey: relationSortKey(edge.rel),
+      });
+    }
+
+    for (const group of groups.values()) {
+      if (group.length <= 1) {
+        continue;
+      }
+
+      group.sort((a, b) => {
+        const yDiff = a.peerY - b.peerY;
+        if (yDiff !== 0) {
+          return yDiff;
+        }
+        return a.sortKey.localeCompare(b.sortKey);
+      });
+
+      const center = (group.length - 1) / 2;
+      group.forEach((entry, i) => {
+        const offset = (i - center) * spacing;
+        if (entry.endpoint === "start") {
+          entry.edge.startOffsetY = offset;
+        } else {
+          entry.edge.endOffsetY = offset;
+        }
+      });
+    }
+  }
+
+  function drawConnectors(relations) {
+    clearConnectorHoverState();
+    clearConnectors();
+
+    const wrapper = document.getElementById("diagram-wrapper");
+    const svg = document.getElementById("connector-layer");
+    const baseRect = wrapper.getBoundingClientRect();
+    const columnIndexByTable = getColumnIndexMap();
+    const lineColor =
+      getComputedStyle(document.documentElement).getPropertyValue("--line-color").trim() ||
+      "#111827";
+    const endpointSpacing = 12;
+    const laneSpacing = 10;
+    const branchStub = 12;
+    const trunkPadding = 28;
+    const arrowHeadSize = Number(CONFIG.connectorStyle?.arrowHeadSize) || 3.2;
+    const arrowHeadPadding = Number(CONFIG.connectorStyle?.arrowHeadPadding) || 2;
+
+    svg.setAttribute("viewBox", `0 0 ${Math.ceil(baseRect.width)} ${Math.ceil(baseRect.height)}`);
+    const defs = makeSvgElement("defs");
+    const arrowHead = makeSvgElement("marker", {
+      id: "connector-arrowhead",
+      viewBox: "0 0 10 10",
+      markerWidth: String(arrowHeadSize),
+      markerHeight: String(arrowHeadSize),
+      refX: "9.3",
+      refY: "5",
+      orient: "auto",
+      markerUnits: "userSpaceOnUse",
+    });
+    arrowHead.appendChild(
+      makeSvgElement("path", {
+        "d": "M 1 1 L 9 5 L 1 9",
+        "fill": "none",
+        "stroke": "context-stroke",
+        "stroke-width": "1.8",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round",
+      }),
+    );
+    defs.appendChild(arrowHead);
+    svg.appendChild(defs);
+
+    const edges = [];
+    for (const rel of relations) {
+      const sourceTableSlug = slug(rel.sourceTable);
+      const targetTableSlug = slug(rel.targetTable);
+
+      const sourceField =
+        document.getElementById(`field-${sourceTableSlug}-${slug(rel.sourceField)}`) ||
+        document.getElementById(`title-${sourceTableSlug}`);
+
+      const targetField =
+        document.getElementById(`field-${targetTableSlug}-${slug(rel.targetField)}`) ||
+        document.getElementById(`title-${targetTableSlug}`);
+      const sourceTableEl = document.getElementById(`table-${sourceTableSlug}`);
+      const targetTableEl = document.getElementById(`table-${targetTableSlug}`);
+
+      if (!sourceField || !targetField || !sourceTableEl || !targetTableEl) {
+        continue;
+      }
+
+      const sourceFieldRect = sourceField.getBoundingClientRect();
+      const targetFieldRect = targetField.getBoundingClientRect();
+      const sourceTableRect = sourceTableEl.getBoundingClientRect();
+      const targetTableRect = targetTableEl.getBoundingClientRect();
+      const sourceCol = columnIndexByTable.get(rel.sourceTable);
+      const targetCol = columnIndexByTable.get(rel.targetTable);
+      const sameColumn =
+        Number.isFinite(sourceCol) && Number.isFinite(targetCol) && sourceCol === targetCol;
+      const preferSourceBus = shouldPreferSourceBus(rel);
+
+      let sourceSide;
+      let targetSide;
+      if (sameColumn) {
+        const centerColumn = (CONFIG.layout.length - 1) / 2;
+        const sharedSide = sourceCol <= centerColumn ? "right" : "left";
+        sourceSide = sharedSide;
+        targetSide = sharedSide;
+      } else if (!Number.isFinite(sourceCol) || !Number.isFinite(targetCol)) {
+        const sourceCenterX = sourceTableRect.left + sourceTableRect.width / 2;
+        const targetCenterX = targetTableRect.left + targetTableRect.width / 2;
+        sourceSide = sourceCenterX <= targetCenterX ? "right" : "left";
+        targetSide = sourceSide === "right" ? "left" : "right";
+      } else {
+        sourceSide = sourceCol < targetCol ? "right" : "left";
+        targetSide = sourceSide === "right" ? "left" : "right";
+      }
+
+      edges.push({
+        rel,
+        sourceTableSlug,
+        targetTableSlug,
+        sourceFieldSlug: slug(rel.sourceField),
+        targetFieldSlug: slug(rel.targetField),
+        sourceCol,
+        targetCol,
+        sameColumn,
+        preferSourceBus,
+        sourceSide,
+        targetSide,
+        sourceFieldRect,
+        targetFieldRect,
+        sourceTableRect,
+        targetTableRect,
+        startOffsetY: 0,
+        endOffsetY: 0,
+        sourceOffsetX: 0,
+        targetDomId: targetField.id,
+        start: anchorFor(sourceFieldRect, sourceSide, baseRect),
+        end: anchorFor(targetFieldRect, targetSide, baseRect),
+      });
+    }
+
+    groupAndOffset(
+      edges,
+      (edge) => `source:${edge.sourceTableSlug}:${edge.sourceFieldSlug}:${edge.sourceSide}`,
+      4,
+      (edge, offset) => {
+        edge.sourceOffsetX = offset;
+      },
+    );
+
+    applyMixedEndpointPairOffsets(edges, endpointSpacing);
+
+    groupAndOffset(
+      edges,
+      (edge) => {
+        if (edge.sameColumn) {
+          return `col:${edge.sourceCol}:${edge.sourceSide}`;
+        }
+        if (edge.preferSourceBus) {
+          return `bus-source:${edge.sourceCol}:${edge.sourceSide}`;
+        }
+        return `bus-target:${edge.targetCol}:${edge.targetSide}`;
+      },
+      laneSpacing,
+      (edge, offset) => {
+        if (edge.sameColumn) {
+          if (edge.sourceSide === "right") {
+            const outerRight =
+              Math.max(edge.sourceTableRect.right, edge.targetTableRect.right) - baseRect.left;
+            edge.trunkX = outerRight + trunkPadding + offset;
+          } else {
+            const outerLeft =
+              Math.min(edge.sourceTableRect.left, edge.targetTableRect.left) - baseRect.left;
+            edge.trunkX = outerLeft - trunkPadding - offset;
+          }
+          return;
+        }
+
+        if (edge.preferSourceBus) {
+          const sourceEdgeX =
+            edge.sourceSide === "left"
+              ? edge.sourceTableRect.left - baseRect.left
+              : edge.sourceTableRect.right - baseRect.left;
+          const direction = edge.sourceSide === "left" ? -1 : 1;
+          edge.trunkX = sourceEdgeX + direction * (trunkPadding + offset);
+        } else {
+          const targetEdgeX =
+            edge.targetSide === "left"
+              ? edge.targetTableRect.left - baseRect.left
+              : edge.targetTableRect.right - baseRect.left;
+          const direction = edge.targetSide === "left" ? -1 : 1;
+          edge.trunkX = targetEdgeX + direction * (trunkPadding + offset);
+        }
+      },
+      (a, b) => {
+        const orderDiff = trunkOrderValue(a.rel) - trunkOrderValue(b.rel);
+        if (orderDiff !== 0) {
+          return orderDiff;
+        }
+        const yDiff = a.start.y + a.end.y - (b.start.y + b.end.y);
+        if (yDiff !== 0) {
+          return yDiff;
+        }
+        return relationSortKey(a.rel).localeCompare(relationSortKey(b.rel));
+      },
+    );
+
+    for (const edge of edges) {
+      const maxStartAttachOffset = Math.max(0, edge.sourceFieldRect.height / 2 - 4);
+      const clampedStartOffsetY = Math.max(
+        -maxStartAttachOffset,
+        Math.min(maxStartAttachOffset, edge.startOffsetY),
+      );
+      const startRouteY = edge.start.y + clampedStartOffsetY;
+      const maxAttachOffset = Math.max(0, edge.targetFieldRect.height / 2 - 4);
+      const clampedEndOffsetY = Math.max(
+        -maxAttachOffset,
+        Math.min(maxAttachOffset, edge.endOffsetY),
+      );
+      const endRouteY = edge.end.y + clampedEndOffsetY;
+      const sourceDir = edge.sourceSide === "right" ? 1 : -1;
+      const targetDir = edge.targetSide === "right" ? 1 : -1;
+      const startOutX = edge.start.x + sourceDir * (branchStub + edge.sourceOffsetX);
+      const endX = edge.end.x + targetDir * arrowHeadPadding;
+      const edgeColor = CONFIG.tableStyles[edge.rel.sourceTable]?.accent || lineColor;
+      const d = [
+        `M ${edge.start.x} ${startRouteY}`,
+        `L ${startOutX} ${startRouteY}`,
+        `L ${edge.trunkX} ${startRouteY}`,
+        `L ${edge.trunkX} ${endRouteY}`,
+        `L ${endX} ${endRouteY}`,
+      ].join(" ");
+
+      svg.appendChild(
+        makeSvgElement("path", {
+          "class": "connector",
+          d,
+          "style": `--edge-color: ${edgeColor};`,
+          "data-relation": `${edge.rel.sourceTable}.${edge.rel.sourceField}->${edge.rel.targetTable}.${edge.rel.targetField}`,
+          "data-target-dom-id": edge.targetDomId,
+        }),
+      );
+    }
+  }
+
+  async function renderDiagram() {
+    setLoadingState(true, "Loading schema diagram...", "loading");
+    setLegendState(false);
+    try {
+      const tables = await Promise.all(CONFIG.schemaFiles.map((file) => fetchSchema(file)));
+      const relationMap = new Map();
+      for (const table of tables) {
+        for (const rel of table.links) {
+          const key = [rel.sourceTable, rel.sourceField, rel.targetTable, rel.targetField].join(
+            "::",
+          );
+          relationMap.set(key, rel);
+        }
+      }
+
+      state.tables = tables;
+      state.relations = [...relationMap.values()];
+
+      renderTables(tables);
+      initTooltips();
+      drawConnectors(state.relations);
+      setupConnectorHover();
+      setLoadingState(false, "", "loading");
+      setLegendState(true);
+    } catch (err) {
+      console.error(err);
+      setLoadingState(
+        true,
+        "Could not load schema diagram. Please check the schema source URL/version.",
+        "error",
+      );
+      setLegendState(false);
+    }
+  }
+
+  let redrawTimer = null;
+  function scheduleRedraw() {
+    if (redrawTimer) {
+      cancelAnimationFrame(redrawTimer);
+    }
+    redrawTimer = requestAnimationFrame(() => {
+      drawConnectors(state.relations);
+    });
+  }
+
+  function redrawForPrint() {
+    requestAnimationFrame(() => {
+      drawConnectors(state.relations);
+    });
+  }
+
+  window.addEventListener("resize", scheduleRedraw);
+  window.addEventListener("beforeprint", redrawForPrint);
+  window.addEventListener("afterprint", redrawForPrint);
+  if (window.matchMedia) {
+    const printMedia = window.matchMedia("print");
+    const onPrintMediaChange = () => redrawForPrint();
+    if (typeof printMedia.addEventListener === "function") {
+      printMedia.addEventListener("change", onPrintMediaChange);
+    } else if (typeof printMedia.addListener === "function") {
+      printMedia.addListener(onPrintMediaChange);
+    }
+  }
+  window.addEventListener("load", async () => {
+    await renderDiagram();
+    // A second pass after fonts/layout settle.
+    setTimeout(scheduleRedraw, 120);
+  });
+</script>

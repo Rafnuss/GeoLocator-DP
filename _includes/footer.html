@@ -1,0 +1,14 @@
+<footer class="d-print-none">
+  <div class="container">
+    <div class="small mt-2 text-center">
+      {% if site.author %}
+        <p>© {{ site.author }}</p>
+      {% endif %}
+      <p><a href="https://github.com/rafnuss/geolocator-dp">GitHub Repository</a></p>
+      {% if site.data.footer.license %}
+        <p>{{ site.data.footer.license | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+      {% endif %}
+      <p>Inspired by <a href="https://camtrap-dp.tdwg.org/">Camtrap DP</a> and built with <a href="https://peterdesmet.com/petridish/">Petridish</a>.</p>
+    </div>
+  </div>
+</footer>

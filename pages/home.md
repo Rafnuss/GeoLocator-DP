@@ -5,20 +5,12 @@ permalink: /
 description: Data exchange format for geolocator data
 ---
 
-{:.alert .alert-primary style="padding-left: 32px;"}
 **GeoLocator Data Package** (GeoLocator DP) defines a data exchange format for geolocator data. By using a common structure across projects, GeoLocator DP makes data easier to share, compare, and reuse, ultimately supporting bird migration research, conservation, and public outreach.
 
-<table>
-    <tr style="border-top-width: 1px;">
-        <td>
-            <a href="https://raphaelnussbaumer.com/GeoLocatorExplorer/" target="_blank"><img src="assets/geolocatorexplorer_screenshot.png" width="100%;"/></a>
-             Use <b><a href="https://raphaelnussbaumer.com/GeoLocatorExplorer/">GeoLocatorExplorer</a></b> to browse trajectories from all published packages in one place.
-        </td>
-    </tr>
+{:.alert .alert-primary style="padding-left: 32px;"}
+**Ready to publish your GeoLocator Data Package?** Follow the step-by-step practical guide in the [GeoLocator Data Package chapter of the GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/geolocator-create.html) to create, curate, and share your package with confidence.
 
-</table>
-
-## Structure
+## Data Package Structure
 
 A GeoLocator Data Package follows the more general [Data Package](https://datapackage.org/) and is organized into three components: (1) the core resources containing raw geolocator data, (2) optional but highly recommended trajectory resources generated with [GeoPressureR](https://raphaelnussbaumer.com/GeoPressureManual/), and (3) a minimal local manifest.
 
@@ -28,37 +20,52 @@ The core GeoLocator DP resources consist of raw geolocator data and deployment i
 
 | File                                                                                 | Description                                                                                           |
 | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| [`tags.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/core/tags/)                 | Table of devices used in the study. We assume that a `tag` is only used once on a single animal.      |
-| [`measurements.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/core/measurements/) | Table with the raw measurements of all sensors (e.g., light, pressure, ...) for all tags.             |
-| [`observations.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/core/observations/) | Table with the field observations associated with tags such as equipment, retrieval, or other events. |
+| [`tags.csv`](https://geopressure.org/GeoLocator-DP/core/tags/)                 | Table of devices used in the study. We assume that a `tag` is only used once on a single animal.      |
+| [`measurements.csv`](https://geopressure.org/GeoLocator-DP/core/measurements/) | Table with the raw measurements of all sensors (e.g., light, pressure, ...) for all tags.             |
+| [`observations.csv`](https://geopressure.org/GeoLocator-DP/core/observations/) | Table with the field observations associated with tags such as equipment, retrieval, or other events. |
 
 ### 2. GeoPressureR Resources
 
 The GeoPressureR extension consists of optional trajectory data generated through the [GeoPressureR workflow analysis](https://raphaelnussbaumer.com/GeoPressureManual/geopressuretemplate-workflow.html).
 
-| File                                                                                          | Description                                                                          |
-| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [`staps.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/staps)                 | Table of the stationary periods of all tags.                                         |
-| [`paths.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/paths)                 | Table of the trajectory of all tags, typically most likely path or simulation paths. |
-| [`edges.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/edges)                 | Table containing the flight information of the edges associated with the paths.      |
-| [`twilights.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/twilights)         | Table of the twilights estimated from light data for all tags.                       |
-| [`pressurepaths.csv`](https://raphaelnussbaumer.com/GeoLocator-DP/geopressurer/pressurepaths) | Table of pressure-based paths.                                                       |
-| `params.json`                                                                                 | JSON parameters used to run the GeoPressureR workflow (optional).                    |
+| File                                                                                          | Description                                                                                                                         |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [`staps.csv`](https://geopressure.org/GeoLocator-DP/geopressurer/staps)                 | Table of the stationary periods of all tags.                                                                                        |
+| [`paths.csv`](https://geopressure.org/GeoLocator-DP/geopressurer/paths)                 | Table of the trajectory of all tags, typically most likely path or simulation paths.                                                |
+| [`edges.csv`](https://geopressure.org/GeoLocator-DP/geopressurer/edges)                 | Table containing the flight information of the edges associated with the paths.                                                     |
+| [`twilights.csv`](https://geopressure.org/GeoLocator-DP/geopressurer/twilights)         | Table of the twilights estimated from light data for all tags.                                                                      |
+| [`pressurepaths.csv`](https://geopressure.org/GeoLocator-DP/geopressurer/pressurepaths) | Table of pressure-based paths.                                                                                                      |
+| `params.json`                                                                                 | List of [parameters](https://raphaelnussbaumer.com/GeoPressureR/reference/param_create.html) used to run the GeoPressureR workflow. |
 
 ### 3. Local Manifest
 
-Following the [Data Package standard](https://datapackage.org/standard/data-package/), each GeoLocator DP contains a `datapackage.json` file with: (1) a machine-readable index of all data [`resources`](https://datapackage.org/standard/data-resource/), (2) a package-level [`$schema`](https://datapackage.org/standard/data-package/#dollar-schema) pointing to the GeoLocator DP profile version, and (3) an optional `id` set to the Zenodo DOI URL when available. The local manifest stays intentionally minimal, while descriptive metadata are managed in Zenodo and resolved from the Zenodo record on read.
+Following the [Data Package standard](https://datapackage.org/standard/data-package/), each GeoLocator DP contains a [`datapackage.json`](https://github.com/Rafnuss/GeoLocator-DP/blob/main/geolocator-dp-profile.json) file with: (1) a machine-readable index of all data [`resources`](https://datapackage.org/standard/data-resource/), (2) a package-level [`$schema`](https://datapackage.org/standard/data-package/#dollar-schema) pointing to the GeoLocator DP profile version. Unlike previous versions, in the v1.0, the local manifest stays intentionally minimal, while metadata are managed in Zenodo.
 
-## Zenodo Record and Metadata
+## How to contribute?
 
-GeoLocator data packages are published on [Zenodo](https://zenodo.org/) because it provides:
+If you have multi-sensor geolocator data and would like to contribute a GeoLocator Data Package, follow the workflow below.
+
+1. [`create_geopressuretemplate()`](https://raphaelnussbaumer.com/GeoLocatoR/reference/create_geopressuretemplate.html): Set up your local GeoPressureTemplate project folder [[guide](https://raphaelnussbaumer.com/GeoPressureManual/geopressuretemplate-intro.html)].
+2. [`geopressuretemplate()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressuretemplate.html): Run trajectory analyses in your GeoPressureTemplate project [[guide](https://raphaelnussbaumer.com/GeoPressureManual/geopressuretemplate-workflow.html)].
+3. [`read_geopressuretemplate()`](https://raphaelnussbaumer.com/GeoLocatoR/reference/read_geopressuretemplate.html): Build your GeoLocator Data Package from the template outputs [[guide](https://raphaelnussbaumer.com/GeoPressureManual/geolocator-create.html)].
+4. Draft the record on [`Zenodo`](https://zenodo.org/) with metadata, reserve the DOI, and select the GeoLocator-DP community (without publishing yet) [[guide](https://help.zenodo.org/docs/share/submit-to-community/)].
+5. [`validate_gldp()`](https://raphaelnussbaumer.com/GeoLocatoR/reference/validate_gldp.html) and [`GeoLocatoR::plot()`](https://raphaelnussbaumer.com/GeoLocatoR/): Validate the package and resolve issues until all checks pass [[guide](https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html)].
+6. Submit for curation and publish the record [[guide](https://help.zenodo.org/docs/share/submit-to-community/)].
+
+<img src="{{ '/assets/user_steps.svg' | relative_url }}" alt="Contribution workflow from setup to publication" style="width: 100%; max-width: 820px; display: block; margin: 0 auto 1rem auto;" />
+
+<div class="alert alert-info" style="padding-left: 32px;" markdown="1">
+
+Why using Zenodo?
 
 1. long-term hosting, DOI assignment, and versioned records,
 2. a simple and reliable way to manage metadata through web forms,
 3. community curation through the [GeoLocator DP Zenodo community](https://zenodo.org/communities/geolocator-dp/).
 
-{:.alert .alert-info style="padding-left: 32px;"}
-For practical publishing steps to create and use a GeoLocator data package, see the [GeoLocatoR chapters in the GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/geolocator-intro.html).
+</div>
+
+{:.alert .alert-danger style="padding-left: 32px;"}
+For the metadata checklist, validation policy, and visual quality checks before release, see the [Curation page]({{ '/curation/' | relative_url }}).
 
 ## Resources
 
