@@ -35,3 +35,12 @@ Create a production-style build:
 ```bash
 JEKYLL_ENV=production bundle exec jekyll build
 ```
+
+Run validation tests:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r tests/requirements.txt
+python tests/validate_profile_and_schemas.py
+```
