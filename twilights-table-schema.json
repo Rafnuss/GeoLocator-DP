@@ -1,7 +1,7 @@
 {
   "name": "twilights",
   "title": "Twilights",
-  "description": "Table with twilights data inferred from light data for all tags. Twilight data is typically computed with [`GeoPressureR::twilight_create()`](https://raphaelnussbaumer.com/GeoPressureR/reference/twilight_create.html).",
+  "description": "Table containing twilight data inferred from light data for all tags. Twilight data is typically computed with [`GeoPressureR::twilight_create()`](https://raphaelnussbaumer.com/GeoPressureR/reference/twilight_create.html).",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "name": "twilight",
-      "description": "Date and time of the twilights. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
+      "description": "Date and time of the twilight event. Formatted as an ISO 8601 string with timezone designator `YYYY-MM-DDThh:mm:ssZ`.",
       "type": "datetime",
       "constraints": {
         "required": true
@@ -34,7 +34,7 @@
     },
     {
       "name": "label",
-      "description": "Labeling of the twilight data according to the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/light-map.html#manual-labelling-of-twilight). The value `discard` indicates that the twilight should not be used for geopositioning. Any other value can be use without affecting the workflow, typically set to `stap_id` allows to visualize which twilight belong to the same stationary period on trainset.",
+      "description": "Labeling of twilight data according to the [GeoPressureManual](https://raphaelnussbaumer.com/GeoPressureManual/light-map.html#manual-labelling-of-twilight). The value `discard` indicates that the twilight should not be used for geopositioning. Any other value can be used without affecting the workflow; setting it to `stap_id` typically helps visualize which twilights belong to the same stationary period in the training set.",
       "type": "string",
       "constraints": {
         "required": false

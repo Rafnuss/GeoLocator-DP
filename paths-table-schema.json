@@ -1,7 +1,7 @@
 {
   "name": "paths",
   "title": "Paths",
-  "description": "A GeoPressureR `path` contains the positions of a bird's trajectory. \n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 types of path : `tag`, `most_likely`, `simulation` and `geopressureviz`. See [`paths.type`](#type) for more details. \n\n `path` should always be used in combination with [`staps`](geopressurer/staps) which can be JOIN by `tag_id` and `stap_id`.",
+  "description": "A GeoPressureR `path` contains positions along a bird trajectory.\n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 path types: `tag`, `most_likely`, `simulation`, and `geopressureviz`. See [`paths.type`](#type) for more details.\n\n`path` should always be used in combination with [`staps`](/GeoLocator-DP/geopressurer/staps), joined by the composite key (`tag_id`, `stap_id`).",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "name": "type",
-      "description": "One of:\n - `tag`: Create with [`tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path) from a likelihood map.\n - `most_likely`: Created with [`graph_most_likely()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_most_likely.html)\n- `simulation`: created by [`graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation): \n- `geopressureviz`: created by [`geopressureviz()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressureviz).",
+      "description": "One of:\n - `tag`: Created with [`tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path) from a likelihood map.\n - `most_likely`: Created with [`graph_most_likely()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_most_likely.html).\n - `simulation`: Created by [`graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation).\n - `geopressureviz`: Created by [`geopressureviz()`](https://raphaelnussbaumer.com/GeoPressureR/reference/geopressureviz).",
       "type": "string",
       "constraints": {
         "required": true,
@@ -25,7 +25,7 @@
     },
     {
       "name": "stap_id",
-      "description": "Identifier of the stationary period. Foreign key to [`staps.stap_id`](/GeoLocator-DP/geopressurer/staps#stap_id)",
+      "description": "Identifier of the stationary period. Together with [`tag_id`](#tag_id), this forms a foreign key to [`staps`](/GeoLocator-DP/geopressurer/staps) (`tag_id`, `stap_id`).",
       "type": "number",
       "constraints": {
         "required": true
@@ -57,42 +57,14 @@
       "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/decimalLongitude"
     },
     {
-      "name": "ind",
-      "description": "Indices of the 2D coordinate of the spatial map defined in [`GeoPressureR::tag_set_map()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag_set_map) (see also [`GeoPressureR::map_expand()`](https://raphaelnussbaumer.com/GeoPressureR/reference/map_expand). Useful to retrieve information on the graph (e.g. [`GeoPressureR::path2edge()`](https://raphaelnussbaumer.com/GeoPressureR/reference/path2edge). This value is the main way to create a path in GeoPressureR through [`GeoPressureR::ind2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/ind2path).",
-      "type": "integer",
-      "constraints": {
-        "required": false,
-        "minimum": 1
-      },
-      "example": "23343"
-    },
-    {
       "name": "j",
-      "description": "Unique identifier for each trajectory. Only useful for `paths.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation)`.",
+      "description": "Unique identifier for each trajectory. Only useful for `paths.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://raphaelnussbaumer.com/GeoPressureR/reference/graph_simulation).",
       "type": "integer",
       "constraints": {
         "required": false,
         "minimum": 1
       },
       "example": "1"
-    },
-    {
-      "name": "interp",
-      "description": "Only useful for `paths.type='tag'`. Boolean value to indicate if the position was interpolated as defined by the `interp` parameter in [`GeoPressureR::tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path).",
-      "type": "boolean",
-      "constraints": {
-        "required": false
-      },
-      "example": "true"
-    },
-    {
-      "name": "known",
-      "description": "Boolean to indicate if the position is taken from a known value. Genearally, `TRUE` if [`staps.known_lat`](geopressurer/staps#known_lat) and [`staps.known_lon`](geopressurer/staps#known_lon) provided. Only different if `paths.type='tag'` and `use_known=FALSE` used in [`GeoPressureR::tag2path()`](https://raphaelnussbaumer.com/GeoPressureR/reference/tag2path).",
-      "type": "boolean",
-      "constraints": {
-        "required": false
-      },
-      "example": "true"
     }
   ],
   "missingValues": ["", "NA"],
@@ -105,10 +77,10 @@
       }
     },
     {
-      "fields": "stap_id",
+      "fields": ["tag_id", "stap_id"],
       "reference": {
         "resource": "staps",
-        "fields": "stap_id"
+        "fields": ["tag_id", "stap_id"]
       }
     }
   ],

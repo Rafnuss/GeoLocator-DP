@@ -1,12 +1,12 @@
 {
   "name": "observations",
   "title": "observations",
-  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) resources from a GeoLocator Data Package containing any relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that happened typically on the field and which provide important information for the analysis. These observations must typically include at least the equipment and, if appropriate, the retrieval, but also any ringing control or direct sightings for instance.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described by at least, the `datetime` of the observation, the location (`latitude` and `longitude`), the `ring_number` of the bird and the type of observations `observation_type` (e.g., equipment, retrieval or control). In addition, we require also `age` and `age_class` (which can be set as unknown `U`).\n\n Also include the ringing events of any control group (i.e., birds ringed but not equipped with a tag).\n\n **Example:** [`observations.csv`](https://github.com/Rafnuss/GeoLocator-DP/blob/main/example/observations.csv)",
+  "description": "`observations.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) resource from a GeoLocator Data Package containing relevant [events](http://rs.tdwg.org/dwc/terms/Event) (datetime and location) that typically happen in the field and provide important information for analysis. These observations should include at least equipment and, when appropriate, retrieval events, as well as ringing controls or direct sightings.\n\n{:.alert .alert-info}\nYou can think of `observations` as your log entries in your ringing book.\n\nAn observation is described at minimum by `datetime`, location (`latitude` and `longitude`), `ring_number`, and `observation_type` (e.g., equipment, retrieval, or capture). In addition, `sex` and `age_class` are required (use `U` for unknown `sex` and `0` for unknown `age_class`).\n\nAlso include ringing events for any control group (i.e., birds ringed but not equipped with a tag).\n\n **Example:** [`observations.csv`](https://github.com/Rafnuss/GeoLocator-DP/blob/main/example/observations.csv)",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
       "name": "ring_number",
-      "description": "Ring number associated with the observed species. Foreign key to [`tags.ring_number`](/GeoLocator-DP/core/tags#ring_number).",
+      "description": "Ring number associated with the observed bird. This is the bird-level identifier used to connect observations over time. It is not a strict foreign key because the same `ring_number` can appear in multiple `tags` rows (e.g., multiple deployments on the same bird).",
       "type": "string",
       "constraints": {
         "required": true
@@ -16,7 +16,7 @@
     },
     {
       "name": "tag_id",
-      "description": "Unique identifier of the tag. `tag_id` is NOT required in this table so that you can enter any relevant ringed specied (e.g. control group). Foreign key to [`tags.tag_id`](/GeoLocator-DP/core/tags#tag_id).",
+      "description": "Unique identifier of the tag. `tag_id` is NOT required in this table so that you can enter any relevant ringed species (e.g., control group). Foreign key to [`tags.tag_id`](/GeoLocator-DP/core/tags#tag_id). When provided, it should refer to a deployment associated with the same bird (`ring_number`).",
       "type": "string",
       "constraints": {
         "required": false
@@ -25,7 +25,7 @@
     },
     {
       "name": "observation_type",
-      "description": "Type of observation. \n - `equipment`: Attachment of the tag on the bird. If you're equipping a new tag at the same time as retrieving an old one from the same bird, create two dedicated rows in the dataset: one for the retrieval and one for the equipment. \n - `retrieval`: Retrieval of the data. Generally through recapture and removal of the tag from the bird but can also be through remote download readout method (see [`tags.readout_method`](core/tags/#readout_method)).\n - `capture`: General case of capture of a bird while not deploying nor retrieving a tag. This option covers the case of (1) recapturing a bird without a device (choose `missing` in `device_status`), (2) the case of a capture before an `equipment` or after a `retrieval` and (3) and capture of individuals from the control group. Recapture/retrap are not hard coded in the dataset, but inferred from consecutive capture of the same `ring_number`. \n - `sighting`: Known presence of the bird on a date and location besides ringing (e.g. direct observation in the field with color ring)\n - `other`: Other type of observation. Avoid using this, and if using, always provide [`observation_comments`](core/observations/#observation_comments).",
+      "description": "Type of observation.\n - `equipment`: Attachment of the tag to the bird. If you equip a new tag at the same time as retrieving an old one from the same bird, create two dedicated rows in the dataset: one for retrieval and one for equipment.\n - `retrieval`: Retrieval of the data, generally through recapture and tag removal, but it can also happen through remote download readout methods (see [`tags.readout_method`](/GeoLocator-DP/core/tags#readout_method)).\n - `capture`: General case of capturing a bird while neither deploying nor retrieving a tag. This option covers (1) recapturing a bird without a device (choose `missing` in `device_status`), (2) a capture before `equipment` or after `retrieval`, and (3) captures of individuals from the control group. Recapture/retrap are not hard-coded in the dataset, but inferred from consecutive captures of the same `ring_number`.\n - `sighting`: Known presence of the bird on a date and location outside ringing (e.g., direct field observation with a color ring).\n - `other`: Any other observation type. Avoid using this; if used, always provide [`observation_comments`](/GeoLocator-DP/core/observations#observation_comments).",
       "type": "string",
       "constraints": {
         "required": true,
@@ -35,7 +35,7 @@
     },
     {
       "name": "datetime",
-      "description": "Date and optionally time of the observation. Accepts any valid [ISO 8601](https://wikipedia.org/wiki/ISO_8601) date or datetime string, including date-only (`YYYY-MM-DD`), full datetime in local time (`YYYY-MM-DDThh:mm`), in UTC (`YYYY-MM-DDThh:mmZ`) or any specific timezone ()`YYYY-MM-DDThh:mm+hh:mm`).",
+      "description": "Date and optionally time of the observation. Accepts any valid [ISO 8601](https://wikipedia.org/wiki/ISO_8601) date or datetime string, including date-only (`YYYY-MM-DD`), full datetime in local time (`YYYY-MM-DDThh:mm`), in UTC (`YYYY-MM-DDThh:mmZ`), or in any specific timezone (`YYYY-MM-DDThh:mm+hh:mm`).",
       "skos:broadMatch": "http://rs.tdwg.org/dwc/terms/eventDate",
       "type": "datetime",
       "constraints": {
@@ -88,7 +88,7 @@
     },
     {
       "name": "device_status",
-      "description": "Status of the tag itself (not the data inside the tag): \n - `present`: Tag on the bird.\n- `none`: No tag present on the bird and this is expected (e.g. pre-equipmenet, post-removal, or control group). Only for `observation_type='capture'`.\n - `missing`: Tag lost by the bird. Only for `observation_type='capture'`. In case a new tag is deployed on a bird which has lost his previous tag, create two rows: one `capture`-`missing` and one `equipment`-`present`.\n - `unknown`: Only for `observation_type = 'sighting'`. \n\n Can only be `present` for `observation_type` `equipment` or `retrieval`.",
+      "description": "Status of the tag itself (not the data inside the tag):\n - `present`: Tag on the bird.\n - `none`: No tag on the bird and this is expected (e.g., pre-equipment, post-removal, or control group). Only for `observation_type='capture'`.\n - `missing`: Tag lost by the bird. Only for `observation_type='capture'`. If a new tag is deployed on a bird that lost its previous tag, create two rows: one `capture`-`missing` and one `equipment`-`present`.\n - `unknown`: Only for `observation_type='sighting'`.\n\nCan only be `present` for `observation_type` `equipment` or `retrieval`.",
       "type": "string",
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
       "constraints": {
@@ -112,7 +112,7 @@
     },
     {
       "name": "catching_method",
-      "description": "Catching method according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=12). Generally, one of:\n - `M`: *M*isnet\n - `N`: on *n*est\n - `Z`: unknown",
+      "description": "Catching method according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=12). Generally, one of:\n - `M`: *m*ist-net\n - `N`: on *n*est\n - `Z`: unknown",
       "type": "string",
       "constraints": {
         "required": false,
@@ -144,7 +144,7 @@
     },
     {
       "name": "age_class",
-      "description": "Life stage of the bird according to the age class in [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=14). \n- `0`: Unknown\n- `1`: Pullus\n- `2`: Full-grown\n- `3`: 1yr\n- `4`: >1yr\n- `5`: 2yr\n- `6`: >2yr",
+      "description": "Life stage of the bird according to the age class in [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=14). \n- `0`: Unknown\n- `1`: Pullus\n- `2`: Full-grown\n- `3`: 1yr\n- `4`: >1yr\n- `5`: 2yr\n- `6`: >2yr\n- ...",
       "type": "string",
       "constraints": {
         "required": true,
@@ -191,7 +191,7 @@
     },
     {
       "name": "condition",
-      "description": "Condition of bird follow a simplified version of [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=23). Assumed to be `alive` if not provided",
+      "description": "Condition of the bird following a simplified version of the [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=23). Assumed to be `alive` if not provided.",
       "type": "string",
       "constraints": {
         "required": false,
@@ -214,7 +214,7 @@
     },
     {
       "name": "wing_length",
-      "description": "Maximum chord measurement. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=26). Expressed in milimeters.",
+      "description": "Maximum chord measurement. See [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=26). Expressed in millimeters.",
       "type": "number",
       "constraints": {
         "required": false,
@@ -260,13 +260,6 @@
       "reference": {
         "resource": "tags",
         "fields": "tag_id"
-      }
-    },
-    {
-      "fields": "ring_number",
-      "reference": {
-        "resource": "tags",
-        "fields": "ring_number"
       }
     }
   ],

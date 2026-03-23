@@ -1,7 +1,7 @@
 {
   "name": "tags",
   "title": "Tags",
-  "description": "`tags.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) resources from a GeoLocator Data Package. As we assumes that a tag is only deployed once on a single species, this table contains information related to the device, the deployment and the animal equipped. Data collected on the bird which might be changing over time (e.g., `age`) should be provided in the [`observations`](/GeoLocator-DP/GeoLocator-DP/core/observations) table.\n\nAdditional data can be provided by following the [Movebank tag attribute dictionary](https://www.movebank.org/cms/movebank-content/movebank-attribute-dictionary#tag_attributes) and [Movebank deployment attribute dictionary](https://www.movebank.org/cms/movebank-content/movebank-attribute-dictionary#deployment_attributes). \n\n **Example:** [`tag.csv`](https://github.com/Rafnuss/GeoLocator-DP/blob/main/example/tags.csv)",
+  "description": "`tags.csv` is a [tabular data](https://datapackage.org/standard/glossary/#tabular-data) resource from a GeoLocator Data Package. Each tag listed in this table is assumed to have been deployed only once on a single bird. This table contains information about the device, the deployment, and the equipped bird. Data collected on the bird that may change over time (e.g., `age_class`) should be provided in the [`observations`](/GeoLocator-DP/core/observations) table.\n\nAdditional data can be provided by following the [Movebank tag attribute dictionary](https://www.movebank.org/cms/movebank-content/movebank-attribute-dictionary#tag_attributes) and [Movebank deployment attribute dictionary](https://www.movebank.org/cms/movebank-content/movebank-attribute-dictionary#deployment_attributes).\n\n **Example:** [`tags.csv`](https://github.com/Rafnuss/GeoLocator-DP/blob/main/example/tags.csv)",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -26,7 +26,7 @@
     },
     {
       "name": "ring_number",
-      "description": "Ring number associated with the tagged species. Use `null` if the tag was not deployed.",
+      "description": "Ring number associated with the tagged bird. This value is not unique at table level because the same bird can receive multiple tag deployments (`tag_id`).",
       "type": "string",
       "constraints": {
         "required": true
@@ -36,7 +36,7 @@
     },
     {
       "name": "scientific_name",
-      "description": "Scientific name of the tagged species. Use `null` if the tag was not deployed.",
+      "description": "Scientific name of the tagged species.",
       "type": "string",
       "constraints": {
         "required": true
@@ -59,7 +59,7 @@
     },
     {
       "name": "model",
-      "description": "Model/design/version of the tag. Any specification of the device able to identify it.",
+      "description": "Model/design/version of the tag. Any device specification that can identify it.",
       "type": "string",
       "constraints": {
         "required": true
@@ -91,7 +91,7 @@
     },
     {
       "name": "attachment_type",
-      "description": "The way a tag is attached to an animal. Use values from [Movebank `attachment type` concept](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000052) values if possible. Assumed to be `harness` if not provided. You can also provide the material used.",
+      "description": "The way a tag is attached to an animal. Use values from the [Movebank `attachment type` concept](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000052) if possible. Assumed to be `harness` if not provided. You can also provide the material used.",
       "type": "string",
       "constraints": {
         "required": false
@@ -102,7 +102,7 @@
     {
       "name": "readout_method",
       "type": "string",
-      "description": "The way the data are received from the tag. Use value from [Movebank `tag readout method` concept](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000188/) if possible. Assumed to be `tag-retrieval` if not provided",
+      "description": "The way the data are received from the tag. Use values from the [Movebank `tag readout method` concept](https://vocab.nerc.ac.uk/collection/MVB/current/MVB000188/) if possible. Assumed to be `tag-retrieval` if not provided.",
       "constraints": {
         "required": false
       },
@@ -111,7 +111,7 @@
     },
     {
       "name": "tag_comments",
-      "description": "Comments or notes about the tag, deployment or animal.",
+      "description": "Comments or notes about the tag, deployment, or animal. Use this field to provide additional information that does not fit in other fields, such as data-quality issues, deployment/retrieval details, or analysis notes (e.g., labeling effort, quality checks, or issues encountered).",
       "type": "string",
       "constraints": {
         "required": false

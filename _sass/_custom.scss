@@ -1,0 +1,86 @@
+// Alert palette overrides to align Bootstrap callouts with GeoLocator DP branding.
+
+.alert {
+  border-left-width: 0.35rem;
+  padding-left: 2.75rem !important;
+  position: relative;
+}
+
+.alert::before {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: calc(var(--bs-alert-padding-y) + 0.35rem);
+  width: 1rem;
+  height: 1rem;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.alert-primary {
+  --bs-alert-color: #1f3a34;
+  --bs-alert-bg: #e7f2ee;
+  --bs-alert-border-color: #b6d0c6;
+  --bs-alert-link-color: #173029;
+  border-left-color: #516f6a;
+}
+
+.alert-primary::before {
+  -webkit-mask-image: url("../../icons/check-circle-fill.svg");
+  mask-image: url("../../icons/check-circle-fill.svg");
+}
+
+.alert-info {
+  --bs-alert-color: #0f4550;
+  --bs-alert-bg: #e6f4f7;
+  --bs-alert-border-color: #b8d9e1;
+  --bs-alert-link-color: #0b3942;
+  border-left-color: #3c8aa0;
+}
+
+.alert-info::before {
+  -webkit-mask-image: url("../../icons/info-circle-fill.svg");
+  mask-image: url("../../icons/info-circle-fill.svg");
+}
+
+.alert-tips {
+  --bs-alert-color: #3f3307;
+  --bs-alert-bg: #fff8e8;
+  --bs-alert-border-color: #ecd8a3;
+  --bs-alert-link-color: #2f2505;
+  border-left-color: #bf8b12;
+}
+
+.alert-tips::before {
+  -webkit-mask-image: url("../../icons/info-circle-fill.svg");
+  mask-image: url("../../icons/info-circle-fill.svg");
+}
+
+.alert-warning {
+  --bs-alert-color: #5f460f;
+  --bs-alert-bg: #fff6df;
+  --bs-alert-border-color: #f0da9c;
+  --bs-alert-link-color: #4a380b;
+  border-left-color: #c9951b;
+}
+
+.alert-warning::before {
+  -webkit-mask-image: url("../../icons/exclamation-triangle-fill.svg");
+  mask-image: url("../../icons/exclamation-triangle-fill.svg");
+}
+
+.alert-danger {
+  --bs-alert-color: #6d1f23;
+  --bs-alert-bg: #fbeaea;
+  --bs-alert-border-color: #f2c7c9;
+  --bs-alert-link-color: #5a171b;
+  border-left-color: #c1353f;
+}
+
+.alert-danger::before {
+  -webkit-mask-image: url("../../icons/exclamation-triangle-fill.svg");
+  mask-image: url("../../icons/exclamation-triangle-fill.svg");
+}
