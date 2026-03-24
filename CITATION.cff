@@ -2,22 +2,19 @@ cff-version: 1.2.0
 type: software
 license: MIT
 title: GeoLocator Data Package
+version: 1.0
 authors:
   - family-names: Nussbaumer
     given-names: Raphaël
     email: GeoPressure@gmail.com
     affiliation: Swiss Ornithological Institute
     orcid: https://orcid.org/0000-0002-8185-1020
-  - family-names: Capilla-Lasheras
-    given-names: Pablo
-    email: pablo.capilla@gvogelwarte.ch
-    affiliation: Swiss Ornithological Institute
-    orcid: https://orcid.org/0000-0001-6091-7089
   - family-names: Desmet
     given-names: Peter
     email: peter.desmet@inbo.be
     affiliation: Research Institute for Nature and Forest
     orcid: https://orcid.org/0000-0002-8442-8025
+  - name: GeoLocator DP Development Team
 repository-code: https://github.com/GeoPressure/geolocator-dp
 url: https://geopressure.org/GeoLocator-DP/
 date-released: "2024-12-02"
