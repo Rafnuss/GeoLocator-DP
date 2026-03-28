@@ -1,5 +1,16 @@
 // Alert palette overrides to align Bootstrap callouts with GeoLocator DP branding.
 
+// Override theme blue disclosure marker color in content details blocks.
+body .content details summary::marker {
+  color: currentColor;
+}
+
+// Remove theme vertical padding on details summary rows.
+body .content details summary {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 .alert {
   border-left-width: 0.35rem;
   padding-left: 2.75rem !important;

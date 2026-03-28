@@ -112,44 +112,31 @@
 
   .schema-title {
     margin: 0;
-    padding: 14px 14px;
     background: var(--header-bg);
     color: var(--table-header-text);
     font-size: 1.3rem;
     line-height: 1.25;
     text-align: center;
     text-transform: none;
-    transition: filter 140ms ease;
+    transition: background-color 140ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: default;
   }
 
   .schema-title:hover {
-    filter: brightness(0.96);
+    background: var(--header-bg);
+    background: color-mix(in srgb, var(--header-bg) 92%, #000 8%);
   }
 
   .schema-title-content {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-  }
-
-  .schema-title-link {
-    color: inherit;
-    text-decoration: none;
-    border-radius: 999px;
-    padding: 3px 10px;
-    transition:
-      background-color 140ms ease,
-      box-shadow 140ms ease,
-      transform 140ms ease;
-  }
-
-  .schema-title-link:hover,
-  .schema-title-link:focus-visible {
-    text-decoration: none;
-    background: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.18);
-    transform: translateY(-1px);
+    width: 100%;
+    padding: 14px 14px;
   }
 
   .schema-title-icon {
@@ -186,13 +173,18 @@
     line-height: 1.2;
     font-size: 1.2rem;
     background: #fff;
-    transition: background-color 140ms ease;
+    transition: background-color 0.15s ease;
     cursor: default;
   }
 
   .schema-field:hover {
-    background: #eaeaea;
+    background: #f0f0f0;
     box-shadow: none;
+  }
+
+  .schema-title[data-bs-toggle="tooltip"],
+  .schema-field[data-bs-toggle="tooltip"] {
+    cursor: pointer;
   }
 
   .schema-field-content {
@@ -230,8 +222,8 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     marker-end: url(#connector-arrowhead);
-    pointer-events: stroke;
-    cursor: pointer;
+    pointer-events: none;
+    cursor: default;
     transition:
       opacity 120ms ease,
       stroke-width 120ms ease;
@@ -855,7 +847,13 @@
       const heading = document.createElement("h2");
       heading.className = "schema-title";
       heading.id = `title-${tableId}`;
-      const headingTooltipMarkdown = firstMarkdownParagraph(table.description);
+      const tableDocHref = CONFIG.tableDocs[table.name];
+      const headingTooltipMarkdown = [
+        firstMarkdownParagraph(table.description),
+        tableDocHref ? `[Open table page](${tableDocHref})` : "",
+      ]
+        .filter(Boolean)
+        .join("\n\n");
       if (headingTooltipMarkdown) {
         heading.setAttribute("data-bs-toggle", "tooltip");
         heading.setAttribute("data-bs-title", headingTooltipMarkdown);
@@ -863,13 +861,8 @@
         heading.setAttribute("data-bs-custom-class", "schema-tooltip");
         heading.setAttribute("data-bs-placement", "top");
       }
-      const tableDocHref = CONFIG.tableDocs[table.name];
-      const titleContent = document.createElement(tableDocHref ? "a" : "span");
-      titleContent.className = `schema-title-content${tableDocHref ? " schema-title-link" : ""}`;
-      if (tableDocHref) {
-        titleContent.href = tableDocHref;
-        titleContent.setAttribute("aria-label", `${table.name} table documentation`);
-      }
+      const titleContent = document.createElement("span");
+      titleContent.className = "schema-title-content";
       const iconPath = CONFIG.tableIcons[table.name];
       if (iconPath) {
         const icon = document.createElement("span");
@@ -1079,7 +1072,6 @@
     if (!window.bootstrap || !window.bootstrap.Tooltip) {
       return;
     }
-    const hideDelayMs = 150;
     const elements = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     for (const el of elements) {
       const existing = window.bootstrap.Tooltip.getInstance(el);
@@ -1089,45 +1081,45 @@
       const markdown =
         el.getAttribute("data-md-description") || el.getAttribute("data-bs-title") || "";
       const htmlTitle = markdownToHtml(markdown);
-      const tooltip = new window.bootstrap.Tooltip(el, {
+      new window.bootstrap.Tooltip(el, {
         container: "body",
-        trigger: "manual",
+        trigger: "click",
         html: true,
         sanitize: false,
         title: htmlTitle,
       });
 
-      let hideTimer = null;
-      const clearHideTimer = () => {
-        if (hideTimer) {
-          window.clearTimeout(hideTimer);
-          hideTimer = null;
+      // Keep only one diagram tooltip open at a time.
+      el.addEventListener("show.bs.tooltip", () => {
+        for (const otherEl of elements) {
+          if (otherEl === el) {
+            continue;
+          }
+          const otherTooltip = window.bootstrap.Tooltip.getInstance(otherEl);
+          if (otherTooltip) {
+            otherTooltip.hide();
+          }
         }
-      };
-      const showTooltip = () => {
-        clearHideTimer();
-        tooltip.show();
-      };
-      const scheduleHide = () => {
-        clearHideTimer();
-        hideTimer = window.setTimeout(() => {
-          tooltip.hide();
-        }, hideDelayMs);
-      };
+      });
+    }
 
-      el.addEventListener("mouseenter", showTooltip);
-      el.addEventListener("focusin", showTooltip);
-      el.addEventListener("mouseleave", scheduleHide);
-      el.addEventListener("focusout", scheduleHide);
-      el.addEventListener("shown.bs.tooltip", () => {
-        const tipEl =
-          typeof tooltip.getTipElement === "function" ? tooltip.getTipElement() : tooltip.tip;
-        if (!tipEl || tipEl.dataset.hoverBound === "true") {
+    if (document.body.dataset.schemaTooltipDismissBound !== "true") {
+      document.body.dataset.schemaTooltipDismissBound = "true";
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) {
           return;
         }
-        tipEl.dataset.hoverBound = "true";
-        tipEl.addEventListener("mouseenter", clearHideTimer);
-        tipEl.addEventListener("mouseleave", scheduleHide);
+        if (target.closest('[data-bs-toggle="tooltip"], .tooltip')) {
+          return;
+        }
+        const activeElements = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        for (const el of activeElements) {
+          const tooltip = window.bootstrap.Tooltip.getInstance(el);
+          if (tooltip) {
+            tooltip.hide();
+          }
+        }
       });
     }
   }
@@ -1521,7 +1513,6 @@
       renderTables(tables);
       initTooltips();
       drawConnectors(state.relations);
-      setupConnectorHover();
       setLoadingState(false, "", "loading");
       setLegendState(true);
     } catch (err) {
