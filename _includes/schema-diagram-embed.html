@@ -11,6 +11,8 @@
     --shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
     --line-color: #111827;
     --line-width: 2.5;
+    --legend-core-color: #d86b5f;
+    --legend-geo-color: #2d8d9f;
   }
 
   * {
@@ -31,7 +33,7 @@
     position: relative;
     width: var(--page-width);
     min-height: 420px;
-    padding: 12px;
+    padding: 12px 12px 44px;
   }
 
   .diagram-loading {
@@ -256,13 +258,11 @@
   }
 
   .legend-box {
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
-    z-index: 4;
-    margin: 0;
-    width: 800px;
-    max-width: calc(100% - 40px);
+    position: relative;
+    z-index: 2;
+    margin: 12px auto 0;
+    width: 100%;
+    max-width: 100%;
     padding: 10px 12px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
@@ -286,7 +286,9 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px 12px;
+    justify-content: space-evenly;
+    row-gap: 10px;
+    column-gap: 20px;
   }
 
   .legend-item {
@@ -354,11 +356,11 @@
   }
 
   .legend-swatch--core {
-    background: #d86b5f;
+    background: var(--legend-core-color);
   }
 
   .legend-swatch--geo {
-    background: #2d8d9f;
+    background: var(--legend-geo-color);
   }
 
   @media (max-width: 1200px) {
@@ -384,9 +386,8 @@
     }
 
     .legend-box {
-      width: min(440px, calc(100% - 24px));
-      left: 12px;
-      bottom: 12px;
+      width: 100%;
+      max-width: 100%;
     }
   }
 
@@ -431,10 +432,9 @@
     }
 
     .legend-box {
-      width: 440px !important;
-      max-width: calc(100% - 24px) !important;
-      left: 12px !important;
-      bottom: 12px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 12px auto 0 !important;
     }
   }
 </style>
@@ -451,6 +451,8 @@
     </div>
     <svg id="connector-layer" aria-hidden="true"></svg>
     <div id="tables-grid"></div>
+  </section>
+  <div class="col-md-10 col-lg-8 mx-auto">
     <aside id="diagram-legend" class="legend-box" aria-label="Diagram legend" aria-hidden="true">
       <p class="legend-title">Legend</p>
       <div class="legend-items">
@@ -476,17 +478,9 @@
           <span class="legend-arrow" aria-hidden="true"></span>
           <span class="legend-label">Foreign key relationship</span>
         </div>
-        <div class="legend-item">
-          <span class="legend-swatch legend-swatch--core" aria-hidden="true"></span>
-          <span class="legend-label">Core tables</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-swatch legend-swatch--geo" aria-hidden="true"></span>
-          <span class="legend-label">GeoPressureR tables</span>
-        </div>
       </div>
     </aside>
-  </section>
+  </div>
 </div>
 <script>
   const CONFIG = {
@@ -504,9 +498,9 @@
     // Array-of-arrays: each inner array is one column from top to bottom.
     layout: [
       ["measurements", "observations"],
-      ["tags", "paths"],
-      ["twilights", "staps"],
-      ["pressurepaths", "edges"],
+      ["tags"],
+      ["pressurepaths", "staps", "paths"],
+      ["twilights", "edges"],
     ],
     tableStyles: {
       tags: { accent: "#cf5b7f" },
@@ -561,6 +555,27 @@
     // Manual order for vertical trunk lanes; lower value sorts first.
     trunkOrder: [
       {
+        sourceTable: "edges",
+        sourceField: "stap_t",
+        targetTable: "staps",
+        targetField: "stap_id",
+        order: -30,
+      },
+      {
+        sourceTable: "edges",
+        sourceField: "stap_s",
+        targetTable: "staps",
+        targetField: "stap_id",
+        order: -20,
+      },
+      {
+        sourceTable: "edges",
+        sourceField: "tag_id",
+        targetTable: "staps",
+        targetField: "tag_id",
+        order: -10,
+      },
+      {
         sourceTable: "pressurepaths",
         sourceField: "tag_id",
         targetTable: "tags",
@@ -573,6 +588,27 @@
         targetTable: "staps",
         targetField: "tag_id",
         order: 10,
+      },
+    ],
+    // Manual trunk position between two layout columns (1-based column numbers).
+    trunkBetweenColumns: [
+      {
+        sourceTable: "twilights",
+        sourceField: "tag_id",
+        targetTable: "tags",
+        targetField: "tag_id",
+        leftColumn: 3,
+        rightColumn: 4,
+      },
+    ],
+    // Manual order for endpoint attachment when multiple connectors share the same field side.
+    endpointOrder: [
+      {
+        sourceTable: "twilights",
+        sourceField: "tag_id",
+        targetTable: "tags",
+        targetField: "tag_id",
+        order: -10,
       },
     ],
     connectorStyle: {
@@ -787,6 +823,37 @@
       }
     }
     return 0;
+  }
+
+  function endpointOrderValue(relation) {
+    for (const rule of CONFIG.endpointOrder || []) {
+      if (matchRelationRule(relation, rule)) {
+        return Number.isFinite(rule.order) ? rule.order : 0;
+      }
+    }
+    return 0;
+  }
+
+  function trunkBetweenColumnsX(relation, columnRects, baseRect) {
+    for (const rule of CONFIG.trunkBetweenColumns || []) {
+      if (!matchRelationRule(relation, rule)) {
+        continue;
+      }
+      const leftIndex = Number(rule.leftColumn) - 1;
+      const rightIndex = Number(rule.rightColumn) - 1;
+      if (!Number.isFinite(leftIndex) || !Number.isFinite(rightIndex)) {
+        continue;
+      }
+      const leftRect = columnRects[leftIndex];
+      const rightRect = columnRects[rightIndex];
+      if (!leftRect || !rightRect) {
+        continue;
+      }
+      const leftX = leftRect.right - baseRect.left;
+      const rightX = rightRect.left - baseRect.left;
+      return (leftX + rightX) / 2;
+    }
+    return null;
   }
 
   async function fetchSchema(file) {
@@ -1255,6 +1322,10 @@
       }
 
       group.sort((a, b) => {
+        const orderDiff = endpointOrderValue(a.edge.rel) - endpointOrderValue(b.edge.rel);
+        if (orderDiff !== 0) {
+          return orderDiff;
+        }
         const yDiff = a.peerY - b.peerY;
         if (yDiff !== 0) {
           return yDiff;
@@ -1281,6 +1352,9 @@
     const wrapper = document.getElementById("diagram-wrapper");
     const svg = document.getElementById("connector-layer");
     const baseRect = wrapper.getBoundingClientRect();
+    const columnRects = [...document.querySelectorAll("#tables-grid .schema-column")].map((el) =>
+      el.getBoundingClientRect(),
+    );
     const columnIndexByTable = getColumnIndexMap();
     const lineColor =
       getComputedStyle(document.documentElement).getPropertyValue("--line-color").trim() ||
@@ -1291,6 +1365,9 @@
     const trunkPadding = 28;
     const arrowHeadSize = Number(CONFIG.connectorStyle?.arrowHeadSize) || 3.2;
     const arrowHeadPadding = Number(CONFIG.connectorStyle?.arrowHeadPadding) || 2;
+    const rootStyles = getComputedStyle(document.documentElement);
+    const coreBandColor = rootStyles.getPropertyValue("--legend-core-color").trim() || "#d86b5f";
+    const geoBandColor = rootStyles.getPropertyValue("--legend-geo-color").trim() || "#2d8d9f";
 
     svg.setAttribute("viewBox", `0 0 ${Math.ceil(baseRect.width)} ${Math.ceil(baseRect.height)}`);
     const defs = makeSvgElement("defs");
@@ -1316,6 +1393,55 @@
     );
     defs.appendChild(arrowHead);
     svg.appendChild(defs);
+
+    const midLeftRect = columnRects[1];
+    const midRightRect = columnRects[2];
+    const splitX =
+      midLeftRect && midRightRect
+        ? (midLeftRect.right + midRightRect.left) / 2 - baseRect.left
+        : null;
+    const bandTopPadding = 10;
+    const bandBottomLabelArea = 38;
+    const sharedTop = Math.min(...columnRects.map((rect) => rect.top)) - baseRect.top - bandTopPadding;
+    const tableBottom = Math.max(...columnRects.map((rect) => rect.bottom)) - baseRect.top;
+    const sharedBottom = tableBottom + bandBottomLabelArea;
+    const labelY = tableBottom + 27;
+    const columnBands = [
+      { startIndex: 0, endIndex: 1, color: coreBandColor, label: "Core resources" },
+      { startIndex: 2, endIndex: 3, color: geoBandColor, label: "GeoPressureR resources" },
+    ];
+    for (const [bandIndex, band] of columnBands.entries()) {
+      const startRect = columnRects[band.startIndex];
+      const endRect = columnRects[band.endIndex];
+      if (!startRect || !endRect) {
+        continue;
+      }
+      const left =
+        splitX != null && bandIndex === 1 ? splitX : startRect.left - baseRect.left - 10;
+      const right =
+        splitX != null && bandIndex === 0 ? splitX : endRect.right - baseRect.left + 10;
+      svg.appendChild(
+        makeSvgElement("rect", {
+          x: String(left),
+          y: String(sharedTop),
+          width: String(Math.max(0, right - left)),
+          height: String(Math.max(0, sharedBottom - sharedTop)),
+          fill: hexToRgba(band.color, 0.12) || "rgba(0,0,0,0.06)",
+          "pointer-events": "none",
+        }),
+      );
+      svg.appendChild(
+        makeSvgElement("text", {
+          x: String((left + right) / 2),
+          y: String(labelY),
+          "text-anchor": "middle",
+          "font-size": "19",
+          "font-weight": "600",
+          fill: band.color,
+          "pointer-events": "none",
+        }),
+      ).textContent = band.label;
+    }
 
     const edges = [];
     for (const rel of relations) {
@@ -1412,6 +1538,12 @@
       },
       laneSpacing,
       (edge, offset) => {
+        const fixedTrunkX = trunkBetweenColumnsX(edge.rel, columnRects, baseRect);
+        if (Number.isFinite(fixedTrunkX)) {
+          edge.trunkX = fixedTrunkX + offset;
+          return;
+        }
+
         if (edge.sameColumn) {
           if (edge.sourceSide === "right") {
             const outerRight =
