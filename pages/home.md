@@ -112,4 +112,4 @@ For the metadata checklist, validation policy, and visual quality checks before 
 
 ## How to Cite
 
-> Nussbaumer, R., Desmet, P. & Geolocaor Developement Team (2024). GeoLocator Data Package. Zenodo. [https://doi.org/10.5281/zenodo.14258411](https://doi.org/10.5281/zenodo.14258411)
+> Nussbaumer, R., Desmet, P. & Geolocator Development Team (2024). GeoLocator Data Package. Zenodo. <https://doi.org/10.5281/zenodo.14258411>
