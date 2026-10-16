@@ -79,7 +79,7 @@
       "description": "Trajectory identifier within each combination of `tag_id` and `type`. For `simulation`, use an integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation). Use `1` for other trajectory types.",
       "type": "integer",
       "constraints": {
-        "required": false,
+        "required": true,
         "minimum": 1
       },
       "example": "1"
@@ -102,5 +102,6 @@
       }
     }
   ],
+  "primaryKey": ["tag_id", "type", "j", "stap_id"],
   "fieldsMatch": "superset"
 }
