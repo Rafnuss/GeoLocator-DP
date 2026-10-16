@@ -20,6 +20,11 @@ rewritten by hand.
 This page collects the [GitHub
 releases](https://github.com/GeoPressure/GeoLocator-DP/releases) in one place.
 
+## Unreleased
+
+### Website
+- Move table rules below the fields with clearer formatting, and render Markdown in category labels.
+
 ## v1.1
 
 *18 September 2026 — [release](https://github.com/GeoPressure/GeoLocator-DP/releases/tag/v1.1)*

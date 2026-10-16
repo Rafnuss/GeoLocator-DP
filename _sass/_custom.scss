@@ -1,5 +1,9 @@
 // Alert palette overrides to align Bootstrap callouts with GeoLocator DP branding.
 
+.schema-notes li {
+  margin-bottom: 0.6rem;
+}
+
 // Override theme blue disclosure marker color in content details blocks.
 body .content details summary::marker {
   color: currentColor;
