@@ -34,6 +34,7 @@ releases](https://github.com/GeoPressure/GeoLocator-DP/releases) in one place.
 ### Fields
 - Require `j` in `paths`, `edges` and `pressurepaths`. GeoPressureR <= 3.6.3 left `j` empty on `pressurepaths` rows in flight, so joins on `type` and `j` dropped them (fixed in [GeoPressureR#180](https://github.com/GeoPressure/GeoPressureR/pull/180)). [GeoLocatoR fills it](https://github.com/GeoPressure/GeoLocatoR/commit/cc2c217) when reading older packages.
 - Add [`primaryKey`](https://datapackage.org/standard/table-schema/#primaryKey) to `paths` (`tag_id`, `type`, `j`, `stap_id`), `edges` (`tag_id`, `type`, `j`, `stap_s`) and `pressurepaths` (`tag_id`, `type`, `j`, `datetime`), so a trajectory cannot appear twice. [`GeoLocatoR::validate_gldp()` checks it](https://github.com/GeoPressure/GeoLocatoR/commit/f65b815).
+- Require `observations.mass` to be greater than 0 ([`exclusiveMinimum`](https://datapackage.org/standard/table-schema/#exclusiveMinimum)): a mass of 0 is a missing value, not a measurement. An upper bound is a guideline, not a rule, so [`GeoLocatoR::validate_gldp()` only warns](https://github.com/GeoPressure/GeoLocatoR/commit/f65b815) above 10,000 g.
 
 ## v1.1
 

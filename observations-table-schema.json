@@ -434,7 +434,7 @@
       "type": "number",
       "constraints": {
         "required": false,
-        "minimum": 0
+        "exclusiveMinimum": 0
       },
       "unit": "grams",
       "skos:exactMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000019",
