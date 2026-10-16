@@ -482,9 +482,17 @@
     </aside>
   </div>
 </div>
+<script type="application/json" id="diagram-schemas">
+{
+{% assign schema_pages = site.pages | where: "layout", "schema" %}
+{% for schema_page in schema_pages %}
+  "{{ schema_page.schema }}.json": {{ site.data[schema_page.schema] | jsonify | replace: '</', '<\/' }}{% unless forloop.last %},{% endunless %}
+{% endfor %}
+}
+</script>
 <script>
+  const schemas = JSON.parse(document.getElementById("diagram-schemas").textContent);
   const CONFIG = {
-    schemaBaseUrl: "https://raw.githubusercontent.com/GeoPressure/geolocator-dp/main",
     schemaFiles: [
       "edges-table-schema.json",
       "measurements-table-schema.json",
@@ -692,6 +700,7 @@
             name: field.name,
             required: !!(field.constraints && field.constraints.required),
             description: field.description || "",
+            categories: field.categories || [],
           };
         })
         .filter(Boolean);
@@ -856,13 +865,8 @@
     return null;
   }
 
-  async function fetchSchema(file) {
-    const url = `${CONFIG.schemaBaseUrl}/${file}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`Could not load ${file} (${res.status})`);
-    }
-    const json = await res.json();
+  function readSchema(file) {
+    const json = schemas[file];
     const tableName = json.name || tableNameFromFile(file);
     const links = extractForeignKeys(json, tableName).filter((link) => !isExcludedRelation(link));
     const fkFields = new Set(links.map((link) => link.sourceField));
@@ -951,10 +955,15 @@
         const item = document.createElement("li");
         item.className = "schema-field";
         item.id = `field-${tableId}-${slug(field.name)}`;
-        if (field.description) {
+        const fieldDescription = [
+          field.description,
+          (field.categories || []).map((category) => `- \`${category.value}\`: ${category.label}`).join("\n"),
+          `[Open field page](${CONFIG.tableDocs[table.name]}#${field.name})`,
+        ].filter(Boolean).join("\n\n");
+        if (fieldDescription) {
           item.setAttribute("data-bs-toggle", "tooltip");
-          item.setAttribute("data-bs-title", field.description);
-          item.setAttribute("data-md-description", field.description);
+          item.setAttribute("data-bs-title", fieldDescription);
+          item.setAttribute("data-md-description", fieldDescription);
           item.setAttribute("data-bs-custom-class", "schema-tooltip");
           item.setAttribute("data-bs-placement", "auto");
         }
@@ -1628,7 +1637,7 @@
     setLoadingState(true, "Loading schema diagram...", "loading");
     setLegendState(false);
     try {
-      const tables = await Promise.all(CONFIG.schemaFiles.map((file) => fetchSchema(file)));
+      const tables = CONFIG.schemaFiles.map(readSchema);
       const relationMap = new Map();
       for (const table of tables) {
         for (const rel of table.links) {
