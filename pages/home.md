@@ -22,7 +22,7 @@ The core GeoLocator DP resources consist of raw geolocator data and deployment i
 | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
 | [`tags.csv`](https://geopressure.org/GeoLocator-DP/core/tags/)                 | Table of devices used in the study. We assume that a `tag` is only used once on a single animal.      |
 | [`measurements.csv`](https://geopressure.org/GeoLocator-DP/core/measurements/) | Table with the raw measurements of all sensors (e.g., light, pressure, ...) for all tags.             |
-| [`observations.csv`](https://geopressure.org/GeoLocator-DP/core/observations/) | Table with the field observations associated with tags such as equipment, retrieval, or other events. |
+| [`observations.csv`](https://geopressure.org/GeoLocator-DP/core/observations/) | Table of bird-level field observations, including equipment, retrieval, and observations of control birds without tags. |
 
 ### 2. GeoPressureR Resources
 
@@ -39,7 +39,7 @@ The GeoPressureR extension consists of optional trajectory data generated throug
 
 ### 3. Local Manifest
 
-Following the [Data Package standard](https://datapackage.org/standard/data-package/), each GeoLocator DP contains a [`datapackage.json`](https://github.com/GeoPressure/GeoLocator-DP/blob/main/geolocator-dp-profile.json) file with: (1) a machine-readable index of all data [`resources`](https://datapackage.org/standard/data-resource/), (2) a package-level [`$schema`](https://datapackage.org/standard/data-package/#dollar-schema) pointing to the GeoLocator DP profile version. Unlike previous versions, in the v1.0, the local manifest stays intentionally minimal, while metadata are managed in Zenodo.
+Following the [Data Package standard](https://datapackage.org/standard/data-package/), each GeoLocator DP contains a [`datapackage.json`](https://github.com/GeoPressure/GeoLocator-DP/blob/main/example/datapackage.json) file with: (1) a machine-readable index of all data [`resources`](https://datapackage.org/standard/data-resource/), (2) a package-level [`$schema`](https://datapackage.org/standard/data-package/#dollar-schema) pointing to the GeoLocator DP profile version. Since v1.0, the local manifest stays intentionally minimal, while metadata are managed in Zenodo. The [GeoLocator DP profile](https://github.com/GeoPressure/GeoLocator-DP/blob/main/geolocator-dp-profile.json) defines the manifest requirements.
 
 ## How to contribute?
 
@@ -56,7 +56,7 @@ If you have multi-sensor geolocator data and would like to contribute a GeoLocat
 
 <div class="alert alert-info" style="padding-left: 32px;" markdown="1">
 
-Why using Zenodo?
+Why use Zenodo?
 
 1. long-term hosting, DOI assignment, and versioned records,
 2. a simple and reliable way to manage metadata through web forms,

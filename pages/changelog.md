@@ -25,6 +25,7 @@ releases](https://github.com/GeoPressure/GeoLocator-DP/releases) in one place.
 ### Website
 - Move table rules below the fields with clearer formatting, and render Markdown in category labels.
 - Build the overview from the same schemas as the table pages, and include categories and field links in tooltips.
+- Fix the manifest example link and clarify bird observations, package loading, and interim-file guidance.
 
 ## v1.1
 

@@ -12,7 +12,10 @@ All submitted records must pass the automated validation of [`validate_gldp()`](
 
 In addition to automated checks, each submission must pass visual and metadata sanity checks. Coverage, ringing, and map plots are inspected to ensure they are biologically plausible and free of obvious artifacts.
 
+Run these checks from the directory containing your package manifest:
+
 ```r
+pkg <- GeoLocatoR::read_gldp("datapackage.json")
 GeoLocatoR::plot(pkg, "coverage")
 GeoLocatoR::plot(pkg, "ring")
 GeoLocatoR::plot(pkg, "map")
@@ -25,14 +28,14 @@ print(pkg)
 
 - **Title**: Must start with `GeoLocator Data Package: `.
 - **Access**: Embargoed records are permitted, but duration must be reasonable and justified, typically until first publication.
-- **Description**: Include minimum contextual information such as study species, main study area, project objective, but alos key processing notes that affect reuse. It's also a good place to invite potential users of the data to get in touch.
+- **Description**: Include minimum contextual information such as study species, main study area, project objective, and key processing notes that affect reuse. It's also a good place to invite potential users of the data to get in touch.
 
 ### Recommended
 
 - **Related works**: Link publications that use the data via related identifiers.
 - **Software/Repository URL**: Provide a link to the GeoPressureTemplate GitHub repository.
 - **Zenodo badge**: Add the Zenodo badge of your repository at the top of the GitHub `README`.
-- **Final interim file**: Update the final interim file on your GitHub repository.
+- **Interim files**: Update the `data/interim/<tag_id>.RData` files in your GeoPressureTemplate repository after the final analysis run so they match the published trajectories.
 - **Author and roles**: Assign author roles as completely as possible using Zenodo/DataCite role options.
 
 <div class="alert alert-info" style="padding-left: 32px;" markdown="1">
