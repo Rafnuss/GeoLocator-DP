@@ -25,28 +25,28 @@
     },
     {
       "name": "observation_type",
-      "description": "Type of observation.\n - `equipment`: Attachment of the tag to the bird. If you equip a new tag at the same time as retrieving an old one from the same bird, create two dedicated rows in the dataset: one for retrieval and one for equipment.\n - `retrieval`: Retrieval of the data, generally through recapture and tag removal, but it can also happen through remote download readout methods (see [`tags.readout_method`](/GeoLocator-DP/core/tags#readout_method)).\n - `capture`: General case of capturing a bird while neither deploying nor retrieving a tag. This option covers (1) recapturing a bird without a device (choose `missing` in `device_status`), (2) a capture before `equipment` or after `retrieval`, and (3) captures of individuals from the control group. Recapture/retrap are not hard-coded in the dataset, but inferred from consecutive captures of the same `ring_number`.\n - `sighting`: Known presence of the bird on a date and location outside ringing (e.g., direct field observation with a color ring).\n - `other`: Any other observation type. Avoid using this; if used, always provide [`observation_comments`](/GeoLocator-DP/core/observations#observation_comments).",
+      "description": "Type of observation.",
       "type": "string",
       "categories": [
         {
           "value": "equipment",
-          "label": "Equipment"
+          "label": "Attachment of the tag to the bird. If you equip a new tag at the same time as retrieving an old one from the same bird, create two dedicated rows in the dataset: one for retrieval and one for equipment."
         },
         {
           "value": "retrieval",
-          "label": "Retrieval"
+          "label": "Retrieval of the data, generally through recapture and tag removal, but it can also happen through remote download readout methods (see [`tags.readout_method`](/GeoLocator-DP/core/tags#readout_method))."
         },
         {
           "value": "capture",
-          "label": "Capture"
+          "label": "General case of capturing a bird while neither deploying nor retrieving a tag. This option covers (1) recapturing a bird without a device (choose `missing` in `device_status`), (2) a capture before `equipment` or after `retrieval`, and (3) captures of individuals from the control group. Recapture/retrap are not hard-coded in the dataset, but inferred from consecutive captures of the same `ring_number`."
         },
         {
           "value": "sighting",
-          "label": "Sighting"
+          "label": "Known presence of the bird on a date and location outside ringing (e.g., direct field observation with a color ring)."
         },
         {
           "value": "other",
-          "label": "Other"
+          "label": "Any other observation type. Avoid using this; if used, always provide [`observation_comments`](/GeoLocator-DP/core/observations#observation_comments)."
         }
       ],
       "constraints": {
@@ -110,24 +110,24 @@
     },
     {
       "name": "device_status",
-      "description": "Status of the tag itself (not the data inside the tag):\n - `present`: Tag on the bird.\n - `none`: No tag on the bird and this is expected (e.g., pre-equipment, post-removal, or control group). Only for `observation_type='capture'`.\n - `missing`: Tag lost by the bird. Only for `observation_type='capture'`. If a new tag is deployed on a bird that lost its previous tag, create two rows: one `capture`-`missing` and one `equipment`-`present`.\n - `unknown`: Only for `observation_type='sighting'`.\n\nCan only be `present` for `observation_type` `equipment` or `retrieval`.",
+      "description": "Status of the tag itself (not the data inside the tag).\n\nCan only be `present` for `observation_type` `equipment` or `retrieval`.",
       "type": "string",
       "categories": [
         {
           "value": "present",
-          "label": "Present"
+          "label": "Tag on the bird."
         },
         {
           "value": "none",
-          "label": "None"
+          "label": "No tag on the bird and this is expected (e.g., pre-equipment, post-removal, or control group). Only for `observation_type='capture'`."
         },
         {
           "value": "missing",
-          "label": "Missing"
+          "label": "Tag lost by the bird. Only for `observation_type='capture'`. If a new tag is deployed on a bird that lost its previous tag, create two rows: one `capture`-`missing` and one `equipment`-`present`."
         },
         {
           "value": "unknown",
-          "label": "Unknown"
+          "label": "Only for `observation_type='sighting'`."
         }
       ],
       "skos:relatedMatch": "http://vocab.nerc.ac.uk/collection/MVB/current/MVB000084",
@@ -152,7 +152,7 @@
     },
     {
       "name": "catching_method",
-      "description": "Catching method according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=12). Most records use `M` (mist net), `N` (on nest) or `Z` (unknown).",
+      "description": "Catching method according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=12). Most records use `M`, `N` or `Z`.",
       "type": "string",
       "categories": [
         {
@@ -373,7 +373,7 @@
     },
     {
       "name": "sex",
-      "description": "Sex of the bird according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=13) as male `M`, female `F` or unknown `U`.",
+      "description": "Sex of the bird according to [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV201.pdf#page=13).",
       "skos:closeMatch": [
         "http://rs.tdwg.org/dwc/terms/sex",
         "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000023"

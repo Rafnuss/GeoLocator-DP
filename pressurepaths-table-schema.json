@@ -34,24 +34,24 @@
     },
     {
       "name": "type",
-      "description": "One of:\n - `tag`: Created with [`tag2path()`](https://geopressure.com/GeoPressureR/reference/tag2path) from a likelihood map.\n - `most_likely`: Created with [`graph_most_likely()`](https://geopressure.com/GeoPressureR/reference/graph_most_likely.html).\n - `simulation`: Created by [`graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation).\n - `geopressureviz`: Created by [`geopressureviz()`](https://geopressure.com/GeoPressureR/reference/geopressureviz).",
+      "description": "Type of trajectory.",
       "type": "string",
       "categories": [
         {
           "value": "tag",
-          "label": "Tag"
+          "label": "Created with [`tag2path()`](https://geopressure.com/GeoPressureR/reference/tag2path) from a likelihood map."
         },
         {
           "value": "most_likely",
-          "label": "Most likely"
+          "label": "Created with [`graph_most_likely()`](https://geopressure.com/GeoPressureR/reference/graph_most_likely.html)."
         },
         {
           "value": "simulation",
-          "label": "Simulation"
+          "label": "Created by [`graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation)."
         },
         {
           "value": "geopressureviz",
-          "label": "GeoPressureViz"
+          "label": "Created by [`geopressureviz()`](https://geopressure.com/GeoPressureR/reference/geopressureviz)."
         }
       ],
       "constraints": {

@@ -15,76 +15,76 @@
     },
     {
       "name": "sensor",
-      "description": "Sensor type.\n - `light`: Light-level values measured by a solar geolocator. Range and units may vary by provider and tag settings.\n - `pressure`: Atmospheric pressure in hPa (or mbar).\n - `activity`: Measure of movement performed by the bird, computed from acceleration sensors. Range and computation method may vary by tag provider, model, settings, and placement on the animal. In general, higher values indicate more activity. Typically computed as the cumulative sum of the absolute difference of acceleration along the z-axis. See [doi:10.1186/s40462-018-0137-1](https://doi.org/10.1186/s40462-018-0137-1) (SOI), [doi:10.1111/jav.01068](https://doi.org/10.1111/jav.01068) (Lund), and the [migratetech report](https://www.migratetech.co.uk/IntigeoSummary.pdf) for more details.\n - `mean_acceleration_z`: Mean acceleration along the z-axis, computed from acceleration sensors. Mainly used by SOI devices. This metric is sometimes used as a proxy for pitch and was named `pitch` in GeoLocator DP versions earlier than v1.0.\n - `temperature_external`: Temperature measured by the tag sensor pointing outward from the animal (air temperature). This typically corresponds to the main external temperature sensor. Units: degrees Celsius.\n - `temperature_internal`: Temperature measured by the tag sensor located between the tag and the animal (body temperature). Units: degrees Celsius.\n - `acceleration_x`: Raw acceleration values provided by the tag for the X axis. Units: m/s^2.\n - `acceleration_y`: Raw acceleration values provided by the tag for the Y axis. Units: m/s^2.\n - `acceleration_z`: Raw acceleration values provided by the tag for the Z axis. Units: m/s^2.\n - `magnetic_x`: Magnetic field strength measured by the magnetometer for the X axis. Units: microtesla.\n - `magnetic_y`: Magnetic field strength measured by the magnetometer for the Y axis. Units: microtesla.\n - `magnetic_z`: Magnetic field strength measured by the magnetometer for the Z axis. Units: microtesla.\n - `wet_count`: Wet count during a measurement interval from the wet-dry sensor. Units are usually device-specific.\n - `conductivity`: Conductivity measured by the wet-dry sensor. Unit varies by model.",
+      "description": "Sensor type.",
       "type": "string",
       "categories": [
         {
           "value": "light",
-          "label": "Light",
+          "label": "Light-level values measured by a solar geolocator. Range and units may vary by provider and tag settings.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000139/"
         },
         {
           "value": "pressure",
-          "label": "Pressure",
+          "label": "Atmospheric pressure in hPa (or mbar).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000055/"
         },
         {
           "value": "activity",
-          "label": "Activity",
+          "label": "Measure of movement performed by the bird, computed from acceleration sensors. Range and computation method may vary by tag provider, model, settings, and placement on the animal. In general, higher values indicate more activity. Typically computed as the cumulative sum of the absolute difference of acceleration along the z-axis. See [doi:10.1186/s40462-018-0137-1](https://doi.org/10.1186/s40462-018-0137-1) (SOI), [doi:10.1111/jav.01068](https://doi.org/10.1111/jav.01068) (Lund), and the [migratetech report](https://www.migratetech.co.uk/IntigeoSummary.pdf) for more details.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000114/"
         },
         {
           "value": "mean_acceleration_z",
-          "label": "Mean acceleration (z-axis)"
+          "label": "Mean acceleration along the z-axis, computed from acceleration sensors. Mainly used by SOI devices. This metric is sometimes used as a proxy for pitch and was named `pitch` in GeoLocator DP versions earlier than v1.0."
         },
         {
           "value": "temperature_internal",
-          "label": "Internal temperature",
+          "label": "Temperature measured by the tag sensor located between the tag and the animal (body temperature). Units: degrees Celsius.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000256/"
         },
         {
           "value": "temperature_external",
-          "label": "External temperature",
+          "label": "Temperature measured by the tag sensor pointing outward from the animal (air temperature). This typically corresponds to the main external temperature sensor. Units: degrees Celsius.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000104/"
         },
         {
           "value": "acceleration_x",
-          "label": "Acceleration (x-axis)",
+          "label": "Raw acceleration values provided by the tag for the X axis. Units: m/s^2.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000006/"
         },
         {
           "value": "acceleration_y",
-          "label": "Acceleration (y-axis)",
+          "label": "Raw acceleration values provided by the tag for the Y axis. Units: m/s^2.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000007/"
         },
         {
           "value": "acceleration_z",
-          "label": "Acceleration (z-axis)",
+          "label": "Raw acceleration values provided by the tag for the Z axis. Units: m/s^2.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000008/"
         },
         {
           "value": "magnetic_x",
-          "label": "Magnetic field (x-axis)",
+          "label": "Magnetic field strength measured by the magnetometer for the X axis. Units: microtesla.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000258/"
         },
         {
           "value": "magnetic_y",
-          "label": "Magnetic field (y-axis)",
+          "label": "Magnetic field strength measured by the magnetometer for the Y axis. Units: microtesla.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000259/"
         },
         {
           "value": "magnetic_z",
-          "label": "Magnetic field (z-axis)",
+          "label": "Magnetic field strength measured by the magnetometer for the Z axis. Units: microtesla.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000260/"
         },
         {
           "value": "wet_count",
-          "label": "Wet count",
+          "label": "Wet count during a measurement interval from the wet-dry sensor. Units are usually device-specific.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000213/"
         },
         {
           "value": "conductivity",
-          "label": "Conductivity",
+          "label": "Conductivity measured by the wet-dry sensor. Unit varies by model.",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000071/"
         }
       ],

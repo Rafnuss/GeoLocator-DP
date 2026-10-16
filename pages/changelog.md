@@ -27,6 +27,9 @@ releases](https://github.com/GeoPressure/GeoLocator-DP/releases) in one place.
 - Build the overview from the same schemas as the table pages, and include categories and field links in tooltips.
 - Fix the manifest example link and clarify bird observations, package loading, and interim-file guidance.
 
+### Documentation
+- Move value explanations into category labels and remove duplicate lists from field descriptions.
+
 ## v1.1
 
 *18 September 2026 — [release](https://github.com/GeoPressure/GeoLocator-DP/releases/tag/v1.1)*

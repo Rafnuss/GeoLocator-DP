@@ -15,7 +15,7 @@
     },
     {
       "name": "type",
-      "description": "Same as [`paths.type`](/GeoLocator-DP/geopressurer/paths#type). One of: `tag`, `most_likely`, `simulation` or `geopressureviz`.",
+      "description": "Same as [`paths.type`](/GeoLocator-DP/geopressurer/paths#type).",
       "type": "string",
       "categories": [
         {
