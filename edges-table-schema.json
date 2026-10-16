@@ -52,7 +52,7 @@
     },
     {
       "name": "stap_t",
-      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1`, except if `include=FALSE` for intermediate `stap_id` values. Together with [`tag_id`](#tag_id), this forms a foreign key to [`staps`](/GeoLocator-DP/geopressurer/staps) (`tag_id`, `stap_id`).",
+      "description": "Identifier of the TARGET stationary period. Generally `stap_s+1`; it can be larger when the trajectory skips intermediate stationary periods. Together with [`tag_id`](#tag_id), this forms a foreign key to [`staps`](/GeoLocator-DP/geopressurer/staps) (`tag_id`, `stap_id`).",
       "type": "number",
       "constraints": {
         "required": true
@@ -109,7 +109,7 @@
     },
     {
       "name": "j",
-      "description": "Same as [`paths.j`](/GeoLocator-DP/geopressurer/paths#j). Unique identifier for each trajectory. Only useful for `edges.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation).",
+      "description": "Trajectory identifier within each combination of `tag_id` and `type`. For `simulation`, use an integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation). Use `1` for other trajectory types.",
       "type": "integer",
       "constraints": {
         "required": false,

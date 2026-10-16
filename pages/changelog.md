@@ -29,6 +29,7 @@ releases](https://github.com/GeoPressure/GeoLocator-DP/releases) in one place.
 
 ### Documentation
 - Move value explanations into category labels and remove duplicate lists from field descriptions.
+- Clarify trajectory identifiers and joins, replace the obsolete `include` reference, and fix the JSON example.
 
 ## v1.1
 

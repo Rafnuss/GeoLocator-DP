@@ -1,7 +1,7 @@
 {
   "name": "paths",
   "title": "Paths",
-  "description": "A GeoPressureR `path` contains positions along a bird trajectory.\n\n{:.alert .alert-info}\nIn GeoPressureR, there are 4 path types: `tag`, `most_likely`, `simulation`, and `geopressureviz`. See [`paths.type`](#type) for more details.\n\n`path` should always be used in combination with [`staps`](/GeoLocator-DP/geopressurer/staps), joined by the composite key (`tag_id`, `stap_id`).",
+  "description": "A GeoPressureR `path` contains positions along a bird trajectory.\n\n{:.alert .alert-info}\nSee [`paths.type`](#type) for the supported trajectory types and how they are created.\n\n`path` should always be used in combination with [`staps`](/GeoLocator-DP/geopressurer/staps), joined by the composite key (`tag_id`, `stap_id`).",
   "$schema": "https://datapackage.org/profiles/2.0/tableschema.json",
   "fields": [
     {
@@ -76,7 +76,7 @@
     },
     {
       "name": "j",
-      "description": "Unique identifier for each trajectory. Only useful for `paths.type='simulation'`. Integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation).",
+      "description": "Trajectory identifier within each combination of `tag_id` and `type`. For `simulation`, use an integer from `1` to `nj` as defined in [`GeoPressureR::graph_simulation()`](https://geopressure.com/GeoPressureR/reference/graph_simulation). Use `1` for other trajectory types.",
       "type": "integer",
       "constraints": {
         "required": false,
