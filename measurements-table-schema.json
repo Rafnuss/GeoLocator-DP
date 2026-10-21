@@ -49,32 +49,32 @@
         },
         {
           "value": "acceleration_x",
-          "label": "Raw acceleration values provided by the tag for the X axis. Units: m/s^2.",
+          "label": "Acceleration measured by the tag along the X axis of the forward-right-down frame. Units: g (standard gravity, 1 g = 9.80665 m/s^2).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000006/"
         },
         {
           "value": "acceleration_y",
-          "label": "Raw acceleration values provided by the tag for the Y axis. Units: m/s^2.",
+          "label": "Acceleration measured by the tag along the Y axis of the forward-right-down frame. Units: g (standard gravity, 1 g = 9.80665 m/s^2).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000007/"
         },
         {
           "value": "acceleration_z",
-          "label": "Raw acceleration values provided by the tag for the Z axis. Units: m/s^2.",
+          "label": "Acceleration measured by the tag along the Z axis of the forward-right-down frame. Units: g (standard gravity, 1 g = 9.80665 m/s^2).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000008/"
         },
         {
           "value": "magnetic_x",
-          "label": "Magnetic field strength measured by the magnetometer for the X axis. Units: microtesla.",
+          "label": "Magnetic field strength measured by the magnetometer along the X axis of the forward-right-down frame. Units: gauss (1 G = 100 microtesla).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000258/"
         },
         {
           "value": "magnetic_y",
-          "label": "Magnetic field strength measured by the magnetometer for the Y axis. Units: microtesla.",
+          "label": "Magnetic field strength measured by the magnetometer along the Y axis of the forward-right-down frame. Units: gauss (1 G = 100 microtesla).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000259/"
         },
         {
           "value": "magnetic_z",
-          "label": "Magnetic field strength measured by the magnetometer for the Z axis. Units: microtesla.",
+          "label": "Magnetic field strength measured by the magnetometer along the Z axis of the forward-right-down frame. Units: gauss (1 G = 100 microtesla).",
           "skos:exactMatch": "https://vocab.nerc.ac.uk/collection/MVB/current/MVB000260/"
         },
         {
